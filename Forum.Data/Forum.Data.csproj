@@ -53,12 +53,14 @@
     <Compile Include="ForumDbContext.cs" />
     <Compile Include="IForumDbContext.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IUowData.cs" />
     <Compile Include="Migrations\201703041449126_Initial.cs" />
     <Compile Include="Migrations\201703041449126_Initial.Designer.cs">
       <DependentUpon>201703041449126_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UowData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

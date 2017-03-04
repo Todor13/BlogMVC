@@ -47,7 +47,7 @@ namespace Forum.Data
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+            this.ChangeState(entity, EntityState.Modified);
         }
 
         private void ChangeState(T entity, EntityState state)

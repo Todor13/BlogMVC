@@ -18,6 +18,8 @@ namespace Forum.Data
 
         IDbSet<T> Set<T>() where T : class;
 
-        DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class; 
+        DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+
+        int SaveChanges();
     }
 }
