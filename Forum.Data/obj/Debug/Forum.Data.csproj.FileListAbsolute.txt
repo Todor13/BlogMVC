@@ -1,0 +1,14 @@
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\Forum.Data.dll.config
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\Forum.Data.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\Forum.Data.pdb
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\EntityFramework.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\EntityFramework.SqlServer.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\Forum.Models.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\Forum.Models.pdb
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\EntityFramework.xml
+F:\Web\Projects\MVCForum\Forum\Forum.Data\bin\Debug\EntityFramework.SqlServer.xml
+F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.csprojResolveAssemblyReference.cache
+F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.pdb
+F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.Migrations.Initial.resources
+F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.csproj.GenerateResource.Cache
