@@ -1,0 +1,26 @@
+﻿@model Forum.Models.Thread
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(m => m.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(m => m.Content)
+        </dd>
+
+    </dl>
+</div>

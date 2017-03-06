@@ -290,11 +290,16 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Forum\Index.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
+    <Content Include="Views\Forum\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forum.Data\Forum.Data.csproj">
       <Project>{1043096D-5A8A-4DFC-B5F4-2837DABBAA0F}</Project>
       <Name>Forum.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forum.Models\Forum.Models.csproj">
+      <Project>{E21EE498-E700-4CB2-873A-2010CD20F902}</Project>
+      <Name>Forum.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

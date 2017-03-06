@@ -1,6 +1,21 @@
-﻿@{
+﻿@model IEnumerable<Forum.Models.Thread>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.ActionLink("Create Thread", "Create", null, new { @class = "btn btn-primary" })
-
+<h2>Welcome to our Forum!</h2>
+<div>
+    @Html.ActionLink("Create Thread", "Create", null, new { @class = "btn btn-primary" })
+</div>
+<hr />
+<div class="container threads">
+    <table>
+        @foreach (var thread in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(thread.Title, "Detail", new { id = thread.Id })</td>
+            </tr>
+        }
+    </table>
+</div>

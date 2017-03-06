@@ -12,3 +12,4 @@ F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.dll
 F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.pdb
 F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.Migrations.Initial.resources
 F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.csproj.GenerateResource.Cache
+F:\Web\Projects\MVCForum\Forum\Forum.Data\obj\Debug\Forum.Data.Migrations.CorrectionUserName.resources
