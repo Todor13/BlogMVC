@@ -58,3 +58,8 @@ F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\bin\Debug\Forum.Models.pdb
 F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\obj\Debug\Forum.Web.Tests.csprojResolveAssemblyReference.cache
 F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\obj\Debug\Forum.Web.Tests.dll
 F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\obj\Debug\Forum.Web.Tests.pdb
+F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\bin\Debug\WebActivatorEx.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\bin\Debug\Ninject.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\bin\Debug\Ninject.Web.Common.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\bin\Debug\Ninject.xml
+F:\Web\Projects\MVCForum\Forum\Forum.Web.Tests\bin\Debug\Ninject.Web.Common.xml

@@ -18,7 +18,7 @@ namespace Forum.Data
         {
             if (context == null)
             {
-                throw new ArgumentException("An instance of DbContext is required to use this repository.", "context");
+                throw new ArgumentException("An instance of IForumDbContext is required to use this repository.", "context");
             }
 
             this.context = context;

@@ -1,9 +1,6 @@
 ﻿using Forum.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Forum.Data
 {
@@ -14,6 +11,11 @@ namespace Forum.Data
 
         public UowData(IForumDbContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentException("An instance of IForumDbContext is required to use this repository.", "context");
+            }
+
             this.context = context;
         }
 

@@ -84,3 +84,12 @@ F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Forum.Data.dll
 F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Forum.Models.dll
 F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Forum.Data.pdb
 F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Forum.Models.pdb
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.Extensions.Conventions.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.Web.Common.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.Web.Mvc.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\WebActivatorEx.dll
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.xml
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.Extensions.Conventions.xml
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.Web.Common.xml
+F:\Web\Projects\MVCForum\Forum\Forum.Web\bin\Ninject.Web.Mvc.xml
