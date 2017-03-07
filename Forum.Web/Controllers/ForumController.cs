@@ -1,7 +1,9 @@
 ﻿using Forum.Data;
 using Forum.Models;
+using Forum.Web.Models.Forum;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -10,6 +12,7 @@ namespace Forum.Web.Controllers
 {
     public class ForumController : Controller
     {
+        private const int PageSize = 3;
         private readonly IUowData data;
 
         public ForumController(IUowData data)
@@ -22,11 +25,29 @@ namespace Forum.Web.Controllers
             this.data = data;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var threads = this.data.Threads.All().ToArray();
 
-            return this.View(threads);
+            var sections = this.data.Sections.All().ToArray();
+            ViewBag.Sections = new SelectList(sections, "Id", "Name");
+
+            var count = this.data.Threads.All().Count();
+
+            var threads = this.data.Threads.All()
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize)
+                .ToArray();
+
+            var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
+
+            var model = new IndexPageViewModel
+            {
+                Threads = threads,
+                CurrentPage = page,
+                PagesCount = pagesCount
+            };
+
+            return this.View(model);
         }
 
         public ActionResult Create()
@@ -50,10 +71,10 @@ namespace Forum.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            return this.ViewBag(thread);
+            return this.ViewBag();
         }
 
-        public ActionResult Detail(int? id)
+        public ActionResult Threads(int? id)
         {
             if (id == null)
             {
@@ -68,6 +89,26 @@ namespace Forum.Web.Controllers
             }
 
             return this.View(thread);
+        }
+
+        public ActionResult Search(string query, int page = 1)
+        {
+            var sections = this.data.Sections.All().ToArray();
+            ViewBag.Sections = new SelectList(sections, "Id", "Name");
+
+            var count = this.data.Threads.All()
+                .Count(x => x.Title.ToLower().Contains(query.ToLower()) && x.Content.ToLower().Contains(query.ToLower()));
+
+            var threads = this.data.Threads.All()
+                .Where(x => x.Title.ToLower().Contains(query.ToLower()) && x.Content.ToLower().Contains(query.ToLower()))
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize)
+                .ToArray();
+
+            this.ViewBag.MaxPage = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
+            this.ViewBag.Page = page;
+
+            return this.View(threads);
         }
     }
 }

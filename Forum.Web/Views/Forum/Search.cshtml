@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Forum.Models.Thread>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Search Results</h3>
+
+@Html.Partial("_ThreadsList", Model)
+
