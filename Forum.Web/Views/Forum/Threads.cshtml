@@ -1,26 +1,37 @@
-﻿@model Forum.Models.Thread
+﻿@model Forum.Web.Models.Forum.ThreadAnswersViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(m => m.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(m => m.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(m => m.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(m => m.Content)
-        </dd>
-
-    </dl>
+<div class="container clearfix">
+    <div class="chat">
+        <div class="chat-history">
+            <ul class="chat-ul">
+                <li> <h2>@Model.Thread.Title</h2></li>
+                @foreach (var answer in Model.Answers)
+                {
+                    <li>
+                        <div class="message-data">
+                            <span class="message-data-name"><i class="glyphicon glyphicon-user">@answer.User.Name</i></span>
+                        </div>
+                        <div class="message you-message">@answer.Content</div>           
+                    </li>
+                    foreach (var comment in answer.Comments)
+                    {
+                        <li class="clearfix">
+                            <div class="message-data align-right">
+                                <span class="message-data-name"><i class="glyphicon glyphicon-user">@comment.User.Name</i></span>
+                            </div>
+                            <div class="message me-message float-right">@comment.Content</div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
 </div>
+
+@section styles {
+    <link rel="Stylesheet" href="@Href("~/Content/thread.css")" />
+}

@@ -4,7 +4,6 @@
             <ul class="nav navbar-nav navbar-left">
                 <li>@Html.ActionLink("Home", "Index")</li>
                 <li>@Html.ActionLink("Create Thread", "Create")</li>
-                <li class="dropdown">@Html.DropDownList("Sections", "Go to Section")</li>
             </ul>
             @using (Html.BeginForm("Search", "Forum", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
             {

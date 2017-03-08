@@ -2,6 +2,7 @@
 using Forum.Models;
 using Forum.Web.Models.Common;
 using Forum.Web.Models.Forum;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,6 @@ namespace Forum.Web.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var sections = this.data.Sections.All().ToArray();
-            ViewBag.Sections = new SelectList(sections, "Id", "Name");
-
             var count = this.data.Threads.All().Count();
 
             var threads = this.data.Threads.All()
@@ -46,7 +44,7 @@ namespace Forum.Web.Controllers
         {
             var sections = this.data.Sections.All().ToArray();
             ViewBag.SectionId = new SelectList(sections, "Id", "Name");
-
+            
             return this.View();
         }
 
@@ -58,6 +56,7 @@ namespace Forum.Web.Controllers
             {
                 thread.Published = DateTime.Now;
                 thread.IsVisible = true;
+                thread.UserId = User.Identity.GetUserId();
                 this.data.Threads.Add(thread);
                 this.data.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,14 +79,21 @@ namespace Forum.Web.Controllers
                 return HttpNotFound();
             }
 
-            return this.View(thread);
+            var answers = this.data.Answers.All()
+                .Where(a => a.ThreadId == id)
+                .ToArray();
+
+            var model = new ThreadAnswersViewModel()
+            {
+                Answers = answers,
+                Thread = thread
+            };
+
+            return this.View(model);
         }
 
         public ActionResult Search(string query, int page = 1)
         {
-            var sections = this.data.Sections.All().ToArray();
-            ViewBag.Sections = new SelectList(sections, "Id", "Name");
-
             var count = this.data.Threads.All()
                 .Count(x => x.Title.ToLower().Contains(query.ToLower()) && x.Content.ToLower().Contains(query.ToLower()));
 
