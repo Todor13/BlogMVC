@@ -1,4 +1,5 @@
 ﻿using Forum.Models;
+using Forum.Web.Models.Common;
 using System.Collections.Generic;
 
 namespace Forum.Web.Models.Forum
@@ -7,8 +8,6 @@ namespace Forum.Web.Models.Forum
     {
         public IEnumerable<Thread> Threads { get; set; }
 
-        public int PagesCount { get; set; }
-
-        public int CurrentPage { get; set; }
+        public PagingViewModel PageCounter { get; set; }
     }
 }

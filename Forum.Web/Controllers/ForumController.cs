@@ -1,9 +1,9 @@
 ﻿using Forum.Data;
 using Forum.Models;
+using Forum.Web.Models.Common;
 using Forum.Web.Models.Forum;
-using Microsoft.AspNet.Identity;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -27,7 +27,6 @@ namespace Forum.Web.Controllers
 
         public ActionResult Index(int page = 1)
         {
-
             var sections = this.data.Sections.All().ToArray();
             ViewBag.Sections = new SelectList(sections, "Id", "Name");
 
@@ -38,14 +37,7 @@ namespace Forum.Web.Controllers
                 .Take(PageSize)
                 .ToArray();
 
-            var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
-
-            var model = new IndexPageViewModel
-            {
-                Threads = threads,
-                CurrentPage = page,
-                PagesCount = pagesCount
-            };
+            var model = this.CreateIndexPage(threads, page, count);
 
             return this.View(model);
         }
@@ -105,10 +97,26 @@ namespace Forum.Web.Controllers
                 .Take(PageSize)
                 .ToArray();
 
-            this.ViewBag.MaxPage = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
-            this.ViewBag.Page = page;
+            var model = this.CreateIndexPage(threads, page, count);
 
-            return this.View(threads);
+            return this.View(model);
+        }
+
+        private IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count)
+        {
+            var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
+
+            var model = new IndexPageViewModel
+            {
+                Threads = threads,
+                PageCounter = new PagingViewModel()
+                {
+                    CurrentPage = page,
+                    PagesCount = pagesCount
+                }
+            };
+
+            return model;
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿@model IEnumerable<Forum.Models.Thread>
+﻿@model Forum.Web.Models.Forum.IndexPageViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3>Search Results</h3>
-
-@Html.Partial("_ThreadsList", Model)
-
+<div class="container">
+    @Html.Partial("_ForumNavBar")
+    @Html.Partial("_ThreadsList", Model.Threads)
+    @Html.Partial("_Pager", Model.PageCounter)
+</div>

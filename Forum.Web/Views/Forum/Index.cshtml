@@ -8,33 +8,7 @@
 <div class="container">
     @Html.Partial("_ForumNavBar")
     @Html.Partial("_ThreadsList", Model.Threads)
-
-    @if (Model.PagesCount > 1)
-    {
-        <center>
-            <nav>
-                <div class="pagination">
-                    @if (Model.CurrentPage > 1)
-                {
-                        @Html.RouteLink("Prev", new { page = Model.CurrentPage - 1 }, new { @class = "btn btn-default" })
-                    }
-                    @for (var i = 1; i <= Model.CurrentPage + 3; i++)
-                {
-                    if (i <= Model.PagesCount)
-                    {
-                            <a href="@Url.Action("Index", new { page = i })"
-                               class="btn btn-default">@i</a>
-                        }
-                    }
-                    @if (Model.CurrentPage < Model.PagesCount)
-                {
-                        @Html.RouteLink("Next", new { page = Model.CurrentPage + 1 }, new { @class = "btn btn-default" })
-                    }
-
-                </div>
-            </nav>
-        </center>
-    }
+    @Html.Partial("_Pager", Model.PageCounter)
 </div>
 
 
