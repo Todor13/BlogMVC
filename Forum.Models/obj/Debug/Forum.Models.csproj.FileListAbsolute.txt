@@ -1,4 +1,0 @@
-F:\Web\Projects\MVCForum\Forum\Forum.Models\bin\Debug\Forum.Models.dll
-F:\Web\Projects\MVCForum\Forum\Forum.Models\bin\Debug\Forum.Models.pdb
-F:\Web\Projects\MVCForum\Forum\Forum.Models\obj\Debug\Forum.Models.dll
-F:\Web\Projects\MVCForum\Forum\Forum.Models\obj\Debug\Forum.Models.pdb
