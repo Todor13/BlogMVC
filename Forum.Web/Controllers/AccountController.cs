@@ -20,9 +20,11 @@ namespace Forum.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IUowData data;
 
-        public AccountController()
+        public AccountController(IUowData data)
         {
+            this.data = data;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -159,6 +161,13 @@ namespace Forum.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    this.data.Users.Add(new User()
+                    {
+                        Id = user.Id,
+                        Name = model.Email
+                    });
+
+                    this.data.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
