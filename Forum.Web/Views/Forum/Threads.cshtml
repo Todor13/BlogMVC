@@ -13,15 +13,23 @@
                 {
                     <li>
                         <div class="message-data">
-                            <span class="message-data-name"><i class="glyphicon glyphicon-user">@answer.User.Name</i></span>
+                            <ul class="list-inline list-unstyled">
+                                <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @answer.User.Name</span></li>
+                                <li><span> | </span></li>
+                                <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", answer.Published)</span></li>
+                            </ul>
                         </div>
-                        <div class="message you-message">@answer.Content</div>           
+                        <div class="message you-message">@answer.Content</div>
                     </li>
                     foreach (var comment in answer.Comments)
                     {
                         <li class="clearfix">
                             <div class="message-data align-right">
-                                <span class="message-data-name"><i class="glyphicon glyphicon-user">@comment.User.Name</i></span>
+                                <ul class="list-inline list-unstyled">
+                                    <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @comment.User.Name</span></li>
+                                    <li><span> | </span></li>
+                                    <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", comment.Published)</span></li>
+                                </ul>
                             </div>
                             <div class="message me-message float-right">@comment.Content</div>
                         </li>
