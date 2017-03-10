@@ -4,14 +4,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles {
+    <link rel="Stylesheet" href="@Href("~/Content/thread.css")" />
+}
+@section scripts {
+   <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+}
+
 <div class="container clearfix">
+    <div class="message-data thread">
+        <ul class="chat-ul message you-message">
+            <li><h2>@Model.Thread.Title</h2></li>
+            <li><p class="content">@Model.Thread.Content</p></li>
+            <li>
+                <div class="thread-data">
+                    <ul class="list-inline list-unstyled">
+                        <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @Model.Thread.User.Name</span></li>
+                        <li><span> | </span></li>
+                        <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", Model.Thread.Published)</span></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div id="answer"></div>
+        @Ajax.ActionLink("Answer", "Answer", "Forum",
+    new AjaxOptions
+    {
+        UpdateTargetId = "answer",
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace
+    }, new { @class = "btn btn-primary" })
+    </div>
+    <hr />
     <div class="chat">
         <div class="chat-history">
             <ul class="chat-ul">
-                <li> <h2>@Model.Thread.Title</h2></li>
                 @foreach (var answer in Model.Answers)
                 {
                     <li>
+                        <div class="message you-message">@answer.Content</div>
                         <div class="message-data">
                             <ul class="list-inline list-unstyled">
                                 <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @answer.User.Name</span></li>
@@ -19,27 +50,24 @@
                                 <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", answer.Published)</span></li>
                             </ul>
                         </div>
-                        <div class="message you-message">@answer.Content</div>
                     </li>
                     foreach (var comment in answer.Comments)
                     {
                         <li class="clearfix">
-                            <div class="message-data align-right">
+                            <div class="message me-message float-right">@comment.Content</div>
+                            <div class="message-data float-right">
                                 <ul class="list-inline list-unstyled">
                                     <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @comment.User.Name</span></li>
                                     <li><span> | </span></li>
                                     <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", comment.Published)</span></li>
                                 </ul>
                             </div>
-                            <div class="message me-message float-right">@comment.Content</div>
+
                         </li>
                     }
+                    <li><hr /></li>
                 }
             </ul>
         </div>
     </div>
 </div>
-
-@section styles {
-    <link rel="Stylesheet" href="@Href("~/Content/thread.css")" />
-}

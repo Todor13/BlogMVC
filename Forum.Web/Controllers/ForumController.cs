@@ -108,6 +108,11 @@ namespace Forum.Web.Controllers
             return this.View(model);
         }
 
+        public ActionResult Answer()
+        {
+            return PartialView("_Answer");
+        }
+
         private IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count)
         {
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
