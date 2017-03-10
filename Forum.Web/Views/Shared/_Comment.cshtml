@@ -1,8 +1,8 @@
-﻿@model Forum.Models.Answer
+﻿@model Forum.Models.Comment
 
 <hr />
 
-@using (Html.BeginForm("Answer", "Forum", new { id = ViewContext.RouteData.Values["id"] }, FormMethod.Post, new { @class = "btn" }))
+@using (Html.BeginForm("Comment", "Forum", new { id = ViewContext.RouteData.Values["id"] }, FormMethod.Post, new { @class = "btn" }))
 {
     @Html.AntiForgeryToken()
 
@@ -14,11 +14,12 @@
         <div>
             <input type="submit" class="btn btn-default" value="Publish" />
             @Ajax.ActionLink("Cancel", "Cancel", "Common", null, new AjaxOptions
-        {
-            UpdateTargetId = "comment",
-            HttpMethod = "GET",
-            InsertionMode = InsertionMode.Replace
-        }, new { @class = "btn btn-default" })
+       {
+           UpdateTargetId = string.Format("{0}", ViewContext.RouteData.Values["id"]),
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace
+       }, new { @class = "btn btn-default" })
         </div>
     </div>
 }
+

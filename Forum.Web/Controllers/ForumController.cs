@@ -44,7 +44,7 @@ namespace Forum.Web.Controllers
         {
             var sections = this.data.Sections.All().ToArray();
             ViewBag.SectionId = new SelectList(sections, "Id", "Name");
-            
+
             return this.View();
         }
 
@@ -62,7 +62,7 @@ namespace Forum.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            return this.ViewBag();
+            return this.View(thread);
         }
 
         public ActionResult Threads(int? id)
@@ -111,6 +111,29 @@ namespace Forum.Web.Controllers
         public ActionResult Answer()
         {
             return PartialView("_Answer");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Answer(Answer answer, int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                answer.UserId = User.Identity.GetUserId();
+                answer.Published = DateTime.Now;
+                answer.IsVisible = true;
+                answer.ThreadId = (int)id;
+                this.data.Answers.Add(answer);
+                this.data.SaveChanges();
+                return RedirectToAction("Threads", new { id = id });
+            }
+
+            return this.View(answer);
         }
 
         private IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count)

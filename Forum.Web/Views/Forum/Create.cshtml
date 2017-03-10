@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Content)
-            @Html.TextAreaFor(m => m.Content, new { rows="4", cols="55" })
+            @Html.EditorFor(m => m.Content, new { rows = "4", cols = "55" })
         </div>
         <div class="form-group">
             @Html.Label("Select Section")

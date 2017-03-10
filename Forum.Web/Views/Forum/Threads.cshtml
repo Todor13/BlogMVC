@@ -8,7 +8,7 @@
     <link rel="Stylesheet" href="@Href("~/Content/thread.css")" />
 }
 @section scripts {
-   <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
 }
 
 <div class="container clearfix">
@@ -26,14 +26,14 @@
                 </div>
             </li>
         </ul>
-        <div id="answer"></div>
-        @Ajax.ActionLink("Answer", "Answer", "Forum",
+        @Ajax.ActionLink("Answer", "Answer", "Forum", new { id = ViewContext.RouteData.Values["id"] },
     new AjaxOptions
     {
         UpdateTargetId = "answer",
         HttpMethod = "GET",
         InsertionMode = InsertionMode.Replace
     }, new { @class = "btn btn-primary" })
+        <div id="answer"></div>
     </div>
     <hr />
     <div class="chat">
@@ -65,6 +65,14 @@
 
                         </li>
                     }
+                    @Ajax.ActionLink("Comment", "Index", "Comment", new { id = answer.Id },
+                           new AjaxOptions
+                           {
+                               UpdateTargetId = string.Format("{0}", answer.Id),
+                               HttpMethod = "GET",
+                               InsertionMode = InsertionMode.Replace
+                           }, new { @class = "btn btn-primary" })
+                    <li><div id="@answer.Id"></div></li>
                     <li><hr /></li>
                 }
             </ul>
