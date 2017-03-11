@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Auth", "Forum.Auth\Fo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{16AEB363-28B3-45D3-B2DC-825C37EA76DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum.Services", "Forum.Services\Forum.Services.csproj", "{9738BA96-C0A1-41B8-8E7D-292E9B99BF58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{855B9D8B-943C-431C-B95A-B73DE498611A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{855B9D8B-943C-431C-B95A-B73DE498611A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{855B9D8B-943C-431C-B95A-B73DE498611A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9738BA96-C0A1-41B8-8E7D-292E9B99BF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9738BA96-C0A1-41B8-8E7D-292E9B99BF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9738BA96-C0A1-41B8-8E7D-292E9B99BF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9738BA96-C0A1-41B8-8E7D-292E9B99BF58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

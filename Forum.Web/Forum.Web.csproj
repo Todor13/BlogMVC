@@ -214,9 +214,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AutoMapperConfig\AutoMapperConfig.cs" />
-    <Compile Include="App_Start\AutoMapperConfig\IHaveCustomMappings.cs" />
-    <Compile Include="App_Start\AutoMapperConfig\IMapFrom.cs" />
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -326,6 +324,10 @@
     <ProjectReference Include="..\Forum.Models\Forum.Models.csproj">
       <Project>{E21EE498-E700-4CB2-873A-2010CD20F902}</Project>
       <Name>Forum.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forum.Services\Forum.Services.csproj">
+      <Project>{9738ba96-c0a1-41b8-8e7d-292e9b99bf58}</Project>
+      <Name>Forum.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

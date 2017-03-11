@@ -1,6 +1,6 @@
 ﻿namespace Forum.Web.App_Start
 {
-    internal interface IMapFrom<T>
+    public interface IMapFrom<T>
     {
     }
 }

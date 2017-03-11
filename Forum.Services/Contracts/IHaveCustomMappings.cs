@@ -2,7 +2,7 @@
 
 namespace Forum.Web.App_Start
 {
-    internal interface IHaveCustomMappings
+    public interface IHaveCustomMappings
     {
         void CreateMappings(IMapperConfigurationExpression configuration);
     }

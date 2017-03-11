@@ -21,7 +21,7 @@ namespace Forum.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ViewEngineConfig.RegisterViewEngines(ViewEngines.Engines);
-            AutoMapperConfig.Config(Assembly.GetCallingAssembly());
+            AutoMapperConfig.Config(Assembly.GetExecutingAssembly());
         }
     }
 }
