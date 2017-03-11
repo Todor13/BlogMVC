@@ -1,6 +1,8 @@
 ﻿using Forum.Data;
 using Forum.Data.Migrations;
+using Forum.Web.App_Start;
 using System.Data.Entity;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -18,6 +20,8 @@ namespace Forum.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ViewEngineConfig.RegisterViewEngines(ViewEngines.Engines);
+            AutoMapperConfig.Config(Assembly.GetCallingAssembly());
         }
     }
 }
