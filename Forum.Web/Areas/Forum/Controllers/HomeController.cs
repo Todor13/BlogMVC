@@ -1,0 +1,30 @@
+﻿using Forum.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Forum.Web.Areas.Forum.Controllers
+{
+    public class HomeController : BaseController
+    {
+        public HomeController(IUowData data) : base(data)
+        {
+        }
+
+        public ActionResult Index(int page = 1)
+        {
+            var count = this.Data.Threads.All().Count();
+
+            var threads = this.Data.Threads.All()
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize)
+                .ToArray();
+
+            var model = this.CreateIndexPage(threads, page, count);
+
+            return this.View(model);
+        }
+    }
+}

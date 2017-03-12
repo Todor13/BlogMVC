@@ -26,7 +26,7 @@
                 </div>
             </li>
         </ul>
-        @Ajax.ActionLink("Answer", "Answer", "Forum", new { id = ViewContext.RouteData.Values["id"] },
+        @Ajax.ActionLink("Answer", "Index", "Answer", new { id = ViewContext.RouteData.Values["id"], Area = "Forum" },
     new AjaxOptions
     {
         UpdateTargetId = "answer",
@@ -65,7 +65,7 @@
 
                         </li>
                     }
-                    @Ajax.ActionLink("Comment", "Index", "Comment", new { id = answer.Id },
+                    @Ajax.ActionLink("Comment", "Index", "Comment", new { id = answer.Id, Area = "Forum" },
                            new AjaxOptions
                            {
                                UpdateTargetId = string.Format("{0}", answer.Id),

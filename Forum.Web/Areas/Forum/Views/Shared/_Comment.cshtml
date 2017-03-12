@@ -1,0 +1,25 @@
+﻿@model Forum.Models.Comment
+
+<hr />
+
+@using (Html.BeginForm("Index", "Comment", new { id = ViewContext.RouteData.Values["id"] }, FormMethod.Post, new { @class = "btn" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Content)
+            @Html.TextAreaFor(m => m.Content, new { rows = "4", cols = "110" })
+        </div>
+        <div>
+            <input type="submit" class="btn btn-default" value="Publish" />
+            @Ajax.ActionLink("Cancel", "Cancel", null, new AjaxOptions
+       {
+           UpdateTargetId = string.Format("{0}", ViewContext.RouteData.Values["id"]),
+           HttpMethod = "GET",
+           InsertionMode = InsertionMode.Replace
+       }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
+

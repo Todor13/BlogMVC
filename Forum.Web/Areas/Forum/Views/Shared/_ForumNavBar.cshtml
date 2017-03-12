@@ -2,10 +2,13 @@
     <div class="container-fluid">
         <div class="navbar-default">
             <ul class="nav navbar-nav navbar-left">
-                <li>@Html.ActionLink("Home", "Index")</li>
-                <li>@Html.ActionLink("Create Thread", "Create")</li>
+                <li>@Html.ActionLink("Home", "Index", "Home", new { Area = "Forum" }, null)</li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Create Thread", "Index", "Create", new { Area = "Forum" }, null)</li>
+                } 
             </ul>
-            @using (Html.BeginForm("Search", "Forum", FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+            @using (Html.BeginForm("Index", "Search", new { Area = "Forum" }, FormMethod.Get, new { @class = "navbar-form navbar-right" }))
             {
                 <div class="form-group">
                     @Html.TextBox("query", null, new { @class = "form-control", placeholder = "Search" })
