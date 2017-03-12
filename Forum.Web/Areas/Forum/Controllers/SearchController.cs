@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Forum.Data;
 
@@ -17,10 +14,11 @@ namespace Forum.Web.Areas.Forum.Controllers
         public ActionResult Index(string query, int page = 1)
         {
             var count = this.Data.Threads.All()
-                .Count(x => x.Title.ToLower().Contains(query.ToLower()) && x.Content.ToLower().Contains(query.ToLower()));
+                .Count(x => x.Title.ToLower().Contains(query.ToLower()) && x.Content.ToLower().Contains(query.ToLower()) && x.IsVisible == true);
 
             var threads = this.Data.Threads.All()
-                .Where(x => x.Title.ToLower().Contains(query.ToLower()) && x.Content.ToLower().Contains(query.ToLower()))
+                .Where(x => x.Title.ToLower().Contains(query.ToLower()) && x.Content.ToLower().Contains(query.ToLower()) && x.IsVisible == true)
+                .OrderBy(t => t.Published)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize)
                 .ToArray();

@@ -7,7 +7,7 @@
             {
             <div class="media">
                 <div class="media-body">
-                    <h4 class="media-heading">@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, Area = "Forum" }, null)</h4>
+                    <h4 class="media-heading">@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</h4>
                     <ul class="list-inline list-unstyled">
                         <li><span><i class="glyphicon glyphicon-user"></i> @thread.User.Name</span></li>
                         <li>|</li>

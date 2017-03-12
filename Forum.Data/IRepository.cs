@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Forum.Data
 {
     public interface IRepository<T>
      where T : class
     {
-        IEnumerable<T> All();
+        IQueryable<T> All();
 
         T GetById(object id);
 

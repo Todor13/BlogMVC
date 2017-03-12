@@ -18,6 +18,8 @@ namespace Forum.Web.Areas.Forum.Controllers
             var count = this.Data.Threads.All().Count();
 
             var threads = this.Data.Threads.All()
+                .Where(t => t.IsVisible == true)
+                .OrderBy(t => t.Published)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize)
                 .ToArray();

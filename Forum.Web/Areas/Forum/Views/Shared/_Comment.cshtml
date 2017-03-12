@@ -13,13 +13,20 @@
         </div>
         <div>
             <input type="submit" class="btn btn-default" value="Publish" />
-            @Ajax.ActionLink("Cancel", "Cancel", null, new AjaxOptions
+            @Ajax.ActionLink("Cancel", "Cancel", "Comment", new AjaxOptions
        {
            UpdateTargetId = string.Format("{0}", ViewContext.RouteData.Values["id"]),
            HttpMethod = "GET",
            InsertionMode = InsertionMode.Replace
        }, new { @class = "btn btn-default" })
+            <a onclick="getServerTime(@string.Format("{0}", ViewContext.RouteData.Values["id"])" class="btn btn-primary">Get server time</a>
         </div>
     </div>
 }
 
+
+<script>
+    function getServerTime(id) {
+        $("#"+id).html("");
+    }
+</script>

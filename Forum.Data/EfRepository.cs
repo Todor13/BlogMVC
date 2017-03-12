@@ -30,7 +30,7 @@ namespace Forum.Data
             this.ChangeState(entity, EntityState.Added);
         }
 
-        public IEnumerable<T> All()
+        public IQueryable<T> All()
         {
             return this.dbSet;
         }

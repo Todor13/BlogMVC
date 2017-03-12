@@ -48,5 +48,10 @@ namespace Forum.Web.Areas.Forum.Controllers
             
             return this.View(comment);
         }
+
+        public ActionResult Cancel()
+        {
+            return this.Content(string.Empty);
+        }
     }
 }
