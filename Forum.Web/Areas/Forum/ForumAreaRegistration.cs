@@ -15,14 +15,32 @@ namespace Forum.Web.Areas.Forum
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Forum",
-                "Forum/{controller}/{id}/{title}",
-                defaults: new { action = "Index", id = UrlParameter.Optional, title = UrlParameter.Optional }
+                "Forum_Home",
+                "Forum/Home",
+                defaults: new { controller = "Home", action = "Index" }
+            );
+
+            context.MapRoute(
+                "Forum_Search",
+                "Forum/Search",
+                defaults: new { controller = "Search", action = "Index" }
+            );
+
+            context.MapRoute(
+                "Forum_Create",
+                "Forum/Create",
+                defaults: new { controller = "Create", action = "Index" }
+            );
+
+            context.MapRoute(
+                "Forum_Thread",
+                "Forum/Thread/{id}/{title}",
+                defaults: new { controller = "Thread", action = "Index", id = UrlParameter.Optional, title = UrlParameter.Optional }
             );
 
             context.MapRoute(
                 "Forum_default",
-                "Forum/{controller}/{id}",
+                "Forum/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

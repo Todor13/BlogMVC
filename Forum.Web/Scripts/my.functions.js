@@ -1,7 +1,3 @@
-﻿$("a").on("click", function(event) {
-    event.preventDefault();
-});
-
-    function clearContent(id) {
+﻿    function clearContent(id) {
         $(id).html("");
 }
