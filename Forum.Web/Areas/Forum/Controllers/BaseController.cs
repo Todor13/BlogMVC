@@ -28,7 +28,7 @@ namespace Forum.Web.Areas.Forum.Controllers
             get { return this.data; }
         }
 
-        protected IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count)
+        protected IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count, string controllerName = null)
         {
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
 
@@ -38,7 +38,8 @@ namespace Forum.Web.Areas.Forum.Controllers
                 PageCounter = new PagingViewModel()
                 {
                     CurrentPage = page,
-                    PagesCount = pagesCount
+                    PagesCount = pagesCount,
+                    ControllerName = controllerName
                 }
             };
 

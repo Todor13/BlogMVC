@@ -7,22 +7,22 @@
             <div class="pagination">
                 @if (Model.CurrentPage > 1)
                 {
-                    @Html.RouteLink("Prev", new { query = Request.QueryString["query"], page = Model.CurrentPage - 1 }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Next", "Index", Model.ControllerName, new { query = Request.QueryString["query"], page = Model.CurrentPage - 1 }, new { @class = "btn btn-default" })
                 }
-                @for (var i = (Model.CurrentPage - 3 >= 1 ? Model.CurrentPage - 3 : 1); i <= (Model.CurrentPage + 3 <= Model.PagesCount ? Model.CurrentPage + 3 : Model.PagesCount); i++)
+                    @for(var i = (Model.CurrentPage - 3 >= 1 ? Model.CurrentPage - 3 : 1); i <= (Model.CurrentPage + 3 <= Model.PagesCount ? Model.CurrentPage + 3 : Model.PagesCount); i++)
                 {
-                    if (Model.CurrentPage == i)
-                    {
-                        @Html.RouteLink($"{i}", new { query = Request.QueryString["query"], page = i }, new { @class = "btn btn-default disabled" })
+                        if (Model.CurrentPage == i)
+                        {
+                            @Html.ActionLink($"{i}", "Index", Model.ControllerName, new { query = Request.QueryString["query"], page = i }, new { @class = "btn btn-default disabled" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink($"{i}", "Index", Model.ControllerName, new { query = Request.QueryString["query"], page = i }, new { @class = "btn btn-default" })
+                        }
                     }
-                    else
-                    {
-                        @Html.RouteLink($"{i}", new { query = Request.QueryString["query"], page = i }, new { @class = "btn btn-default" })
-                    }
-                }
-                @if (Model.CurrentPage < Model.PagesCount)
+                    @if(Model.CurrentPage < Model.PagesCount)
                 {
-                    @Html.RouteLink("Next", new { query = Request.QueryString["query"], page = Model.CurrentPage + 1 }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Next", "Index", Model.ControllerName, new { query = Request.QueryString["query"], page = Model.CurrentPage + 1 }, new { @class = "btn btn-default" })
                 }
             </div>
         </nav>

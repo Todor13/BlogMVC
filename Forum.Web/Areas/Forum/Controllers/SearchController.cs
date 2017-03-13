@@ -23,7 +23,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 .Take(PageSize)
                 .ToArray();
 
-            var model = this.CreateIndexPage(threads, page, count);
+            var model = this.CreateIndexPage(threads, page, count, "Search");
 
             return this.View(model);
         }

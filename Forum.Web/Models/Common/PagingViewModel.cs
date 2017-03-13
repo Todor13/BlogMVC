@@ -10,5 +10,7 @@ namespace Forum.Web.Models.Common
         public int CurrentPage { get; set; }
 
         public int PagesCount { get; set; }
+
+        public string ControllerName { get; set; }
     }
 }

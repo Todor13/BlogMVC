@@ -49,7 +49,8 @@ namespace Forum.Web.Areas.Forum.Controllers
                 PageCounter = new PagingViewModel()
                 {
                     CurrentPage = page,
-                    PagesCount = pagesCount
+                    PagesCount = pagesCount,
+                    ControllerName = "Thread"
                 }
             };
 
