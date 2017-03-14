@@ -9,8 +9,6 @@ namespace Forum.Web.Areas.Forum.Controllers
 {
     public class ThreadController : BaseController
     {
-        private const int PegeSize = 3;
-
         public ThreadController(IUowData data) : base(data)
         {
         }

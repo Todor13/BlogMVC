@@ -4,6 +4,7 @@ using System;
 using System.Net;
 using System.Web.Mvc;
 using Forum.Data;
+using System.Linq;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
@@ -29,7 +30,7 @@ namespace Forum.Web.Areas.Forum.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Answer answer, int? id)
+        public ActionResult Index(Answer answer, int? id, string title)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +45,9 @@ namespace Forum.Web.Areas.Forum.Controllers
                 answer.ThreadId = (int)id;
                 this.data.Answers.Add(answer);
                 this.data.SaveChanges();
-                return RedirectToAction("Index", "Thread", new { id = id });
+                var answersCount = this.data.Answers.All().Count(a => a.IsVisible == true);
+                var page = (answersCount / ForumConstants.PageSize) + (answersCount % ForumConstants.PageSize == 0 ? 0 : 1);
+                return RedirectToAction("Index", "Thread", new { id = id, title = title, page = page });
             }
 
             return this.View(answer);

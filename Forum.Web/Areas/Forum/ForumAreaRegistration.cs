@@ -39,6 +39,24 @@ namespace Forum.Web.Areas.Forum
             );
 
             context.MapRoute(
+                "Forum_Answer",
+                "Forum/Answer/{id}/{title}",
+                defaults: new { controller = "Answer", action = "Index", id = UrlParameter.Optional, title = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
+                "Forum_Comment_Cancel",
+                "Forum/Comment/Cancel",
+                defaults: new { controller = "Comment", action = "Cancel" }
+            );
+
+            context.MapRoute(
+                "Forum_Comment",
+                "Forum/Comment/{id}/{title}/{threadId}/{page}",
+                defaults: new { controller = "Comment", action = "Index", id = UrlParameter.Optional, title = UrlParameter.Optional, threadId = UrlParameter.Optional, page = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
                 "Forum_default",
                 "Forum/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }

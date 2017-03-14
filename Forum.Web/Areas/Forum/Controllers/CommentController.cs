@@ -29,7 +29,7 @@ namespace Forum.Web.Areas.Forum.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Comment comment, int? id)
+        public ActionResult Index(Comment comment, int? id, int page, int threadId, string title )
         {
             if (ModelState.IsValid)
             {
@@ -42,11 +42,13 @@ namespace Forum.Web.Areas.Forum.Controllers
                 comment.Published = DateTime.Now;
                 comment.IsVisible = true;
                 comment.AnswerId = (int)id;
+                var query = Request.QueryString;
                 this.data.Comments.Add(comment);
                 this.data.SaveChanges();
+                return RedirectToAction("Index", "Thread", new { id = threadId, title = title, page = page });
             }
             
-            return this.View(comment);
+            return this.View();
         }
 
         public ActionResult Cancel()

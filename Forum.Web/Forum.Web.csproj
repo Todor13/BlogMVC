@@ -231,6 +231,7 @@
     <Compile Include="Areas\Forum\Controllers\SearchController.cs" />
     <Compile Include="Areas\Forum\Controllers\ThreadController.cs" />
     <Compile Include="Areas\Forum\ForumAreaRegistration.cs" />
+    <Compile Include="Areas\Forum\ForumConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -345,7 +346,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Forum\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Forum\" />

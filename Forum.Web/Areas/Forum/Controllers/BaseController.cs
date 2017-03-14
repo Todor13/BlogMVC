@@ -11,7 +11,7 @@ namespace Forum.Web.Areas.Forum.Controllers
     public class BaseController : Controller
     {
         private readonly IUowData data;
-        protected const int PageSize = 3;
+        protected const int PageSize = ForumConstants.PageSize;
 
         public BaseController(IUowData data)
         {
