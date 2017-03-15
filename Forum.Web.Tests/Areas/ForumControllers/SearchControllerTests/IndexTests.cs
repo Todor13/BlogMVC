@@ -90,8 +90,8 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
 
             var expected = new Thread[]
              {
-                new Thread() { Id = 7, IsVisible = true, Published = new DateTime(2017, 01, 07) },
-                new Thread() { Id = 8, IsVisible = true, Published = new DateTime(2017, 01, 08) }
+                new Thread() { Id = 7, IsVisible = true, Published = new DateTime(2017, 01, 07), Title = "SomeTitle", Content = "SomeContent" },
+                new Thread() { Id = 8, IsVisible = true, Published = new DateTime(2017, 01, 08), Title = "SomeTitle", Content = "SomeContent" }
              };
 
             // Act

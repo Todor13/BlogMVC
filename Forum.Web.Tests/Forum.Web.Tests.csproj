@@ -96,8 +96,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\ForumControllers\BaseControllerTests\BaseControllerShould.cs" />
-    <Compile Include="Areas\ForumControllers\BaseControllerTests\Mocked\MockedController.cs" />
     <Compile Include="Areas\ForumControllers\Helpers\ThreadComparer.cs" />
     <Compile Include="Areas\ForumControllers\HomeControllerTests\IndexTests.cs" />
     <Compile Include="Areas\ForumControllers\SearchControllerTests\IndexTests.cs" />

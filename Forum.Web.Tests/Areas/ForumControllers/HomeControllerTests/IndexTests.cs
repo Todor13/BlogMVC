@@ -89,9 +89,9 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
             HomeController controller = new HomeController(data.Object);
             var expected = new Thread[]
              {
-                new Thread() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01) },
-                new Thread() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02) },
-                new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 03) }
+                new Thread() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 03), Title = string.Empty, Content = string.Empty }
              };
 
             // Act
@@ -112,8 +112,8 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
             HomeController controller = new HomeController(data.Object);
             var expected = new Thread[]
              {
-                new Thread() { Id = 7, IsVisible = true, Published = new DateTime(2017, 01, 07) },
-                new Thread() { Id = 8, IsVisible = true, Published = new DateTime(2017, 01, 08) }
+                new Thread() { Id = 7, IsVisible = true, Published = new DateTime(2017, 01, 07), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 8, IsVisible = true, Published = new DateTime(2017, 01, 08), Title = string.Empty, Content = string.Empty }
              };
 
             // Act
@@ -128,15 +128,15 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
         {
             return new List<Thread>()
             {
-                new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 03) },
-                new Thread() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02) },
-                new Thread() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01) },
-                new Thread() { Id = 4, IsVisible = true, Published = new DateTime(2017, 01, 04) },
-                new Thread() { Id = 5, IsVisible = true, Published = new DateTime(2017, 01, 06) },
-                new Thread() { Id = 6, IsVisible = true, Published = new DateTime(2017, 01, 05) },
-                new Thread() { Id = 7, IsVisible = true, Published = new DateTime(2017, 01, 07) },
-                new Thread() { Id = 8, IsVisible = true, Published = new DateTime(2017, 01, 08) },
-                new Thread() { Id = 9, IsVisible = false, Published = new DateTime(2017, 01, 09) }
+                new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 03), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 4, IsVisible = true, Published = new DateTime(2017, 01, 04), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 5, IsVisible = true, Published = new DateTime(2017, 01, 06), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 6, IsVisible = true, Published = new DateTime(2017, 01, 05), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 7, IsVisible = true, Published = new DateTime(2017, 01, 07), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 8, IsVisible = true, Published = new DateTime(2017, 01, 08), Title = string.Empty, Content = string.Empty },
+                new Thread() { Id = 9, IsVisible = false, Published = new DateTime(2017, 01, 09), Title = string.Empty, Content = string.Empty }
             };
         }
     }
