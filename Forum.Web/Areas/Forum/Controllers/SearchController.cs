@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Forum.Data;
+using Forum.Services.Contracts;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {

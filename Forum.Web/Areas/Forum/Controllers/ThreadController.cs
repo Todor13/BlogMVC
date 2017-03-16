@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Forum.Data;
 using Forum.Web.Models.Forum;
 using Forum.Web.Models.Common;
+using Forum.Services.Contracts;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
@@ -36,7 +37,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 .ToArray();
 
             var count = this.Data.Answers.All()
-                .Count(a => a.ThreadId == id && a.IsVisible == true);
+                .Count(a => a.ThreadId == id && a.IsVisible == true && a.Comments.All(c => c.IsVisible == true));
 
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
 

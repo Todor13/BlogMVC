@@ -1,4 +1,5 @@
 ﻿using Forum.Models;
+using Forum.Web.Areas.Forum.Models;
 using Forum.Web.Models.Common;
 using System.Collections.Generic;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Forum.Web.App_Start
+namespace Forum.Services.Contracts
 {
     public interface IHaveCustomMappings
     {

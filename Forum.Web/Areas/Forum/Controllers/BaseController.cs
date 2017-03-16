@@ -1,9 +1,12 @@
 ﻿using Forum.Data;
 using Forum.Models;
+using Forum.Services.Contracts;
+using Forum.Web.Areas.Forum.Models;
 using Forum.Web.Models.Common;
 using Forum.Web.Models.Forum;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Forum.Web.Areas.Forum.Controllers
@@ -31,6 +34,7 @@ namespace Forum.Web.Areas.Forum.Controllers
         protected IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count, string controllerName = null)
         {
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
+
 
             var model = new IndexPageViewModel
             {

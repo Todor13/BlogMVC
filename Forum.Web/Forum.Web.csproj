@@ -232,6 +232,7 @@
     <Compile Include="Areas\Forum\Controllers\ThreadController.cs" />
     <Compile Include="Areas\Forum\ForumAreaRegistration.cs" />
     <Compile Include="Areas\Forum\ForumConstants.cs" />
+    <Compile Include="Areas\Forum\Models\ThreadViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
