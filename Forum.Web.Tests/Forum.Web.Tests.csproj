@@ -96,9 +96,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\ForumControllers\CreateControllerTests\CreateControllerIndexPostTests.cs" />
+    <Compile Include="Areas\ForumControllers\CreateControllerTests\CreateControllerIndexTests.cs" />
+    <Compile Include="Areas\ForumControllers\Helpers\SectionComparer.cs" />
     <Compile Include="Areas\ForumControllers\Helpers\ThreadComparer.cs" />
-    <Compile Include="Areas\ForumControllers\HomeControllerTests\IndexTests.cs" />
-    <Compile Include="Areas\ForumControllers\SearchControllerTests\IndexTests.cs" />
+    <Compile Include="Areas\ForumControllers\HomeControllerTests\HomeControllerIndexTests.cs" />
+    <Compile Include="Areas\ForumControllers\SearchControllerTests\SearchControllerIndexTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>

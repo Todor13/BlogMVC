@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
 {
     [TestFixture]
-    public class IndexTests
+    public class HomeControllerIndexTests
     {
         [Test]
         public void HomeController_Index_ShouldReturnViewResult()
