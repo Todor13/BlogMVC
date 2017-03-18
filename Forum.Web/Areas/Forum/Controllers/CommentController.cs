@@ -42,7 +42,6 @@ namespace Forum.Web.Areas.Forum.Controllers
                 comment.Published = DateTime.Now;
                 comment.IsVisible = true;
                 comment.AnswerId = (int)id;
-                var query = Request.QueryString;
                 this.data.Comments.Add(comment);
                 this.data.SaveChanges();
                 return RedirectToAction("Index", "Thread", new { id = threadId, title = title, page = page });
