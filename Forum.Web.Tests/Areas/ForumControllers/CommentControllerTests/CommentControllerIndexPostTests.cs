@@ -196,5 +196,173 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             // Assert
             data.Verify(d => d.SaveChanges(), Times.Once);
         }
+
+        [TestCase(1)]
+        [TestCase(256)]
+        public void CommentController_Index_Post_ShouldRedirectToCorrectPage(int page)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var commentsRepository = new Mock<IRepository<Comment>>();
+            data.Setup(d => d.Comments).Returns(commentsRepository.Object);
+
+            var claim = new Claim("test", "qwe-123");
+
+            var identity = new Mock<ClaimsIdentity>();
+            identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
+
+            var principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.Identity).Returns(identity.Object);
+
+            var context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User).Returns(principal.Object);
+
+            CommentController controller = new CommentController(data.Object)
+            {
+                ControllerContext = context.Object
+            };
+
+            Comment comment = new Comment();
+
+            // Act
+            RedirectToRouteResult result = controller.Index(comment, 1, page, 1, "threadTitle") as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(page, result.RouteValues["page"]);
+        }
+
+        [TestCase(1)]
+        [TestCase(1153)]
+        public void CommentController_Index_Post_ShouldRedirectWithCorrectThreadIdParam(int threadId)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var commentsRepository = new Mock<IRepository<Comment>>();
+            data.Setup(d => d.Comments).Returns(commentsRepository.Object);
+
+            var claim = new Claim("test", "qwe-123");
+
+            var identity = new Mock<ClaimsIdentity>();
+            identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
+
+            var principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.Identity).Returns(identity.Object);
+
+            var context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User).Returns(principal.Object);
+
+            CommentController controller = new CommentController(data.Object)
+            {
+                ControllerContext = context.Object
+            };
+
+            Comment comment = new Comment();
+
+            // Act
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, threadId, "threadTitle") as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(threadId, result.RouteValues["id"]);
+        }
+
+        [TestCase("First%20Thread%20ever!")]
+        [TestCase("Second%20ThreadYeee")]
+        public void CommentController_Index_Post_ShouldRedirectWithCorrectThreadIdParam(string title)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var commentsRepository = new Mock<IRepository<Comment>>();
+            data.Setup(d => d.Comments).Returns(commentsRepository.Object);
+
+            var claim = new Claim("test", "qwe-123");
+
+            var identity = new Mock<ClaimsIdentity>();
+            identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
+
+            var principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.Identity).Returns(identity.Object);
+
+            var context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User).Returns(principal.Object);
+
+            CommentController controller = new CommentController(data.Object)
+            {
+                ControllerContext = context.Object
+            };
+
+            Comment comment = new Comment();
+
+            // Act
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, 1, title) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(title, result.RouteValues["title"]);
+        }
+
+        [Test]
+        public void CommentController_Index_Post_ShouldRedirectToCorrectControllerName()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var commentsRepository = new Mock<IRepository<Comment>>();
+            data.Setup(d => d.Comments).Returns(commentsRepository.Object);
+
+            var claim = new Claim("test", "qwe-123");
+
+            var identity = new Mock<ClaimsIdentity>();
+            identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
+
+            var principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.Identity).Returns(identity.Object);
+
+            var context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User).Returns(principal.Object);
+
+            CommentController controller = new CommentController(data.Object)
+            {
+                ControllerContext = context.Object
+            };
+
+            Comment comment = new Comment();
+
+            // Act
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Thread", result.RouteValues["Controller"]);
+        }
+
+        [Test]
+        public void CommentController_Index_Post_ShouldRedirectToCorrectActionName()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var commentsRepository = new Mock<IRepository<Comment>>();
+            data.Setup(d => d.Comments).Returns(commentsRepository.Object);
+
+            var claim = new Claim("test", "qwe-123");
+
+            var identity = new Mock<ClaimsIdentity>();
+            identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
+
+            var principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.Identity).Returns(identity.Object);
+
+            var context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User).Returns(principal.Object);
+
+            CommentController controller = new CommentController(data.Object)
+            {
+                ControllerContext = context.Object
+            };
+
+            Comment comment = new Comment();
+
+            // Act
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual("Index", result.RouteValues["Action"]);
+        }
     }
 }
