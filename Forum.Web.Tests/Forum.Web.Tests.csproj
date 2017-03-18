@@ -96,6 +96,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\ForumControllers\AnswerControllerTests\AnswerControllerIndexPostTests.cs" />
+    <Compile Include="Areas\ForumControllers\AnswerControllerTests\AnswerControllerIndexTests.cs" />
     <Compile Include="Areas\ForumControllers\CreateControllerTests\CreateControllerIndexPostTests.cs" />
     <Compile Include="Areas\ForumControllers\CreateControllerTests\CreateControllerIndexTests.cs" />
     <Compile Include="Areas\ForumControllers\Helpers\AnswerComparer.cs" />

@@ -36,7 +36,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CreateControllerTests
             {
                 ControllerContext = context.Object
             };
-            
+
             var thread = new Thread();
 
             //Act
@@ -58,7 +58,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CreateControllerTests
 
             var identity = new Mock<ClaimsIdentity>();
             identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
-           
+
             var principal = new Mock<IPrincipal>();
             principal.Setup(p => p.Identity).Returns(identity.Object);
 
@@ -76,7 +76,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CreateControllerTests
             var result = controller.Index(thread) as ViewResult;
 
             //Assert
-            threadRepository.Verify(d => d.Add(It.Is<Thread>(t=>t.Published.GetType() == typeof(DateTime))));
+            threadRepository.Verify(d => d.Add(It.Is<Thread>(t => t.Published.GetType() == typeof(DateTime))));
         }
 
         [Test]
@@ -176,7 +176,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CreateControllerTests
             var result = controller.Index(thread) as ViewResult;
 
             //Assert
-            data.Verify(d=>d.SaveChanges(), Times.Once);
+            data.Verify(d => d.SaveChanges(), Times.Once);
         }
 
         [Test]
@@ -269,7 +269,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CreateControllerTests
                 ControllerContext = context.Object
             };
 
-            var thread = new Thread() { Id = 3};
+            var thread = new Thread() { Id = 3 };
 
             //Act
             RedirectToRouteResult redirectResult = controller.Index(thread) as RedirectToRouteResult;
