@@ -290,6 +290,72 @@ namespace Forum.Web.Tests.Areas.ForumControllers.AnswerControllerTests
             Assert.AreEqual("Index", result.RouteValues["Action"]);
         }
 
+        [TestCase(13)]
+        [TestCase(2147483646)]
+        public void AnswerController_Index_Post_ShouldRedirectWithCorrectParamThreadId(int threadId)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable());
+
+            var claim = new Claim("test", "id-123");
+
+            var identity = new Mock<ClaimsIdentity>();
+            identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
+
+            var principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.Identity).Returns(identity.Object);
+
+            var context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User).Returns(principal.Object);
+
+            AnswerController controller = new AnswerController(data.Object)
+            {
+                ControllerContext = context.Object
+            };
+
+            Answer answer = new Answer();
+
+            // Act
+            RedirectToRouteResult result = controller.Index(answer, threadId, "ThreadTitle") as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(threadId, result.RouteValues["id"]);
+        }
+
+        [TestCase("First%20Thread%20ever!")]
+        [TestCase("Second%20Thread")]
+        public void AnswerController_Index_Post_ShouldRedirectWithCorrectParamThreadTitle(string threadTitle)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable());
+
+            var claim = new Claim("test", "id-123");
+
+            var identity = new Mock<ClaimsIdentity>();
+            identity.Setup(i => i.FindFirst(It.IsAny<string>())).Returns(claim);
+
+            var principal = new Mock<IPrincipal>();
+            principal.Setup(p => p.Identity).Returns(identity.Object);
+
+            var context = new Mock<ControllerContext>();
+            context.Setup(c => c.HttpContext.User).Returns(principal.Object);
+
+            AnswerController controller = new AnswerController(data.Object)
+            {
+                ControllerContext = context.Object
+            };
+
+            Answer answer = new Answer();
+
+            // Act
+            RedirectToRouteResult result = controller.Index(answer, 13, threadTitle) as RedirectToRouteResult;
+
+            // Assert
+            Assert.AreEqual(threadTitle, result.RouteValues["title"]);
+        }
+
         private ICollection<Answer> AnswersCollection()
         {
             return new List<Answer>()
