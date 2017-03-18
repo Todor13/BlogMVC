@@ -30,14 +30,14 @@ namespace Forum.Web.Areas.Forum.Controllers
             }
 
             var answers = this.Data.Answers.All()
-                .Where(a => a.ThreadId == id && a.IsVisible == true && a.Comments.All(c => c.IsVisible == true))
+                .Where(a => a.ThreadId == id && a.IsVisible == true)
                 .OrderBy(a => a.Published)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize)
                 .ToArray();
 
             var count = this.Data.Answers.All()
-                .Count(a => a.ThreadId == id && a.IsVisible == true && a.Comments.All(c => c.IsVisible == true));
+                .Count(a => a.ThreadId == id && a.IsVisible == true);
 
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
 

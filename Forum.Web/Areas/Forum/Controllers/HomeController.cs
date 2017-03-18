@@ -13,7 +13,7 @@ namespace Forum.Web.Areas.Forum.Controllers
 
         public ActionResult Index(int page = 1)
         {
-            var count = this.Data.Threads.All().Count();
+            var count = this.Data.Threads.All().Count(t => t.IsVisible == true);
 
             var threads = this.Data.Threads.All()
                 .Where(t => t.IsVisible == true)

@@ -152,6 +152,60 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
             CollectionAssert.AreEqual(expected, resultModel.Answers, new AnswerComparer());
         }
 
+        [Test]
+        public void ThreadController_Index_ShouldReturnCorrectCurrentPage()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+
+            var controller = new ThreadController(data.Object);
+
+            // Act
+            var result = controller.Index(1, 2) as ViewResult;
+            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+
+            // Assert
+            Assert.AreEqual(2, resultModel.PageCounter.CurrentPage);
+        }
+
+        [Test]
+        public void ThreadController_Index_ShouldReturnCorrectPagesCount()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+
+            var controller = new ThreadController(data.Object);
+
+            // Act
+            var result = controller.Index(1, 2) as ViewResult;
+            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+
+            // Assert
+            Assert.AreEqual(2, resultModel.PageCounter.PagesCount);
+        }
+
+        [Test]
+        public void ThreadController_Index_ShouldReturnCorrectControllerName()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+
+            var controller = new ThreadController(data.Object);
+
+            // Act
+            var result = controller.Index(1, 2) as ViewResult;
+            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+
+            // Assert
+            Assert.AreEqual("Thread", resultModel.PageCounter.ControllerName);
+        }
+
         private ICollection<Answer> AnswersCollection()
         {
             return new List<Answer>()
