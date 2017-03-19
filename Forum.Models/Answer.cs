@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Forum.Models
 {
@@ -13,6 +14,8 @@ namespace Forum.Models
         }
 
         public int Id { get; set; }
+
+        [AllowHtml]
         public string Content { get; set; }
         public DateTime Published { get; set; }
         public string UserId { get; set; }

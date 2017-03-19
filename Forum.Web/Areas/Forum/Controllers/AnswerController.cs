@@ -45,7 +45,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 answer.ThreadId = (int)id;
                 this.data.Answers.Add(answer);
                 this.data.SaveChanges();
-                var answersCount = this.data.Answers.All().Count(a => a.IsVisible == true);
+                var answersCount = this.data.Answers.All().Count(a => a.ThreadId == id  && a.IsVisible == true);
                 var page = (answersCount / ForumConstants.PageSize) + (answersCount % ForumConstants.PageSize == 0 ? 0 : 1);
                 return RedirectToAction("Index", "Thread", new { id = id, title = title, page = page });
             }

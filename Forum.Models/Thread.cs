@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Forum.Models
@@ -15,6 +14,8 @@ namespace Forum.Models
         }
 
         public int Id { get; set; }
+
+        [AllowHtml]
         public string Title { get; set; }
 
         [AllowHtml]

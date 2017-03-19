@@ -360,11 +360,13 @@ namespace Forum.Web.Tests.Areas.ForumControllers.AnswerControllerTests
         {
             return new List<Answer>()
             {
-                new Answer() { Id = 1, IsVisible = true },
-                new Answer() { Id = 2, IsVisible = true },
-                new Answer() { Id = 3, IsVisible = true },
-                new Answer() { Id = 4, IsVisible = true },
-                new Answer() { Id = 4, IsVisible = false }
+                new Answer() { Id = 1, IsVisible = true, ThreadId = 1 },
+                new Answer() { Id = 2, IsVisible = true, ThreadId = 1 },
+                new Answer() { Id = 3, IsVisible = true, ThreadId = 1 },
+                new Answer() { Id = 4, IsVisible = true, ThreadId = 1 },
+                new Answer() { Id = 5, IsVisible = true, ThreadId = 1 },
+                new Answer() { Id = 6, IsVisible = true, ThreadId = 1 },
+                new Answer() { Id = 7, IsVisible = false, ThreadId = 1 }
             };
         }
     }

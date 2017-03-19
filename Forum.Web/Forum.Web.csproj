@@ -243,6 +243,7 @@
     <Compile Include="Models\Common\PagingViewModel.cs" />
     <Compile Include="Areas\Forum\Models\IndexPageViewModel.cs" />
     <Compile Include="Areas\Forum\Models\ThreadAnswersViewModel.cs" />
+    <Compile Include="Models\HomePageViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

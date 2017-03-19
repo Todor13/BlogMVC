@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Web.Mvc;
 
 namespace Forum.Models
 {
     public class Comment
     {
         public int Id { get; set; }
+
+        [AllowHtml]
         public string Content { get; set; }
         public DateTime Published { get; set; }
         public int AnswerId { get; set; }

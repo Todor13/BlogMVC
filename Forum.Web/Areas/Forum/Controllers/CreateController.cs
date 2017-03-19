@@ -34,7 +34,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 thread.UserId = User.Identity.GetUserId();
                 this.Data.Threads.Add(thread);
                 this.Data.SaveChanges();
-                return RedirectToAction("Index", "Thread", new { id = thread.Id });
+                return RedirectToAction("Index", "Thread", new { id = thread.Id, title = thread.Title });
             }
 
             return this.View(thread);

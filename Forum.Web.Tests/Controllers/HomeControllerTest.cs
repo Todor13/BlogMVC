@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Forum.Web;
 using Forum.Web.Controllers;
+using Forum.Data;
+using Moq;
 
 namespace Forum.Web.Tests.Controllers
 {
@@ -16,7 +18,9 @@ namespace Forum.Web.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var data = new Mock<IUowData>();
+
+            HomeController controller = new HomeController(data.Object);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +33,9 @@ namespace Forum.Web.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var data = new Mock<IUowData>();
+
+            HomeController controller = new HomeController(data.Object);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +48,9 @@ namespace Forum.Web.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var data = new Mock<IUowData>();
+
+            HomeController controller = new HomeController(data.Object);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
