@@ -51,11 +51,11 @@ namespace Forum.Data
             }
         }
 
-        public IRepository<User> Users
+        public IRepository<ApplicationUser> Users
         {
             get
             {
-                return this.GetRepository<User>();
+                return this.GetRepository<ApplicationUser>();
             }
         }
 

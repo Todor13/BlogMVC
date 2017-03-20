@@ -20,7 +20,7 @@
             <li>
                 <div class="thread-data">
                     <ul class="list-inline list-unstyled">
-                        <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @Model.Thread.User.Name</span></li>
+                        <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @Model.Thread.User.UserName</span></li>
                         <li><span> | </span></li>
                         <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", Model.Thread.Published)</span></li>
                     </ul>
@@ -46,7 +46,7 @@
                         <div class="message you-message">@answer.Content</div>
                         <div class="message-data">
                             <ul class="list-inline list-unstyled">
-                                <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @answer.User.Name</span></li>
+                                <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @answer.User.UserName</span></li>
                                 <li><span> | </span></li>
                                 <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", answer.Published)</span></li>
                             </ul>
@@ -58,7 +58,7 @@
                             <div class="message me-message float-right">@comment.Content</div>
                             <div class="message-data float-right">
                                 <ul class="list-inline list-unstyled">
-                                    <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @comment.User.Name</span></li>
+                                    <li><span class="message-data-name"><i class="glyphicon glyphicon-user"></i> @comment.User.UserName</span></li>
                                     <li><span> | </span></li>
                                     <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", comment.Published)</span></li>
                                 </ul>

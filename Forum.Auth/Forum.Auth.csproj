@@ -87,8 +87,8 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="ApplicationSignInManager.cs" />
-    <Compile Include="ApplicationUser.cs" />
     <Compile Include="ApplicationUserManager.cs" />
+    <Compile Include="ApplicationUserStore.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmsService.cs" />
@@ -96,6 +96,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forum.Data\Forum.Data.csproj">
+      <Project>{1043096D-5A8A-4DFC-B5F4-2837DABBAA0F}</Project>
+      <Name>Forum.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forum.Models\Forum.Models.csproj">
+      <Project>{e21ee498-e700-4cb2-873a-2010cd20f902}</Project>
+      <Name>Forum.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,9 +1,11 @@
 ﻿using Forum.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Data.Entity;
 
 namespace Forum.Data
 {
-    public class ForumDbContext : DbContext, IForumDbContext
+    public class ForumDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IForumDbContext
     {
         public ForumDbContext()
             :base("ForumConnection")
@@ -18,11 +20,14 @@ namespace Forum.Data
 
         public IDbSet<Thread> Threads { get; set; }
 
-        public IDbSet<User> Users { get; set; }
-
         public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();
+        }
+
+        public static ForumDbContext Create()
+        {
+            return new ForumDbContext();
         }
 
         public override int SaveChanges()

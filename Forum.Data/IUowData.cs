@@ -12,7 +12,7 @@ namespace Forum.Data
 
         IRepository<Thread> Threads { get; }
 
-        IRepository<User> Users { get; }
+        IRepository<ApplicationUser> Users { get; }
 
         int SaveChanges();
     }

@@ -14,7 +14,7 @@ namespace Forum.Data
 
         IDbSet<Thread> Threads { get; set; }
 
-        IDbSet<User> Users { get; set; }
+        IDbSet<ApplicationUser> Users { get; set; }
 
         IDbSet<T> Set<T>() where T : class;
 

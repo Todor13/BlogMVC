@@ -12,7 +12,7 @@ namespace Forum.Web.Areas.Forum.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Published { get; set; }
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         public Section Section { get; set; }
         public int AnswersCount { get; set; }
 

@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿//using Forum.Models;
+//using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Forum.Auth
-{
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+//namespace Forum.Auth
+//{
+//    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+//    {
+//        public ApplicationDbContext()
+//            : base("ForumConnection")
+//        {
+//        }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-    }
-}
+//        public static ApplicationDbContext Create()
+//        {
+//            return new ApplicationDbContext();
+//        }
+//    }
+//}
