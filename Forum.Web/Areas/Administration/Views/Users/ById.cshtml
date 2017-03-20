@@ -1,0 +1,49 @@
+﻿@model Forum.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h3>@Model.Email Profile</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>User Name</th>
+                    <th>Phone number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>@Model.Email</th>
+                    <th>@Model.UserName</th>
+                    <th>@Model.PhoneNumber</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <hr />
+    <h3>@Model.Email Threads</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Thread</th>
+                    <th>Publish Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var thread in Model.Threads)
+                {
+                    <tr>
+                        <th>@thread.Title</th>
+                        <th>@thread.Published</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

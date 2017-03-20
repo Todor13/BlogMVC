@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Forum.Web.Areas.Administration.Models.UserViewModel>
+
+@{
+    ViewBag.Title = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Users</h2>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>User Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+            {
+                    <tr>
+                        <th>@Html.ActionLink(user.Email, "ById", new { id = user.Id })</th>
+                        <th>@user.UserName</th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
