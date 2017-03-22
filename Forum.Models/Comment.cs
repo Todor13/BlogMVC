@@ -14,6 +14,8 @@ namespace Forum.Models
         public virtual Answer Answer { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public DateTime? EditedOn { get; set; }
+        public string EditedById { get; set; }
         public bool IsVisible { get; set; }
     }
 }

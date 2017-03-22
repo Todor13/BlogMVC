@@ -1,11 +1,8 @@
 ﻿using Forum.Data;
-using Forum.Web.Areas.Administration.Models;
+using Forum.Web.Areas.Users.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Data.Entity;
 
 namespace Forum.Web.Areas.Administration.Controllers
 {
@@ -15,7 +12,19 @@ namespace Forum.Web.Areas.Administration.Controllers
 
         public UsersController(IUowData data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException("An instance of IUowData is required to use this repository.", "data");
+            }
+
             this.data = data;
+        }
+
+        public ActionResult Index(string id)
+        {
+            var user = this.data.Users.GetById(id);
+
+            return this.View("ById", user);
         }
 
         // GET: Administration/Users
@@ -27,14 +36,6 @@ namespace Forum.Web.Areas.Administration.Controllers
                 .ToArray();
 
             return View(users);
-        }
-
-        public ActionResult ById(string id)
-        {
-            var user = this.data.Users.GetById(id);
-                
-
-            return this.View(user);
         }
     }
 }

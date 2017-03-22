@@ -22,6 +22,8 @@ namespace Forum.Models
         public virtual ApplicationUser User { get; set; }
         public int ThreadId { get; set; }
         public virtual Thread Thread { get; set; }
+        public DateTime? EditedOn { get; set; }
+        public string EditedById { get; set; }
         public bool IsVisible { get; set; }
 
         public virtual ICollection<Comment> Comments

@@ -31,19 +31,19 @@ namespace Forum.Models
             return userIdentity;
         }
 
-        public ICollection<Thread> Threads
+        public virtual ICollection<Thread> Threads
         {
             get { return this.threads; }
             set { this.threads = value; }
         }
 
-        public ICollection<Answer> Answers
+        public virtual ICollection<Answer> Answers
         {
             get { return this.answers; }
             set { this.answers = value; }
         }
 
-        public ICollection<Comment> Comments
+        public virtual ICollection<Comment> Comments
         {
             get { return this.comments; }
             set { this.comments = value; }

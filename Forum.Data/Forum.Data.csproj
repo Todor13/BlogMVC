@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201703201014122_IdentityToForumRelation.Designer.cs">
       <DependentUpon>201703201014122_IdentityToForumRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703222015301_ModelsUpdated.cs" />
+    <Compile Include="Migrations\201703222015301_ModelsUpdated.Designer.cs">
+      <DependentUpon>201703222015301_ModelsUpdated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UowData.cs" />
@@ -104,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703201014122_IdentityToForumRelation.resx">
       <DependentUpon>201703201014122_IdentityToForumRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703222015301_ModelsUpdated.resx">
+      <DependentUpon>201703222015301_ModelsUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

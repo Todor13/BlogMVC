@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<Forum.Web.Areas.Users.Models.UserViewModel>
 
 @{
-    ViewBag.Title = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,7 +19,7 @@
                 @foreach (var user in Model)
             {
                     <tr>
-                        <th>@Html.ActionLink(user.Email, "Index", new { id = user.Id })</th>
+                        <th>@Html.ActionLink(user.Email, "Index", "Profile", new { id = user.Id, Area = "Users" }, null)</th>
                         <th>@user.UserName</th>
                     </tr>
                 }
@@ -28,3 +27,5 @@
         </table>
     </div>
 </div>
+
+

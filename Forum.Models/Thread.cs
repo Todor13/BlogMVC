@@ -25,6 +25,8 @@ namespace Forum.Models
         public virtual ApplicationUser User { get; set; }
         public int SectionId { get; set; }
         public virtual Section Section { get; set; }
+        public DateTime? EditedOn { get; set; }
+        public string EditedById { get; set; }
         public bool IsVisible { get; set; }
 
         public virtual ICollection<Answer> Answers

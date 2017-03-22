@@ -225,7 +225,10 @@
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
-    <Compile Include="Areas\Administration\Models\UserViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\UserAdministrationViewModel.cs" />
+    <Compile Include="Areas\Users\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Users\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Users\Models\UserViewModel.cs" />
     <Compile Include="Areas\Forum\Controllers\AnswerController.cs" />
     <Compile Include="Areas\Forum\Controllers\BaseController.cs" />
     <Compile Include="Areas\Forum\Controllers\CommentController.cs" />
@@ -236,6 +239,8 @@
     <Compile Include="Areas\Forum\ForumAreaRegistration.cs" />
     <Compile Include="Areas\Forum\ForumConstants.cs" />
     <Compile Include="Areas\Forum\Models\ThreadViewModel.cs" />
+    <Compile Include="Areas\Users\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -247,8 +252,8 @@
     <Compile Include="Areas\Forum\Models\IndexPageViewModel.cs" />
     <Compile Include="Areas\Forum\Models\ThreadAnswersViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ThreadViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -269,6 +274,9 @@
     <Content Include="Areas\Administration\Views\web.config" />
     <Content Include="Areas\Administration\Views\Users\All.cshtml" />
     <Content Include="Areas\Administration\Views\Users\ById.cshtml" />
+    <Content Include="Areas\Users\Views\web.config" />
+    <Content Include="Areas\Users\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Users\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -355,6 +363,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\Shared\" />
+    <Folder Include="Areas\Users\Views\Base\" />
+    <Folder Include="Areas\Users\Views\Shared\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Forum\" />
