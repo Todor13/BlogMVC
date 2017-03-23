@@ -1,4 +1,5 @@
 ﻿using Forum.Models;
+using Forum.Web.Common;
 using System;
 using System.Linq.Expressions;
 
@@ -6,8 +7,6 @@ namespace Forum.Web.Areas.Users.Models
 {
     public class ThreadActivityViewModel
     {
-        private const int Length = 100;
-
         public static Expression<Func<Thread, ThreadActivityViewModel>> FromThread
         {
             get
@@ -15,8 +14,8 @@ namespace Forum.Web.Areas.Users.Models
                 return thread => new ThreadActivityViewModel
                 {
                     Id = thread.Id,
-                    Title = thread.Title.Substring(0, Length),
-                    Content = thread.Content.Substring(0, Length),
+                    Title = thread.Title,
+                    Content = thread.Content.Substring(0, WebConstants.ActivitySubString),
                     Published = thread.Published
                 };
             }

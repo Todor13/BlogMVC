@@ -10,5 +10,7 @@ namespace Forum.Web.Common
         public const int PageSize = 3;
 
         public const int ThreadListCount = 7;
+
+        public const int ActivitySubString = 100;
     }
 }

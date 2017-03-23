@@ -230,6 +230,7 @@
     <Compile Include="Areas\Users\Controllers\HomeController.cs" />
     <Compile Include="Areas\Users\Models\ActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\AnswerActivityViewModel.cs" />
+    <Compile Include="Areas\Users\Models\CommentActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\RoleViewModel.cs" />
     <Compile Include="Areas\Users\Models\ThreadActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\UserViewModel.cs" />
@@ -284,9 +285,9 @@
     <Content Include="Areas\Users\Views\web.config" />
     <Content Include="Areas\Users\Views\Profile\Index.cshtml" />
     <Content Include="Areas\Users\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Users\Views\Profile\_Activity.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Threads.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Answers.cshtml" />
+    <Content Include="Areas\Users\Views\Profile\_Comments.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

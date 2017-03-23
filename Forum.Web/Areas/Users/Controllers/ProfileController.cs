@@ -33,7 +33,7 @@ namespace Forum.Web.Areas.Users.Controllers
         public ActionResult GetUserThreads(string id)
         {
             var threads = this.Data.Threads.All()
-                .Where(t => t.UserId == id)
+                .Where(t => t.UserId == id && t.IsVisible == true)
                 .Select(ThreadActivityViewModel.FromThread)
                 .ToArray();
 
@@ -43,11 +43,21 @@ namespace Forum.Web.Areas.Users.Controllers
         public ActionResult GetUserAnswers(string id)
         {
             var answers = this.Data.Answers.All()
-                .Where(a => a.UserId == id)
+                .Where(a => a.UserId == id && a.IsVisible == true)
                 .Select(AnswerActivityViewModel.FromAnswer)
                 .ToArray();
 
             return PartialView("_Answers", answers);
+        }
+
+        public ActionResult GetUserComments(string id)
+        {
+            var comments = this.Data.Comments.All()
+                .Where(c => c.UserId == id && c.IsVisible == true)
+                .Select(CommentActivityViewModel.FromComment)
+                .ToArray();
+
+            return PartialView("_Comments", comments);
         }
 
     }

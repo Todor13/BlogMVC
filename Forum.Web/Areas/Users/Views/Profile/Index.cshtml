@@ -45,14 +45,19 @@
        UpdateTargetId = "forum-activity",
        HttpMethod = "GET",
        InsertionMode = InsertionMode.Replace
-   })
+   }, new { @class = "btn btn-default"})
         @Ajax.ActionLink("Answers", "GetUserAnswers", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
-           {
-               UpdateTargetId = "forum-activity",
-               HttpMethod = "GET",
-               InsertionMode = InsertionMode.Replace
-           })
-
+   {
+       UpdateTargetId = "forum-activity",
+       HttpMethod = "GET",
+       InsertionMode = InsertionMode.Replace
+   }, new { @class = "btn btn-default" })
+        @Ajax.ActionLink("Comments", "GetUserComments", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
+   {
+       UpdateTargetId = "forum-activity",
+       HttpMethod = "GET",
+       InsertionMode = InsertionMode.Replace
+   }, new { @class = "btn btn-default" })
 </h3>
 <div id="forum-activity"></div>
 </div>
