@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Forum.Web.Common
+﻿namespace Forum.Web.Common
 {
     public class WebConstants
     {
@@ -11,6 +6,12 @@ namespace Forum.Web.Common
 
         public const int ThreadListCount = 7;
 
+
+        //Users Area Constants
         public const int ActivitySubString = 100;
+        public const int ActivityPageSize = 3;
+        public const string UpdateTarget = "forum-activity";
+        public const string Profile = "Profile";
+        public const string GetUserThreads = "GetUserThreads";
     }
 }

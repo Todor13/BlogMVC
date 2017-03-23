@@ -1,6 +1,10 @@
 ﻿using Forum.Data;
 using Forum.Web.Areas.Users.Models;
+using Forum.Web.Common;
+using Forum.Web.Models.Common;
 using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -30,14 +34,32 @@ namespace Forum.Web.Areas.Users.Controllers
             return View(userViewModel);
         }
 
-        public ActionResult GetUserThreads(string id)
+        public ActionResult GetUserThreads(string id, int page = 1)
         {
             var threads = this.Data.Threads.All()
                 .Where(t => t.UserId == id && t.IsVisible == true)
+                .OrderBy(t => t.Published)
+                .Skip((page - 1) * WebConstants.ActivityPageSize)
+                .Take(WebConstants.ActivityPageSize)
                 .Select(ThreadActivityViewModel.FromThread)
                 .ToArray();
 
-            return PartialView("_Threads", threads);
+            var threadsCount = this.Data.Threads.All().Count(t => t.UserId == id && t.IsVisible == true);
+
+            var pageViwModel = new AjaxPagerViewModel()
+            {
+                CurrentPage = page,
+                ItemsCount = threadsCount,
+                ControllerName = WebConstants.Profile,
+                ActionName = WebConstants.GetUserThreads,
+                PageSize = WebConstants.ActivityPageSize,
+                UpdateTarget = WebConstants.UpdateTarget
+            };
+
+            var model = new Tuple<IEnumerable<ThreadActivityViewModel>, AjaxPagerViewModel>(threads, pageViwModel);
+           
+
+            return PartialView("_Threads", model);
         }
 
         public ActionResult GetUserAnswers(string id)

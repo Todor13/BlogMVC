@@ -1,10 +1,7 @@
 ﻿using Forum.Models;
 using Forum.Web.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 
 namespace Forum.Web.Areas.Users.Models
 {

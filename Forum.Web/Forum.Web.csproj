@@ -228,8 +228,8 @@
     <Compile Include="Areas\Administration\Models\UserAdministrationViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\BaseController.cs" />
     <Compile Include="Areas\Users\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Users\Models\ActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\AnswerActivityViewModel.cs" />
+    <Compile Include="Areas\Users\Models\AjaxPagerViewModel.cs" />
     <Compile Include="Areas\Users\Models\CommentActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\RoleViewModel.cs" />
     <Compile Include="Areas\Users\Models\ThreadActivityViewModel.cs" />
@@ -288,6 +288,7 @@
     <Content Include="Areas\Users\Views\Profile\_Threads.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Answers.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Comments.cshtml" />
+    <Content Include="Areas\Users\Views\Shared\_AjaxPager.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -374,7 +375,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\Shared\" />
-    <Folder Include="Areas\Users\Views\Shared\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Common\" />
     <Folder Include="Views\Forum\" />

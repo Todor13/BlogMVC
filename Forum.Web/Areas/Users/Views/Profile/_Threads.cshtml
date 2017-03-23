@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Forum.Web.Areas.Users.Models.ThreadActivityViewModel>
+﻿@model Tuple<IEnumerable<Forum.Web.Areas.Users.Models.ThreadActivityViewModel>, Forum.Web.Areas.Users.Models.AjaxPagerViewModel>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var thread in Model)
+            @foreach (var thread in Model.Item1)
             {
                 <tr>
                     <td>@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</td>
@@ -20,4 +20,5 @@
             }
         </tbody>
     </table>
+    @Html.Partial("_AjaxPager", Model.Item2)
 </div>
