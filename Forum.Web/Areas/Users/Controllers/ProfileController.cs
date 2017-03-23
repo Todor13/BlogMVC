@@ -23,7 +23,7 @@ namespace Forum.Web.Areas.Users.Controllers
         public ActionResult Index(string id)
         {
             var user = this.Data.Users.GetById(id);
-            
+
             if (user == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, "There is no such user");
@@ -57,7 +57,7 @@ namespace Forum.Web.Areas.Users.Controllers
             };
 
             var model = new Tuple<IEnumerable<ThreadActivityViewModel>, AjaxPagerViewModel>(threads, pageViwModel);
-           
+
 
             return PartialView("_Threads", model);
         }
@@ -89,14 +89,31 @@ namespace Forum.Web.Areas.Users.Controllers
             return PartialView("_Answers", model);
         }
 
-        public ActionResult GetUserComments(string id)
+        public ActionResult GetUserComments(string id, int page = 1)
         {
             var comments = this.Data.Comments.All()
                 .Where(c => c.UserId == id && c.IsVisible == true)
+                .OrderBy(t => t.Published)
+                .Skip((page - 1) * WebConstants.ActivityPageSize)
+                .Take(WebConstants.ActivityPageSize)
                 .Select(CommentActivityViewModel.FromComment)
                 .ToArray();
 
-            return PartialView("_Comments", comments);
+            var commentsCount = this.Data.Comments.All().Count(c => c.UserId == id && c.IsVisible == true);
+
+            var pageViwModel = new AjaxPagerViewModel()
+            {
+                CurrentPage = page,
+                ItemsCount = commentsCount,
+                ControllerName = WebConstants.Profile,
+                ActionName = WebConstants.GetUserComments,
+                PageSize = WebConstants.ActivityPageSize,
+                UpdateTarget = WebConstants.UpdateTarget
+            };
+
+            var model = new Tuple<IEnumerable<CommentActivityViewModel>, AjaxPagerViewModel>(comments, pageViwModel);
+
+            return PartialView("_Comments", model);
         }
 
     }

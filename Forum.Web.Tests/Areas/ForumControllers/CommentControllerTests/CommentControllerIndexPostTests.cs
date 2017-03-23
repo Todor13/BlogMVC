@@ -23,7 +23,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            HttpStatusCodeResult result = controller.Index(comment, null, 1, 1, "threadTitle") as HttpStatusCodeResult;
+            HttpStatusCodeResult result = controller.Index(comment, null, 1, "threadTitle") as HttpStatusCodeResult;
 
             // Assert
             Assert.AreEqual(400, result.StatusCode);
@@ -57,7 +57,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            ViewResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as ViewResult;
+            ViewResult result = controller.Index(comment, 1, 1, "threadTitle") as ViewResult;
 
             // Assert
             commentsRepository.Verify(d => d.Add(It.Is<Comment>(c => c.UserId == userId)));
@@ -90,7 +90,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            ViewResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as ViewResult;
+            ViewResult result = controller.Index(comment, 1, 1, "threadTitle") as ViewResult;
 
             // Assert
             commentsRepository.Verify(d => d.Add(It.Is<Comment>(c => c.Published.GetType() == typeof(DateTime))));
@@ -123,7 +123,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            ViewResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as ViewResult;
+            ViewResult result = controller.Index(comment, 1, 1, "threadTitle") as ViewResult;
 
             // Assert
             commentsRepository.Verify(d => d.Add(It.Is<Comment>(c => c.IsVisible == true)));
@@ -158,7 +158,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            ViewResult result = controller.Index(comment, answerId, 1, 1, "threadTitle") as ViewResult;
+            ViewResult result = controller.Index(comment, answerId, 1, "threadTitle") as ViewResult;
 
             // Assert
             commentsRepository.Verify(d => d.Add(It.Is<Comment>(c => c.AnswerId == answerId)));
@@ -191,7 +191,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            ViewResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as ViewResult;
+            ViewResult result = controller.Index(comment, 1, 1, "threadTitle") as ViewResult;
 
             // Assert
             data.Verify(d => d.SaveChanges(), Times.Once);
@@ -225,7 +225,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            RedirectToRouteResult result = controller.Index(comment, 1, page, 1, "threadTitle") as RedirectToRouteResult;
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, "threadTitle", page) as RedirectToRouteResult;
 
             // Assert
             Assert.AreEqual(page, result.RouteValues["page"]);
@@ -259,7 +259,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            RedirectToRouteResult result = controller.Index(comment, 1, 1, threadId, "threadTitle") as RedirectToRouteResult;
+            RedirectToRouteResult result = controller.Index(comment, 1, threadId, "threadTitle") as RedirectToRouteResult;
 
             // Assert
             Assert.AreEqual(threadId, result.RouteValues["id"]);
@@ -293,7 +293,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            RedirectToRouteResult result = controller.Index(comment, 1, 1, 1, title) as RedirectToRouteResult;
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, title) as RedirectToRouteResult;
 
             // Assert
             Assert.AreEqual(title, result.RouteValues["title"]);
@@ -326,7 +326,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            RedirectToRouteResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as RedirectToRouteResult;
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, "threadTitle") as RedirectToRouteResult;
 
             // Assert
             Assert.AreEqual("Thread", result.RouteValues["Controller"]);
@@ -359,7 +359,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CommentControllerTests
             Comment comment = new Comment();
 
             // Act
-            RedirectToRouteResult result = controller.Index(comment, 1, 1, 1, "threadTitle") as RedirectToRouteResult;
+            RedirectToRouteResult result = controller.Index(comment, 1, 1, "threadTitle") as RedirectToRouteResult;
 
             // Assert
             Assert.AreEqual("Index", result.RouteValues["Action"]);

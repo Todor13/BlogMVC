@@ -14,5 +14,6 @@
         public const string Profile = "Profile";
         public const string GetUserThreads = "GetUserThreads";
         public const string GetUserAnswers = "GetUserAnswers";
+        public const string GetUserComments = "GetUserComments";
     }
 }

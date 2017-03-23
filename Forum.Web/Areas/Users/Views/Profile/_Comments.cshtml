@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Forum.Web.Areas.Users.Models.CommentActivityViewModel>
+﻿@model Tuple<IEnumerable<Forum.Web.Areas.Users.Models.CommentActivityViewModel>, Forum.Web.Areas.Users.Models.AjaxPagerViewModel>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -10,14 +10,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var activity in Model)
+            @foreach (var comment in Model.Item1)
             {
                 <tr>
-                    <td>@Html.ActionLink(activity.ThreadTitle, "Index", "Thread", new { id = activity.ThreadId })</td>
-                    <td>@activity.Content</td>
-                    <td>@activity.Published</td>
+                    <td>@Html.ActionLink(comment.ThreadTitle, "Index", "Thread", new { id = comment.ThreadId })</td>
+                    <td>@comment.Content</td>
+                    <td>@comment.Published</td>
                 </tr>
             }
         </tbody>
     </table>
+    @Html.Partial("_AjaxPager", Model.Item2)
 </div>

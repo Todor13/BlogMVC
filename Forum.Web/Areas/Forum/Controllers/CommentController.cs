@@ -29,7 +29,7 @@ namespace Forum.Web.Areas.Forum.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Comment comment, int? id, int page, int threadId, string title )
+        public ActionResult Index(Comment comment, int? id, int threadId, string title, int page = 1)
         {
             if (ModelState.IsValid)
             {
