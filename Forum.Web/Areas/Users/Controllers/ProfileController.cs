@@ -40,5 +40,15 @@ namespace Forum.Web.Areas.Users.Controllers
             return PartialView("_Threads", threads);
         }
 
+        public ActionResult GetUserAnswers(string id)
+        {
+            var answers = this.Data.Answers.All()
+                .Where(a => a.UserId == id)
+                .Select(AnswerActivityViewModel.FromAnswer)
+                .ToArray();
+
+            return PartialView("_Answers", answers);
+        }
+
     }
 }

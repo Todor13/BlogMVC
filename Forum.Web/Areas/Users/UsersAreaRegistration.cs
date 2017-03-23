@@ -27,6 +27,12 @@ namespace Forum.Web.Areas.Users
             );
 
             context.MapRoute(
+               "Users_Activity_Answers",
+               "Users/Profile/GetUserAnswers/{id}",
+               new { controller = "Profile", action = "GetUserAnswers", id = UrlParameter.Optional }
+           );
+
+            context.MapRoute(
                 "Users_Profile",
                 "Users/Profile/{id}",
                 new { controller = "Profile", action = "Index", id = UrlParameter.Optional }

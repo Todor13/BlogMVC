@@ -286,6 +286,7 @@
     <Content Include="Areas\Users\Views\Home\Index.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Activity.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Threads.cshtml" />
+    <Content Include="Areas\Users\Views\Profile\_Answers.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

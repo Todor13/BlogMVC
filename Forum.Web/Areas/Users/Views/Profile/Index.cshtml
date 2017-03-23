@@ -46,6 +46,12 @@
        HttpMethod = "GET",
        InsertionMode = InsertionMode.Replace
    })
+        @Ajax.ActionLink("Answers", "GetUserAnswers", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
+           {
+               UpdateTargetId = "forum-activity",
+               HttpMethod = "GET",
+               InsertionMode = InsertionMode.Replace
+           })
 
 </h3>
 <div id="forum-activity"></div>
