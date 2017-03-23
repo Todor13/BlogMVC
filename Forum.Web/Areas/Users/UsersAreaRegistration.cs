@@ -21,6 +21,12 @@ namespace Forum.Web.Areas.Users
             );
 
             context.MapRoute(
+                "Users_Activity_Threads",
+                "Users/Profile/GetUserThreads/{id}",
+                new { controller = "Profile", action = "GetUserThreads", id = UrlParameter.Optional }
+            );
+
+            context.MapRoute(
                 "Users_Profile",
                 "Users/Profile/{id}",
                 new { controller = "Profile", action = "Index", id = UrlParameter.Optional }

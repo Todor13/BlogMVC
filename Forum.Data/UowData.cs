@@ -59,6 +59,14 @@ namespace Forum.Data
             }
         }
 
+        public IRepository<ApplicationRole> Roles
+        {
+            get
+            {
+                return this.GetRepository<ApplicationRole>();
+            }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();

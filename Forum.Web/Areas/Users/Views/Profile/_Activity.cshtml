@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Forum.Web.Areas.Users.Models.ActivityViewModel>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Thread</th>
+                <th>Content</th>
+                <th>Published</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var activity in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(activity.ThreadTitle, "Index", "Thread", new { id = activity.ThreadId })</td>
+                    <td>@activity.Content</td>
+                    <td>@activity.Published</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

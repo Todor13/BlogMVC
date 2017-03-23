@@ -1,12 +1,10 @@
 ﻿using Forum.Data;
 using Forum.Models;
-using Forum.Services.Contracts;
-using Forum.Web.Areas.Forum.Models;
+using Forum.Web.Common;
 using Forum.Web.Models.Common;
 using Forum.Web.Models.Forum;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace Forum.Web.Areas.Forum.Controllers
@@ -14,7 +12,7 @@ namespace Forum.Web.Areas.Forum.Controllers
     public class BaseController : Controller
     {
         private readonly IUowData data;
-        protected const int PageSize = ForumConstants.PageSize;
+        protected const int PageSize = WebConstants.PageSize;
 
         public BaseController(IUowData data)
         {

@@ -1,12 +1,11 @@
 ﻿using Forum.Data;
 using Forum.Web.Areas.Users.Models;
-using Forum.Web.Models;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Forum.Web.Areas.Users.Controllers
 {
@@ -20,14 +19,25 @@ namespace Forum.Web.Areas.Users.Controllers
         public ActionResult Index(string id)
         {
             var user = this.Data.Users.GetById(id);
-            var profile = this.Data.Users.All().Where(u => u.Id == id).Select(UserViewModel.FromUser).FirstOrDefault();
-
+            
             if (user == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, "There is no such user");
             }
 
-            return View(user);
+            var userViewModel = new UserViewModel(user);
+
+            return View(userViewModel);
+        }
+
+        public ActionResult GetUserThreads(string id)
+        {
+            var threads = this.Data.Threads.All()
+                .Where(t => t.UserId == id)
+                .Select(ThreadActivityViewModel.FromThread)
+                .ToArray();
+
+            return PartialView("_Threads", threads);
         }
 
     }

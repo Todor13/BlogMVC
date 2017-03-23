@@ -1,5 +1,6 @@
 ﻿using Forum.Data;
 using Forum.Web.Areas.Forum;
+using Forum.Web.Common;
 using Forum.Web.Models;
 using System;
 using System.Linq;
@@ -25,19 +26,19 @@ namespace Forum.Web.Controllers
         {
             var newest = this.data.Threads.All()
                 .OrderByDescending(t => t.Published)
-                .Take(ForumConstants.ThreadListCount)
+                .Take(WebConstants.ThreadListCount)
                 .ToArray();
 
             var mostDiscussed = this.data.Threads.All()
                 .OrderByDescending(t => t.Answers.Count)
-                .Take(ForumConstants.ThreadListCount)
+                .Take(WebConstants.ThreadListCount)
                 .ToArray();
 
             var important = this.data.Threads.All()
                 .Where(t => t.Section.Name == "Important")
                 .OrderByDescending(x => x.Published)
                 .OrderByDescending(x => x.Answers.Max(a => a.Published))
-                .Take(ForumConstants.ThreadListCount)
+                .Take(WebConstants.ThreadListCount)
                 .ToArray();
 
             var model = new HomePageViewModel()

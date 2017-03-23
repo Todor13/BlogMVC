@@ -1,6 +1,8 @@
 ﻿using Forum.Models;
+using Forum.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Forum.Web.Areas.Users.Models
@@ -17,12 +19,26 @@ namespace Forum.Web.Areas.Users.Models
                     Email = user.Email,
                     UserName = user.UserName,
                     PhoneNumber = user.PhoneNumber,
-                    Roles = user.Roles,
-                    Threads = user.Threads,
-                    Answers = user.Answers,
-                    Comments = user.Comments
+                    Threads = user.Threads.AsQueryable().Select(ThreadViewModel.FromThread),
+                    Answers = user.Answers.AsQueryable().Select(AnswerViewModel.FromAnswer),
+                    Comments = user.Comments.AsQueryable().Select(CommentViewModel.FromComment)
                 };
             }
+        }
+
+        public UserViewModel()
+        {
+        }
+
+        public UserViewModel(ApplicationUser user)
+        {
+            Id = user.Id;
+            Email = user.Email;
+            UserName = user.UserName;
+            PhoneNumber = user.PhoneNumber;
+            Threads = user.Threads.Select(x => new ThreadViewModel(x));
+            Answers = user.Answers.Select(x => new AnswerViewModel(x));
+            Comments = user.Comments.Select(x => new CommentViewModel(x));
         }
 
         public string Id { get; set; }
@@ -33,12 +49,12 @@ namespace Forum.Web.Areas.Users.Models
 
         public string PhoneNumber { get; set; }
 
-        public ICollection<ApplicationUserRole> Roles { get; set; }
+        public IEnumerable<string> Roles { get; set; }
 
-        public ICollection<Thread> Threads { get; set; }
+        public IEnumerable<ThreadViewModel> Threads { get; set; }
 
-        public ICollection<Answer> Answers { get; set; }
+        public IEnumerable<AnswerViewModel> Answers { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; }
     }
 }

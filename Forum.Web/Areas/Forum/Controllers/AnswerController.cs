@@ -5,6 +5,7 @@ using System.Net;
 using System.Web.Mvc;
 using Forum.Data;
 using System.Linq;
+using Forum.Web.Common;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
@@ -46,7 +47,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 this.data.Answers.Add(answer);
                 this.data.SaveChanges();
                 var answersCount = this.data.Answers.All().Count(a => a.ThreadId == id  && a.IsVisible == true);
-                var page = (answersCount / ForumConstants.PageSize) + (answersCount % ForumConstants.PageSize == 0 ? 0 : 1);
+                var page = (answersCount / WebConstants.PageSize) + (answersCount % WebConstants.PageSize == 0 ? 0 : 1);
                 return RedirectToAction("Index", "Thread", new { id = id, title = title, page = page });
             }
 

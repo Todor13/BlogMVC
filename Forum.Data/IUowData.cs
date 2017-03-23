@@ -14,6 +14,8 @@ namespace Forum.Data
 
         IRepository<ApplicationUser> Users { get; }
 
+        IRepository<ApplicationRole> Roles { get; }
+
         int SaveChanges();
     }
 }
