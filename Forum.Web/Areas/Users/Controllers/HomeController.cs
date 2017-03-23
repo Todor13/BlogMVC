@@ -11,7 +11,6 @@ namespace Forum.Web.Areas.Users.Controllers
         {
         }
 
-        // GET: Users/Home
         public ActionResult Index()
         {
             var users = this.Data.Users.All()

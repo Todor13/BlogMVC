@@ -15,5 +15,12 @@
         public const string GetUserThreads = "GetUserThreads";
         public const string GetUserAnswers = "GetUserAnswers";
         public const string GetUserComments = "GetUserComments";
+        public const string ThreadsPartialView = "_Threads";
+        public const string AnswersPartialView = "_Answers";
+        public const string CommentsPartialView = "_Comments";
+
+        //Messages
+        public const string UserNotFound = "User not found";
+        public const string IUowDataNullMessage= "An instance of IUowData is required to use this repository!";
     }
 }

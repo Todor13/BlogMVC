@@ -18,7 +18,7 @@ namespace Forum.Web.Areas.Forum.Controllers
         {
             if (data == null)
             {
-                throw new ArgumentException("An instance of IUowData is required to use this repository.", "data");
+                throw new ArgumentException(WebConstants.IUowDataNullMessage, "data");
             }
 
             this.data = data;
@@ -32,7 +32,6 @@ namespace Forum.Web.Areas.Forum.Controllers
         protected IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count, string controllerName = null)
         {
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
-
 
             var model = new IndexPageViewModel
             {

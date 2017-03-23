@@ -49,7 +49,7 @@ namespace Forum.Web.Areas.Users.Models
 
         public string PhoneNumber { get; set; }
 
-        public IEnumerable<string> Roles { get; set; }
+        public IEnumerable<RoleViewModel> Roles { get; set; }
 
         public IEnumerable<ThreadViewModel> Threads { get; set; }
 

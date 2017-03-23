@@ -25,14 +25,14 @@
                     <td>@Model.Email</td>
                     <td>@Model.UserName</td>
                     <td>@Model.PhoneNumber</td>
-                    @*<td>
+                    <td>
                             <ul>
                                 @foreach (var role in Model.Roles)
                                 {
-                                    <li>@role</li>
+                                    <li>@role.Name</li>
                                 }
                             </ul>
-                        </td>*@
+                        </td>
                 </tr>
             </tbody>
         </table>

@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using Forum.Data;
 using Forum.Web.Models.Forum;
 using Forum.Web.Models.Common;
-using Forum.Services.Contracts;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {

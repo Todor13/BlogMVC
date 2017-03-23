@@ -1,15 +1,13 @@
 ﻿using Forum.Data;
+using Forum.Models;
 using Forum.Web.Areas.Users.Models;
 using Forum.Web.Common;
-using Forum.Web.Models.Common;
-using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace Forum.Web.Areas.Users.Controllers
 {
@@ -19,17 +17,24 @@ namespace Forum.Web.Areas.Users.Controllers
         {
         }
 
-        // GET: Users/Profile
         public ActionResult Index(string id)
         {
             var user = this.Data.Users.GetById(id);
 
             if (user == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "There is no such user");
+                throw new HttpException((int)HttpStatusCode.NotFound, WebConstants.UserNotFound);
+            }
+
+            var userRoles = new List<RoleViewModel>();
+
+            foreach (var role in user.Roles)
+            {
+                userRoles.Add(new RoleViewModel(this.Data.Roles.GetById(role.RoleId)));
             }
 
             var userViewModel = new UserViewModel(user);
+            userViewModel.Roles = userRoles;
 
             return View(userViewModel);
         }
@@ -59,7 +64,7 @@ namespace Forum.Web.Areas.Users.Controllers
             var model = new Tuple<IEnumerable<ThreadActivityViewModel>, AjaxPagerViewModel>(threads, pageViwModel);
 
 
-            return PartialView("_Threads", model);
+            return PartialView(WebConstants.ThreadsPartialView, model);
         }
 
         public ActionResult GetUserAnswers(string id, int page = 1)
@@ -86,7 +91,7 @@ namespace Forum.Web.Areas.Users.Controllers
 
             var model = new Tuple<IEnumerable<AnswerActivityViewModel>, AjaxPagerViewModel>(answers, pageViwModel);
 
-            return PartialView("_Answers", model);
+            return PartialView(WebConstants.AnswersPartialView, model);
         }
 
         public ActionResult GetUserComments(string id, int page = 1)
@@ -113,8 +118,7 @@ namespace Forum.Web.Areas.Users.Controllers
 
             var model = new Tuple<IEnumerable<CommentActivityViewModel>, AjaxPagerViewModel>(comments, pageViwModel);
 
-            return PartialView("_Comments", model);
+            return PartialView(WebConstants.CommentsPartialView, model);
         }
-
     }
 }

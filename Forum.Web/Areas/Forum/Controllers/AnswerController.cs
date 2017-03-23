@@ -17,7 +17,7 @@ namespace Forum.Web.Areas.Forum.Controllers
         {
             if (data == null)
             {
-                throw new ArgumentException("An instance of IUowData is required to use this repository.", "data");
+                throw new ArgumentException(WebConstants.IUowDataNullMessage, "data");
             }
 
             this.data = data;
