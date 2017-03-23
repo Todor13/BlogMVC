@@ -62,14 +62,31 @@ namespace Forum.Web.Areas.Users.Controllers
             return PartialView("_Threads", model);
         }
 
-        public ActionResult GetUserAnswers(string id)
+        public ActionResult GetUserAnswers(string id, int page = 1)
         {
             var answers = this.Data.Answers.All()
                 .Where(a => a.UserId == id && a.IsVisible == true)
+                .OrderBy(t => t.Published)
+                .Skip((page - 1) * WebConstants.ActivityPageSize)
+                .Take(WebConstants.ActivityPageSize)
                 .Select(AnswerActivityViewModel.FromAnswer)
                 .ToArray();
 
-            return PartialView("_Answers", answers);
+            var answersCount = this.Data.Answers.All().Count(t => t.UserId == id && t.IsVisible == true);
+
+            var pageViwModel = new AjaxPagerViewModel()
+            {
+                CurrentPage = page,
+                ItemsCount = answersCount,
+                ControllerName = WebConstants.Profile,
+                ActionName = WebConstants.GetUserAnswers,
+                PageSize = WebConstants.ActivityPageSize,
+                UpdateTarget = WebConstants.UpdateTarget
+            };
+
+            var model = new Tuple<IEnumerable<AnswerActivityViewModel>, AjaxPagerViewModel>(answers, pageViwModel);
+
+            return PartialView("_Answers", model);
         }
 
         public ActionResult GetUserComments(string id)

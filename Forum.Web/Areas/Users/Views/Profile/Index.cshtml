@@ -39,13 +39,14 @@
     </div>
     <br />
     <hr />
-    <h3>
+    <h3 class="text-center">User Activity</h3>
+    <div class="table-bordered">
         @Ajax.ActionLink("Threads", "GetUserThreads", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
    {
        UpdateTargetId = "forum-activity",
        HttpMethod = "GET",
        InsertionMode = InsertionMode.Replace
-   }, new { @class = "btn btn-default"})
+   }, new { @class = "btn btn-default" })
         @Ajax.ActionLink("Answers", "GetUserAnswers", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
    {
        UpdateTargetId = "forum-activity",
@@ -58,7 +59,7 @@
        HttpMethod = "GET",
        InsertionMode = InsertionMode.Replace
    }, new { @class = "btn btn-default" })
-</h3>
+    </div>
 <div id="forum-activity"></div>
 </div>
 

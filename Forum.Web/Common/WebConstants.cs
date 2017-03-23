@@ -13,5 +13,6 @@
         public const string UpdateTarget = "forum-activity";
         public const string Profile = "Profile";
         public const string GetUserThreads = "GetUserThreads";
+        public const string GetUserAnswers = "GetUserAnswers";
     }
 }
