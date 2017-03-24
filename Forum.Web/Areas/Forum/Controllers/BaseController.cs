@@ -31,15 +31,14 @@ namespace Forum.Web.Areas.Forum.Controllers
 
         protected IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count, string controllerName = null)
         {
-            var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
-
             var model = new IndexPageViewModel
             {
                 Threads = threads,
                 PageCounter = new PagingViewModel()
                 {
                     CurrentPage = page,
-                    PagesCount = pagesCount,
+                    PageSize = PageSize,
+                    ItemsCount = count,
                     ControllerName = controllerName
                 }
             };

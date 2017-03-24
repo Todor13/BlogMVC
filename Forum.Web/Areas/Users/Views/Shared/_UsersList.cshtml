@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Forum.Web.Areas.Users.Models.UserViewModel>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <th>@Html.ActionLink(user.Email, "Index", "Profile", new { id = user.Id, Area = "Users" }, null)</th>
+                    <th>@user.UserName</th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

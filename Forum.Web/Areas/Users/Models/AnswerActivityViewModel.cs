@@ -25,7 +25,6 @@ namespace Forum.Web.Areas.Users.Models
         public int Id { get; set; }
         public string Content { get; set; }
         public DateTime Published { get; set; }
-
         public int ThreadId { get; set; }
         public string ThreadTitle { get; set; }
     }

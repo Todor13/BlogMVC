@@ -228,6 +228,7 @@
     <Compile Include="Areas\Administration\Models\UserAdministrationViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\BaseController.cs" />
     <Compile Include="Areas\Users\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Users\Controllers\SearchController.cs" />
     <Compile Include="Areas\Users\Models\AnswerActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\AjaxPagerViewModel.cs" />
     <Compile Include="Areas\Users\Models\CommentActivityViewModel.cs" />
@@ -289,6 +290,9 @@
     <Content Include="Areas\Users\Views\Profile\_Answers.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Comments.cshtml" />
     <Content Include="Areas\Users\Views\Shared\_AjaxPager.cshtml" />
+    <Content Include="Areas\Users\Views\Shared\_UsersList.cshtml" />
+    <Content Include="Areas\Users\Views\Shared\_UsersSearch.cshtml" />
+    <Content Include="Areas\Users\Views\Search\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

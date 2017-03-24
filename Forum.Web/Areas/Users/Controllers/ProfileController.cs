@@ -1,5 +1,4 @@
 ﻿using Forum.Data;
-using Forum.Models;
 using Forum.Web.Areas.Users.Models;
 using Forum.Web.Common;
 using System;

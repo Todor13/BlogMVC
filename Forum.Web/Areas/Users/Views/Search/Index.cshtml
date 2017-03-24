@@ -1,15 +1,22 @@
 ﻿@model Tuple<IEnumerable<Forum.Web.Areas.Users.Models.UserViewModel>, Forum.Web.Models.Common.PagingViewModel>
 
 @{
+    ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>All Users</h2>
+<h2>Users Search Results</h2>
 
 <div class="container">
     @Html.Partial(Forum.Web.Common.WebConstants.UsersSearchPartialView)
-    @Html.Partial(Forum.Web.Common.WebConstants.UsersListPartialView, Model.Item1)
+    @if (Model.Item1.Any())
+    {
+        @Html.Partial(Forum.Web.Common.WebConstants.UsersListPartialView, Model.Item1)
+    }
+    else
+    {
+        <p>User @ViewContext.HttpContext.Request.QueryString["query"] cannot be found!</p>
+    }
     @Html.Partial(Forum.Web.Common.WebConstants.PagerPartialView, Model.Item2)
 </div>
-
 
