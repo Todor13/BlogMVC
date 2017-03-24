@@ -1,7 +1,6 @@
 ﻿using Forum.Data;
 using Forum.Web.Areas.Users.Models;
 using Forum.Web.Common;
-using Forum.Web.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,24 +21,17 @@ namespace Forum.Web.Areas.Users.Controllers
 
         public ActionResult Index(string id)
         {
-            var user = this.Data.Users.GetById(id);
+            var user = this.Data.Users.All()
+                .Where(u => u.Id == id)
+                .Select(UserViewModel.FromUser)
+                .FirstOrDefault();
 
             if (user == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, WebConstants.UserNotFound);
             }
 
-            var userRoles = new List<RoleViewModel>();
-
-            foreach (var role in user.Roles)
-            {
-                userRoles.Add(new RoleViewModel(this.Data.Roles.GetById(role.RoleId)));
-            }
-
-            var userViewModel = new UserViewModel(user);
-            userViewModel.Roles = userRoles;
-
-            return View(userViewModel);
+            return View(user);
         }
 
         public ActionResult GetUserThreads(string id, int page = 1)

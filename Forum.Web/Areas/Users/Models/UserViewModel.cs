@@ -26,20 +26,16 @@ namespace Forum.Web.Areas.Users.Models
             }
         }
 
-        public UserViewModel()
-        {
-        }
-
-        public UserViewModel(ApplicationUser user)
-        {
-            Id = user.Id;
-            Email = user.Email;
-            UserName = user.UserName;
-            PhoneNumber = user.PhoneNumber;
-            Threads = user.Threads.Select(x => new ThreadViewModel(x));
-            Answers = user.Answers.Select(x => new AnswerViewModel(x));
-            Comments = user.Comments.Select(x => new CommentViewModel(x));
-        }
+        //public UserViewModel(ApplicationUser user)
+        //{
+        //    Id = user.Id;
+        //    Email = user.Email;
+        //    UserName = user.UserName;
+        //    PhoneNumber = user.PhoneNumber;
+        //    Threads = user.Threads.Select(x => new ThreadViewModel(x));
+        //    Answers = user.Answers.Select(x => new AnswerViewModel(x));
+        //    Comments = user.Comments.Select(x => new CommentViewModel(x));
+        //}
 
         public string Id { get; set; }
 
@@ -49,7 +45,7 @@ namespace Forum.Web.Areas.Users.Models
 
         public string PhoneNumber { get; set; }
 
-        public IEnumerable<RoleViewModel> Roles { get; set; }
+        public IEnumerable<string> Roles { get; set; }
 
         public IEnumerable<ThreadViewModel> Threads { get; set; }
 

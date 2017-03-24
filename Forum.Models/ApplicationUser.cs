@@ -2,8 +2,6 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -41,6 +39,19 @@ namespace Forum.Models
             set
             {
                 base.Id = value;
+            }
+        }
+
+        public override string Email
+        {
+            get
+            {
+                return base.Email;
+            }
+
+            set
+            {
+                base.Email = value;
             }
         }
 
