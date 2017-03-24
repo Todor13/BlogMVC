@@ -1,6 +1,7 @@
 ﻿using Forum.Data;
 using Forum.Models;
 using Forum.Web.Areas.Forum.Controllers;
+using Forum.Web.Factories;
 using Forum.Web.Models.Forum;
 using Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers;
 using Moq;
@@ -20,9 +21,11 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             //Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
 
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             //Act
             var result = controller.Index("SomeContent") as ViewResult;
@@ -36,8 +39,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             //Act
             var result = controller.Index("SomeTitle") as ViewResult;
@@ -51,8 +56,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index("SomeContent") as ViewResult;
@@ -69,8 +76,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index("SomeContent" ,currentPage) as ViewResult;
@@ -85,8 +94,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             var expected = new Thread[]
              {
@@ -107,8 +118,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index("SomeContent", 1) as ViewResult;
@@ -125,8 +138,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(SearchTestCollection().AsQueryable());
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             var expected = new Thread[]
             {
@@ -148,8 +163,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.SearchControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(SearchTestCollection().AsQueryable());
-            SearchController controller = new SearchController(data.Object);
+            SearchController controller = new SearchController(data.Object, pagerFactory.Object);
 
             var expected = new Thread[]
             {

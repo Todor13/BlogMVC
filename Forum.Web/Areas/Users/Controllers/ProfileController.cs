@@ -1,18 +1,22 @@
 ﻿using Forum.Data;
 using Forum.Web.Areas.Users.Models;
 using Forum.Web.Common;
+using Forum.Web.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Forum.Web.Factories;
+using Forum.Web.Models.Common.Contracts;
 
 namespace Forum.Web.Areas.Users.Controllers
 {
     public class ProfileController : BaseController
     {
-        public ProfileController(IUowData data) : base(data)
+        public ProfileController(IUowData data, IPagerViewModelFactory pagerModelFactory) 
+            : base(data, pagerModelFactory)
         {
         }
 
@@ -50,18 +54,10 @@ namespace Forum.Web.Areas.Users.Controllers
 
             var threadsCount = this.Data.Threads.All().Count(t => t.UserId == id && t.IsVisible == true);
 
-            var pageViwModel = new AjaxPagerViewModel()
-            {
-                CurrentPage = page,
-                ItemsCount = threadsCount,
-                ControllerName = WebConstants.Profile,
-                ActionName = WebConstants.GetUserThreads,
-                PageSize = WebConstants.ActivityPageSize,
-                UpdateTarget = WebConstants.UpdateTarget
-            };
+            var pagerViwModel = this.PagerModelFactory.CreateAjaxPagerViewModel(WebConstants.Profile,
+                WebConstants.GetUserThreads, WebConstants.UsersActivityUpdateTarget, page, threadsCount, WebConstants.ActivityPageSize);
 
-            var model = new Tuple<IEnumerable<ThreadActivityViewModel>, AjaxPagerViewModel>(threads, pageViwModel);
-
+            var model = new Tuple<IEnumerable<ThreadActivityViewModel>, IAjaxPagerViewModel>(threads, pagerViwModel);
 
             return PartialView(WebConstants.ThreadsPartialView, model);
         }
@@ -78,17 +74,10 @@ namespace Forum.Web.Areas.Users.Controllers
 
             var answersCount = this.Data.Answers.All().Count(t => t.UserId == id && t.IsVisible == true);
 
-            var pageViwModel = new AjaxPagerViewModel()
-            {
-                CurrentPage = page,
-                ItemsCount = answersCount,
-                ControllerName = WebConstants.Profile,
-                ActionName = WebConstants.GetUserAnswers,
-                PageSize = WebConstants.ActivityPageSize,
-                UpdateTarget = WebConstants.UpdateTarget
-            };
+            var pagerViwModel = this.PagerModelFactory.CreateAjaxPagerViewModel(WebConstants.Profile,
+                WebConstants.GetUserAnswers, WebConstants.UsersActivityUpdateTarget, page, answersCount, WebConstants.ActivityPageSize);
 
-            var model = new Tuple<IEnumerable<AnswerActivityViewModel>, AjaxPagerViewModel>(answers, pageViwModel);
+            var model = new Tuple<IEnumerable<AnswerActivityViewModel>, IAjaxPagerViewModel>(answers, pagerViwModel);
 
             return PartialView(WebConstants.AnswersPartialView, model);
         }
@@ -105,17 +94,10 @@ namespace Forum.Web.Areas.Users.Controllers
 
             var commentsCount = this.Data.Comments.All().Count(c => c.UserId == id && c.IsVisible == true);
 
-            var pageViwModel = new AjaxPagerViewModel()
-            {
-                CurrentPage = page,
-                ItemsCount = commentsCount,
-                ControllerName = WebConstants.Profile,
-                ActionName = WebConstants.GetUserComments,
-                PageSize = WebConstants.ActivityPageSize,
-                UpdateTarget = WebConstants.UpdateTarget
-            };
+            var pagerViwModel = this.PagerModelFactory.CreateAjaxPagerViewModel(WebConstants.Profile,
+                WebConstants.GetUserComments, WebConstants.UsersActivityUpdateTarget, page, commentsCount, WebConstants.ActivityPageSize);
 
-            var model = new Tuple<IEnumerable<CommentActivityViewModel>, AjaxPagerViewModel>(comments, pageViwModel);
+            var model = new Tuple<IEnumerable<CommentActivityViewModel>, IAjaxPagerViewModel>(comments, pagerViwModel);
 
             return PartialView(WebConstants.CommentsPartialView, model);
         }

@@ -1,6 +1,7 @@
 ﻿using Forum.Data;
 using Forum.Models;
 using Forum.Web.Areas.Forum.Controllers;
+using Forum.Web.Factories;
 using Forum.Web.Models.Forum;
 using Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers;
 using Moq;
@@ -20,9 +21,11 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
         {
             //Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
 
-            HomeController controller = new HomeController(data.Object);
+            HomeController controller = new HomeController(data.Object, pagerFactory.Object);
 
             //Act
             var result = controller.Index() as ViewResult;
@@ -36,8 +39,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            HomeController controller = new HomeController(data.Object);
+            HomeController controller = new HomeController(data.Object, pagerFactory.Object);
 
             //Act
             var result = controller.Index() as ViewResult;
@@ -51,8 +56,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            HomeController controller = new HomeController(data.Object);
+            HomeController controller = new HomeController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index() as ViewResult;
@@ -69,8 +76,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            HomeController controller = new HomeController(data.Object);
+            HomeController controller = new HomeController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index(currentPage) as ViewResult;
@@ -85,8 +94,10 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            HomeController controller = new HomeController(data.Object);
+            HomeController controller = new HomeController(data.Object, pagerFactory.Object);
             var expected = new Thread[]
              {
                 new Thread() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01), Title = string.Empty, Content = string.Empty },
@@ -107,9 +118,11 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
 
-            HomeController controller = new HomeController(data.Object);
+            HomeController controller = new HomeController(data.Object, pagerFactory.Object);
             var expected = new Thread[]
              {
                 new Thread() { Id = 7, IsVisible = true, Published = new DateTime(2017, 01, 07), Title = string.Empty, Content = string.Empty },

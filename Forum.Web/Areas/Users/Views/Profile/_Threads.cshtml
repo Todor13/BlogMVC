@@ -1,24 +1,31 @@
-﻿@model Tuple<IEnumerable<Forum.Web.Areas.Users.Models.ThreadActivityViewModel>, Forum.Web.Areas.Users.Models.AjaxPagerViewModel>
+﻿@model Tuple<IEnumerable<Forum.Web.Areas.Users.Models.ThreadActivityViewModel>, Forum.Web.Models.Common.Contracts.IAjaxPagerViewModel>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Thread</th>
-                <th>Content</th>
-                <th>Published</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var thread in Model.Item1)
-            {
+@if (Model.Item1.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</td>
-                    <td>@thread.Content</td>
-                    <td>@thread.Published</td>
+                    <th>Thread</th>
+                    <th>Content</th>
+                    <th>Published</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    @Html.Partial("_AjaxPager", Model.Item2)
-</div>
+            </thead>
+            <tbody>
+                @foreach (var thread in Model.Item1)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</td>
+                        <td>@thread.Content</td>
+                        <td>@thread.Published</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.Partial(Forum.Web.Common.WebConstants.AjaxPartialView, Model.Item2)
+    </div>
+}
+else
+{
+    <p>The User has not created threads yet!</p>
+}

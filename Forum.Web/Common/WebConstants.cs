@@ -6,6 +6,7 @@
 
         public const int ThreadListCount = 7;
         public const string PagerPartialView = "_Pager";
+        public const string AjaxPartialView = "_AjaxPager";
         public const string HomeController = "Home";
         public const string SearchController = "Search";
 
@@ -14,7 +15,7 @@
         public const int ActivitySubString = 100;
         public const int ActivityPageSize = 3;
         public const int UsersPageSize = 3;
-        public const string UpdateTarget = "forum-activity";
+        public const string UsersActivityUpdateTarget = "forum-activity";
         public const string Profile = "Profile";
         public const string GetUserThreads = "GetUserThreads";
         public const string GetUserAnswers = "GetUserAnswers";
@@ -28,5 +29,6 @@
         //Messages
         public const string UserNotFound = "User not found";
         public const string IUowDataNullMessage= "An instance of IUowData is required to use this repository!";
+        public const string IPagerViewModelFactoryNullMessage = "An instance of IPagerViewModelFactory is required to use this repository!";
     }
 }

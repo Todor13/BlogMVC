@@ -41,19 +41,19 @@
     <hr />
     <h3 class="text-center">User Activity</h3>
     <div class="table-bordered">
-        @Ajax.ActionLink("Threads", "GetUserThreads", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
+        @Ajax.ActionLink("Threads", Forum.Web.Common.WebConstants.GetUserThreads, Forum.Web.Common.WebConstants.Profile, new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
    {
        UpdateTargetId = "forum-activity",
        HttpMethod = "GET",
        InsertionMode = InsertionMode.Replace
    }, new { @class = "btn btn-default" })
-        @Ajax.ActionLink("Answers", "GetUserAnswers", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
+        @Ajax.ActionLink("Answers", Forum.Web.Common.WebConstants.GetUserAnswers, Forum.Web.Common.WebConstants.Profile, new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
    {
        UpdateTargetId = "forum-activity",
        HttpMethod = "GET",
        InsertionMode = InsertionMode.Replace
    }, new { @class = "btn btn-default" })
-        @Ajax.ActionLink("Comments", "GetUserComments", "Profile", new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
+        @Ajax.ActionLink("Comments", Forum.Web.Common.WebConstants.GetUserComments, Forum.Web.Common.WebConstants.Profile, new { id = ViewContext.RouteData.Values["id"], Area = "Users" }, new AjaxOptions
    {
        UpdateTargetId = "forum-activity",
        HttpMethod = "GET",

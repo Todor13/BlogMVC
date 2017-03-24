@@ -1,6 +1,7 @@
 ﻿using Forum.Data;
 using Forum.Models;
 using Forum.Web.Areas.Forum.Controllers;
+using Forum.Web.Factories;
 using Forum.Web.Models.Forum;
 using Forum.Web.Tests.Areas.ForumControllers.Helpers;
 using Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers;
@@ -21,8 +22,9 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
 
-            ThreadController controller = new ThreadController(data.Object);
+            ThreadController controller = new ThreadController(data.Object, pagerFactory.Object);
 
             // Act
             HttpStatusCodeResult result = controller.Index(null) as HttpStatusCodeResult;
@@ -36,9 +38,11 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(null as Thread);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             // Act
             HttpNotFoundResult result = controller.Index(1) as HttpNotFoundResult;
@@ -52,9 +56,11 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(new Thread() { Id = 1, IsVisible = false });
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             // Act
             HttpNotFoundResult result = controller.Index(1) as HttpNotFoundResult;
@@ -68,10 +74,12 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
             data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index(1) as ViewResult;
@@ -86,10 +94,12 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
             data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
             var expected = new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 01) };
 
             // Act
@@ -107,10 +117,12 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
             data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             var expected = new List<Answer>()
             {
@@ -132,10 +144,12 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
             data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             var expected = new List<Answer>()
             {
@@ -157,10 +171,12 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
             data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index(1, 2) as ViewResult;
@@ -175,10 +191,12 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
             data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index(1, 2) as ViewResult;
@@ -193,10 +211,12 @@ namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
         {
             // Arrange
             var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+
             data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
             data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-            var controller = new ThreadController(data.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object);
 
             // Act
             var result = controller.Index(1, 2) as ViewResult;

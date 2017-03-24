@@ -2,12 +2,14 @@
 using System.Linq;
 using System.Web.Mvc;
 using Forum.Services.Contracts;
+using Forum.Web.Factories;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController(IUowData data) : base(data)
+        public HomeController(IUowData data, IPagerViewModelFactory pagerModelFactory) 
+            : base(data, pagerModelFactory)
         {
         }
 

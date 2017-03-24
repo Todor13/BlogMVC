@@ -9,6 +9,6 @@ namespace Forum.Web.Models.Forum
     {
         public IEnumerable<Thread> Threads { get; set; }
 
-        public PagingViewModel PageCounter { get; set; }
+        public PagerViewModel PageCounter { get; set; }
     }
 }

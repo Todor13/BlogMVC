@@ -13,6 +13,6 @@ namespace Forum.Web.Models.Forum
 
         public Thread Thread { get; set; }
 
-        public PagingViewModel PageCounter { get; set; }
+        public PagerViewModel PageCounter { get; set; }
     }
 }

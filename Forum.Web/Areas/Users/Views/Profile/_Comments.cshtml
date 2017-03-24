@@ -1,24 +1,31 @@
-﻿@model Tuple<IEnumerable<Forum.Web.Areas.Users.Models.CommentActivityViewModel>, Forum.Web.Areas.Users.Models.AjaxPagerViewModel>
+﻿@model Tuple<IEnumerable<Forum.Web.Areas.Users.Models.CommentActivityViewModel>, Forum.Web.Models.Common.Contracts.IAjaxPagerViewModel>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Thread</th>
-                <th>Content</th>
-                <th>Published</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var comment in Model.Item1)
-            {
+@if (Model.Item1.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@Html.ActionLink(comment.ThreadTitle, "Index", "Thread", new { id = comment.ThreadId })</td>
-                    <td>@comment.Content</td>
-                    <td>@comment.Published</td>
+                    <th>Thread</th>
+                    <th>Content</th>
+                    <th>Published</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    @Html.Partial("_AjaxPager", Model.Item2)
-</div>
+            </thead>
+            <tbody>
+                @foreach (var comment in Model.Item1)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(comment.ThreadTitle, "Index", "Thread", new { id = comment.ThreadId })</td>
+                        <td>@comment.Content</td>
+                        <td>@comment.Published</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.Partial(Forum.Web.Common.WebConstants.AjaxPartialView, Model.Item2)
+    </div>
+}
+else
+{
+    <p>The User has not created comments yet!</p>
+}

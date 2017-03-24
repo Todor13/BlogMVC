@@ -4,19 +4,28 @@ using System.Web.Mvc;
 using Forum.Data;
 using Forum.Models;
 using Microsoft.AspNet.Identity;
+using Forum.Web.Common;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
-    public class CreateController : BaseController
+    public class CreateController : Controller
     {
-        public CreateController(IUowData data) : base(data)
+        private readonly IUowData data;
+
+        public CreateController(IUowData data)
         {
+            if (data == null)
+            {
+                throw new ArgumentException(WebConstants.IUowDataNullMessage, "data");
+            }
+
+            this.data = data;
         }
 
         // GET: Forum/Create
         public ActionResult Index()
         {
-            var sections = this.Data.Sections.All().ToArray();
+            var sections = this.data.Sections.All().ToArray();
             ViewBag.SectionId = new SelectList(sections, "Id", "Name");
 
             return this.View();
@@ -32,8 +41,8 @@ namespace Forum.Web.Areas.Forum.Controllers
                 thread.Published = DateTime.Now;
                 thread.IsVisible = true;
                 thread.UserId = User.Identity.GetUserId();
-                this.Data.Threads.Add(thread);
-                this.Data.SaveChanges();
+                this.data.Threads.Add(thread);
+                this.data.SaveChanges();
                 return RedirectToAction("Index", "Thread", new { id = thread.Id, title = thread.Title });
             }
 

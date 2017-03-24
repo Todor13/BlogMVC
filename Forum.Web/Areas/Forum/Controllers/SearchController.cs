@@ -1,12 +1,14 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Forum.Data;
+using Forum.Web.Factories;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
     public class SearchController : BaseController
     {
-        public SearchController(IUowData data) : base(data)
+        public SearchController(IUowData data, IPagerViewModelFactory pagerModelFactory) 
+            : base(data, pagerModelFactory)
         {
         }
 

@@ -7,6 +7,10 @@ using Forum.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using Forum.Web.Factories;
+using Ninject.Extensions.Factory;
+using Forum.Web.Models.Common.Contracts;
+using Forum.Web.Models.Common;
 
 namespace Forum.Web.App_Start
 {
@@ -30,6 +34,11 @@ namespace Forum.Web.App_Start
             });
 
             this.Bind<ApplicationUserManager>().ToSelf();
+
+            this.Bind<IPagerViewModel>().To<PagerViewModel>();
+            this.Bind<IAjaxPagerViewModel>().To<AjaxPagerViewModel>();
+
+            this.Bind<IPagerViewModelFactory>().ToFactory();
         }
     }
 }

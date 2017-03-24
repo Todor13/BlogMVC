@@ -48,6 +48,10 @@
       <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.2.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -87,6 +91,10 @@
     </Reference>
     <Reference Include="Ninject.Extensions.Conventions, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Factory.3.2.1.0\lib\net45-full\Ninject.Extensions.Factory.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -230,7 +238,7 @@
     <Compile Include="Areas\Users\Controllers\HomeController.cs" />
     <Compile Include="Areas\Users\Controllers\SearchController.cs" />
     <Compile Include="Areas\Users\Models\AnswerActivityViewModel.cs" />
-    <Compile Include="Areas\Users\Models\AjaxPagerViewModel.cs" />
+    <Compile Include="Models\Common\AjaxPagerViewModel.cs" />
     <Compile Include="Areas\Users\Models\CommentActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\RoleViewModel.cs" />
     <Compile Include="Areas\Users\Models\ThreadActivityViewModel.cs" />
@@ -251,13 +259,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Factories\Contracts\IPagerViewModelFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AnswerViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
-    <Compile Include="Models\Common\PagingViewModel.cs" />
+    <Compile Include="Models\Common\Contracts\IAjaxPagerViewModel.cs" />
+    <Compile Include="Models\Common\Contracts\IPagerViewModel.cs" />
+    <Compile Include="Models\Common\PagerViewModel.cs" />
     <Compile Include="Areas\Forum\Models\IndexPageViewModel.cs" />
     <Compile Include="Areas\Forum\Models\ThreadAnswersViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
@@ -289,7 +300,7 @@
     <Content Include="Areas\Users\Views\Profile\_Threads.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Answers.cshtml" />
     <Content Include="Areas\Users\Views\Profile\_Comments.cshtml" />
-    <Content Include="Areas\Users\Views\Shared\_AjaxPager.cshtml" />
+    <Content Include="Views\Shared\_AjaxPager.cshtml" />
     <Content Include="Areas\Users\Views\Shared\_UsersList.cshtml" />
     <Content Include="Areas\Users\Views\Shared\_UsersSearch.cshtml" />
     <Content Include="Areas\Users\Views\Search\Index.cshtml" />

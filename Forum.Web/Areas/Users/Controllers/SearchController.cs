@@ -5,13 +5,15 @@ using System.Web.Mvc;
 using Forum.Data;
 using Forum.Web.Common;
 using Forum.Web.Areas.Users.Models;
-using Forum.Web.Models.Common;
+using Forum.Web.Factories;
+using Forum.Web.Models.Common.Contracts;
 
 namespace Forum.Web.Areas.Users.Controllers
 {
     public class SearchController : BaseController
     {
-        public SearchController(IUowData data) : base(data)
+        public SearchController(IUowData data, IPagerViewModelFactory pagerModelFactory) 
+            : base(data, pagerModelFactory)
         {
         }
 
@@ -28,15 +30,9 @@ namespace Forum.Web.Areas.Users.Controllers
 
             var usersCount = this.Data.Users.All().Count(u => u.Email.Contains(query) || u.UserName.Contains(query));
 
-            var pagingViewModel = new PagingViewModel()
-            {
-                ControllerName = WebConstants.HomeController,
-                CurrentPage = page,
-                ItemsCount = usersCount,
-                PageSize = WebConstants.UsersPageSize
-            };
+            var pagerViewModel = this.PagerModelFactory.CreatePagerViewModel(WebConstants.HomeController, page, usersCount, WebConstants.UsersPageSize);
 
-            var model = new Tuple<IEnumerable<UserViewModel>, PagingViewModel>(users, pagingViewModel);
+            var model = new Tuple<IEnumerable<UserViewModel>, IPagerViewModel>(users, pagerViewModel);
 
             return View(model);
         }

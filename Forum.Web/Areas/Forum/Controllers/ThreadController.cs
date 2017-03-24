@@ -4,12 +4,14 @@ using System.Web.Mvc;
 using Forum.Data;
 using Forum.Web.Models.Forum;
 using Forum.Web.Models.Common;
+using Forum.Web.Factories;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
     public class ThreadController : BaseController
     {
-        public ThreadController(IUowData data) : base(data)
+        public ThreadController(IUowData data, IPagerViewModelFactory pagerModelFactory) 
+            : base(data, pagerModelFactory)
         {
         }
 
@@ -40,20 +42,20 @@ namespace Forum.Web.Areas.Forum.Controllers
 
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
 
-            var model = new ThreadAnswersViewModel()
-            {
-                Answers = answers,
-                Thread = thread,
-                PageCounter = new PagingViewModel()
-                {
-                    CurrentPage = page,
-                    ItemsCount = count,
-                    PageSize = PageSize,
-                    ControllerName = "Thread"
-                }
-            };
+            //var model = new ThreadAnswersViewModel()
+            //{
+            //    Answers = answers,
+            //    Thread = thread,
+            //    PageCounter = new PagerViewModel()
+            //    {
+            //        CurrentPage = page,
+            //        ItemsCount = count,
+            //        PageSize = PageSize,
+            //        ControllerName = "Thread"
+            //    }
+            //};
 
-            return this.View(model);
+            return this.View(/*model*/);
         }
     }
 }
