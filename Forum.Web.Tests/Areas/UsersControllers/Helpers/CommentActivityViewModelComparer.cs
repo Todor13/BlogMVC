@@ -29,6 +29,10 @@ namespace Forum.Web.Tests.Areas.UsersControllers.Helpers
             {
                 return x.ThreadId.CompareTo(y.ThreadId);
             }
+            else if (x.ThreadTitle.CompareTo(y.ThreadTitle) != 0)
+            {
+                return x.ThreadTitle.CompareTo(y.ThreadTitle);
+            }
             else if (x.Content.CompareTo(y.Content) != 0)
             {
                 return x.Content.CompareTo(y.Content);

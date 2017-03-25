@@ -114,6 +114,7 @@
     <Compile Include="Areas\UsersControllers\Helpers\UserViewModelComparer.cs" />
     <Compile Include="Areas\UsersControllers\HomeControllerTests\HomeControllerIndexTests.cs" />
     <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerGetUserAnswersTests.cs" />
+    <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerGetUserCommentsTests.cs" />
     <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerGetUserThreadsTests.cs" />
     <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerIndexTests.cs" />
     <Compile Include="Areas\UsersControllers\SearchControllerTests\SearchControllerIndexTests.cs" />
