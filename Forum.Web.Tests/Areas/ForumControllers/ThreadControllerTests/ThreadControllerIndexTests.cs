@@ -4,7 +4,6 @@ using Forum.Web.Areas.Forum.Controllers;
 using Forum.Web.Factories;
 using Forum.Web.Models.Forum;
 using Forum.Web.Tests.Areas.ForumControllers.Helpers;
-using Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers;
 using Moq;
 using NUnit.Framework;
 using System;

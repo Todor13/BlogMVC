@@ -1,12 +1,15 @@
 ﻿using Forum.Models;
 using Forum.Web.Common;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Forum.Web.Areas.Users.Models
 {
     public class ThreadActivityViewModel
     {
+        private string content;
+
         public static Expression<Func<Thread, ThreadActivityViewModel>> FromThread
         {
             get
@@ -15,7 +18,7 @@ namespace Forum.Web.Areas.Users.Models
                 {
                     Id = thread.Id,
                     Title = thread.Title,
-                    Content = thread.Content.Substring(0, WebConstants.ActivitySubString),
+                    Content = thread.Content,
                     Published = thread.Published
                 };
             }
@@ -23,7 +26,25 @@ namespace Forum.Web.Areas.Users.Models
 
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Content { get; set; }
         public DateTime Published { get; set; }
+
+        public string Content
+        {
+            get
+            {
+                return this.content;
+            }
+            set
+            {
+                if (value.Count() >= WebConstants.ActivitySubString)
+                {
+                    this.content = value.Substring(0, WebConstants.ActivitySubString);
+                }
+                else
+                {
+                    this.content = value;
+                }
+            }
+        }
     }
 }

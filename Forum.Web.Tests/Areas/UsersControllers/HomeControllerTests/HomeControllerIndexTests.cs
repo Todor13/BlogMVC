@@ -4,7 +4,6 @@ using Forum.Web.Areas.Users.Controllers;
 using Forum.Web.Areas.Users.Models;
 using Forum.Web.Common;
 using Forum.Web.Factories;
-using Forum.Web.Models.Common;
 using Forum.Web.Models.Common.Contracts;
 using Forum.Web.Tests.Areas.UsersControllers.Helpers;
 using Moq;
@@ -17,10 +16,10 @@ using System.Web.Mvc;
 namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
 {
     [TestFixture]
-    public class HomeControllerTests
+    public class HomeControllerIndexTests
     {
         [Test]
-        public void UsersHomeController_Index_ShouldReturnCorrectModel()
+        public void Users_HomeController_Index_ShouldReturnCorrectModel()
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -40,7 +39,7 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
         }
 
         [Test]
-        public void UsersHomeController_Index_ShouldReturnCorrectUserCollectionConvertedToUserViewModelAtPage1()
+        public void Users_HomeController_Index_ShouldReturnCorrectUserCollectionConvertedToUserViewModelAtPage1()
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -68,7 +67,7 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
         }
 
         [Test]
-        public void UsersHomeController_Index_ShouldReturnCorrectUserCollectionConvertedToUserViewModelAtPage2()
+        public void Users_HomeController_Index_ShouldReturnCorrectUserCollectionConvertedToUserViewModelAtPage2()
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -95,7 +94,7 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
 
         [TestCase(1)]
         [TestCase(25664623)]
-        public void UsersHomeController_Index_ShouldReturnCallPagerViewModelFactoryWithCorrectData(int page)
+        public void Users_HomeController_Index_ShouldReturnCallPagerViewModelFactoryWithCorrectData(int page)
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -108,14 +107,13 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
 
             // Act
             var result = controller.Index(page) as ViewResult;
-            var resultModel = result.Model as Tuple<IEnumerable<UserViewModel>, IPagerViewModel>;
 
             // Assert
             pagerFactory.Verify(p => p.CreatePagerViewModel("Home", page, UsersCollection().Count, WebConstants.UsersPageSize));
         }
 
         [Test]
-        public void UsersHomeController_Index_ShouldReturnModelWithCorrectControllerName()
+        public void Users_HomeController_Index_ShouldReturnModelWithCorrectControllerName()
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -138,7 +136,7 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
 
         [TestCase(1)]
         [TestCase(2568903)]
-        public void UsersHomeController_Index_ShouldReturnModelWithCorrectCurrentPage(int page)
+        public void Users_HomeController_Index_ShouldReturnModelWithCorrectCurrentPage(int page)
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -161,7 +159,7 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
 
         [TestCase(5)]
         [TestCase(234235)]
-        public void UsersHomeController_Index_ShouldReturnModelWithCorrectItemsCount(int itemsCount)
+        public void Users_HomeController_Index_ShouldReturnModelWithCorrectItemsCount(int itemsCount)
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -184,7 +182,7 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
 
         [TestCase(35)]
         [TestCase(2342235)]
-        public void UsersHomeController_Index_ShouldReturnModelWithCorrectPagesCount(int pagesCount)
+        public void Users_HomeController_Index_ShouldReturnModelWithCorrectPagesCount(int pagesCount)
         {
             // Arrange
             var data = new Mock<IUowData>();
@@ -207,7 +205,7 @@ namespace Forum.Web.Tests.Areas.UsersControllers.HomeControllerTests
 
         [TestCase(345)]
         [TestCase(32512312)]
-        public void UsersHomeController_Index_ShouldReturnModelWithCorrectPageSize(int pageSize)
+        public void Users_HomeController_Index_ShouldReturnModelWithCorrectPageSize(int pageSize)
         {
             // Arrange
             var data = new Mock<IUowData>();
