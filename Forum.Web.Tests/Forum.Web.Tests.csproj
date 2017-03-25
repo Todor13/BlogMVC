@@ -108,9 +108,12 @@
     <Compile Include="Areas\ForumControllers\HomeControllerTests\HomeControllerIndexTests.cs" />
     <Compile Include="Areas\ForumControllers\SearchControllerTests\SearchControllerIndexTests.cs" />
     <Compile Include="Areas\ForumControllers\ThreadControllerTests\ThreadControllerIndexTests.cs" />
+    <Compile Include="Areas\UsersControllers\Helpers\AnswerActivityViewModelComparer.cs" />
+    <Compile Include="Areas\UsersControllers\Helpers\CommentActivityViewModelComparer.cs" />
     <Compile Include="Areas\UsersControllers\Helpers\ThreadActivityViewModelComparer.cs" />
     <Compile Include="Areas\UsersControllers\Helpers\UserViewModelComparer.cs" />
     <Compile Include="Areas\UsersControllers\HomeControllerTests\HomeControllerIndexTests.cs" />
+    <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerGetUserAnswersTests.cs" />
     <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerGetUserThreadsTests.cs" />
     <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerIndexTests.cs" />
     <Compile Include="Areas\UsersControllers\SearchControllerTests\SearchControllerIndexTests.cs" />

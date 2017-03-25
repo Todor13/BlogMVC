@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 namespace Forum.Web.Tests.Areas.UsersControllers.Helpers
 {
-    public class AnswerActivityViewModelComparer : IComparer, IComparer<AnswerActivityViewModel>
+    public class CommentActivityViewModelComparer : IComparer, IComparer<CommentActivityViewModel>
     {
         public int Compare(object x, object y)
         {
-            var lhs = x as AnswerActivityViewModel;
-            var rhs = y as AnswerActivityViewModel;
+            var lhs = x as CommentActivityViewModel;
+            var rhs = y as CommentActivityViewModel;
             if (lhs == null || rhs == null) throw new InvalidOperationException();
             return Compare(lhs, rhs);
         }
 
-        public int Compare(AnswerActivityViewModel x, AnswerActivityViewModel y)
+        public int Compare(CommentActivityViewModel x, CommentActivityViewModel y)
         {
             if (x.Id.CompareTo(y.Id) != 0)
             {
@@ -28,10 +28,6 @@ namespace Forum.Web.Tests.Areas.UsersControllers.Helpers
             else if (x.ThreadId.CompareTo(y.ThreadId) != 0)
             {
                 return x.ThreadId.CompareTo(y.ThreadId);
-            }
-            else if (x.ThreadTitle.CompareTo(y.ThreadTitle) != 0)
-            {
-                return x.ThreadTitle.CompareTo(y.ThreadTitle);
             }
             else if (x.Content.CompareTo(y.Content) != 0)
             {

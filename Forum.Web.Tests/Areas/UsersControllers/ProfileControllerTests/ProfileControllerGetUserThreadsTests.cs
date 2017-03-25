@@ -4,7 +4,6 @@ using Forum.Web.Areas.Users.Controllers;
 using Forum.Web.Areas.Users.Models;
 using Forum.Web.Common;
 using Forum.Web.Factories;
-using Forum.Web.Models.Common;
 using Forum.Web.Models.Common.Contracts;
 using Forum.Web.Tests.Areas.UsersControllers.Helpers;
 using Moq;
@@ -12,8 +11,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Forum.Web.Tests.Areas.UsersControllers.ProfileControllerTests
@@ -30,7 +27,6 @@ namespace Forum.Web.Tests.Areas.UsersControllers.ProfileControllerTests
             var ajaxPagerViewModel = new Mock<IAjaxPagerViewModel>();
 
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
-            //pagerFactory.Setup(p => p.CreateAjaxPagerViewModel(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(ajaxPagerViewModel.Object);
 
             ProfileController controller = new ProfileController(data.Object, pagerFactory.Object);
 
