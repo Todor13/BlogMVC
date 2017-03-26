@@ -24,12 +24,14 @@ namespace Forum.Web.Areas.Forum.Controllers
         }
 
         // GET: Forum/Answer
+        [Authorize]
         public ActionResult Index()
         {
             return PartialView("_Answer");
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Index(Answer answer, int? id, string title)
         {

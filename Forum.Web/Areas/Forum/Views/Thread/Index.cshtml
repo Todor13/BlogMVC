@@ -1,4 +1,4 @@
-﻿@model Forum.Web.Models.Forum.ThreadAnswersViewModel
+﻿@model Forum.Web.Areas.Forum.Models.Contracts.IForumThreadViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,13 +27,16 @@
                 </div>
             </li>
         </ul>
+@if (Request.IsAuthenticated)
+{
         @Ajax.ActionLink("Answer", "Index", "Answer", new { id = ViewContext.RouteData.Values["id"], title = ViewContext.RouteData.Values["title"], page = Request.QueryString["page"], Area = "Forum" },
-    new AjaxOptions
-    {
-        UpdateTargetId = "answer",
-        HttpMethod = "GET",
-        InsertionMode = InsertionMode.Replace
-    }, new { @class = "btn btn-primary" })
+     new AjaxOptions
+     {
+         UpdateTargetId = "answer",
+         HttpMethod = "GET",
+         InsertionMode = InsertionMode.Replace
+     }, new { @class = "btn btn-primary" })
+}
         <div id="answer"></div>
     </div>
     <hr />
@@ -66,18 +69,21 @@
 
                         </li>
                     }
+                    if (Request.IsAuthenticated)
+                    {
                     @Ajax.ActionLink("Comment", "Index", "Comment", new { id = answer.Id, page = Request.QueryString["page"], title = ViewContext.RouteData.Values["title"], threadId = ViewContext.RouteData.Values["id"], Area = "Forum" },
-                           new AjaxOptions
-                           {
-                               UpdateTargetId = string.Format("{0}", answer.Id),
-                               HttpMethod = "GET",
-                               InsertionMode = InsertionMode.Replace
-                           }, new { @class = "btn btn-primary" })
+                                    new AjaxOptions
+                                    {
+                                        UpdateTargetId = string.Format("{0}", answer.Id),
+                                        HttpMethod = "GET",
+                                        InsertionMode = InsertionMode.Replace
+                                    }, new { @class = "btn btn-primary" })
+                    }
                     <li><div id="@answer.Id"></div></li>
                     <li><hr /></li>
                 }
             </ul>
         </div>
     </div>
-    @Html.Partial("_Pager", Model.PageCounter)
+    @Html.Partial("_Pager", Model.PagerViewModel)
 </div>

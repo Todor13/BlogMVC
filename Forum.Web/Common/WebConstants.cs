@@ -7,9 +7,11 @@
         public const int ThreadListCount = 7;
         public const string PagerPartialView = "_Pager";
         public const string AjaxPartialView = "_AjaxPager";
+
+        //Forum Area Constants
         public const string HomeController = "Home";
         public const string SearchController = "Search";
-
+        public const string ThreadController = "Thread";
 
         //Users Area Constants
         public const int ActivitySubString = 100;

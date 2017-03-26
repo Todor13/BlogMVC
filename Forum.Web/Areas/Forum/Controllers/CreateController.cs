@@ -23,6 +23,7 @@ namespace Forum.Web.Areas.Forum.Controllers
         }
 
         // GET: Forum/Create
+        [Authorize]
         public ActionResult Index()
         {
             var sections = this.data.Sections.All().ToArray();
@@ -33,8 +34,9 @@ namespace Forum.Web.Areas.Forum.Controllers
 
         // POST: Forum/Create
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Thread thread)
+        public ActionResult Index([Bind(Include = "Title, Content, SectionId")]Thread thread)
         {
             if (ModelState.IsValid)
             {

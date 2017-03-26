@@ -252,10 +252,12 @@
     <Compile Include="Areas\Administration\Models\UserAdministrationViewModel.cs" />
     <Compile Include="Areas\Forum\Models\AnswerViewModel.cs" />
     <Compile Include="Areas\Forum\Models\CommentViewModel.cs" />
+    <Compile Include="Areas\Forum\Models\Contracts\IForumThreadViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\BaseController.cs" />
     <Compile Include="Areas\Users\Controllers\HomeController.cs" />
     <Compile Include="Areas\Users\Controllers\SearchController.cs" />
     <Compile Include="Areas\Users\Models\AnswerActivityViewModel.cs" />
+    <Compile Include="Factories\Contracts\IViewModelFactory.cs" />
     <Compile Include="Models\Common\AjaxPagerViewModel.cs" />
     <Compile Include="Areas\Users\Models\CommentActivityViewModel.cs" />
     <Compile Include="Areas\Users\Models\RoleViewModel.cs" />
@@ -269,7 +271,6 @@
     <Compile Include="Areas\Forum\Controllers\SearchController.cs" />
     <Compile Include="Areas\Forum\Controllers\ThreadController.cs" />
     <Compile Include="Areas\Forum\ForumAreaRegistration.cs" />
-    <Compile Include="Areas\Forum\ForumConstants.cs" />
     <Compile Include="Areas\Forum\Models\ThreadViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
@@ -288,7 +289,7 @@
     <Compile Include="Models\Common\Contracts\IPagerViewModel.cs" />
     <Compile Include="Models\Common\PagerViewModel.cs" />
     <Compile Include="Areas\Forum\Models\IndexPageViewModel.cs" />
-    <Compile Include="Areas\Forum\Models\ThreadAnswersViewModel.cs" />
+    <Compile Include="Areas\Forum\Models\ForumThreadViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ThreadsViewModel.cs" />

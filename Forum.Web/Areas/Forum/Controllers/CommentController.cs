@@ -23,12 +23,14 @@ namespace Forum.Web.Areas.Forum.Controllers
         }
 
         // GET: Forum/Comment
+        [Authorize]
         public ActionResult Index()
         {
             return PartialView("_Comment");
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Index(Comment comment, int? id, int threadId, string title, int page = 1)
         {

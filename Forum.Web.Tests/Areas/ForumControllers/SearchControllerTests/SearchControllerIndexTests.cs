@@ -6,7 +6,6 @@ using Forum.Web.Areas.Forum.Models;
 using Forum.Web.Common;
 using Forum.Web.Factories;
 using Forum.Web.Models.Common.Contracts;
-using Forum.Web.Models.Forum;
 using Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers;
 using Moq;
 using NUnit.Framework;

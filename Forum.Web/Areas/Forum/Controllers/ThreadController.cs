@@ -2,19 +2,22 @@
 using System.Net;
 using System.Web.Mvc;
 using Forum.Data;
-using Forum.Web.Models.Forum;
-using Forum.Web.Models.Common;
 using Forum.Web.Factories;
 using AutoMapper.QueryableExtensions;
 using Forum.Web.Areas.Forum.Models;
+using Forum.Web.Common;
+using Forum.Web.Factories.Contracts;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
     public class ThreadController : BaseController
     {
-        public ThreadController(IUowData data, IPagerViewModelFactory pagerModelFactory) 
+        private readonly IViewModelFactory viewModelFactory;
+
+        public ThreadController(IUowData data, IPagerViewModelFactory pagerModelFactory, IViewModelFactory viewModelFactory) 
             : base(data, pagerModelFactory)
         {
+            this.viewModelFactory = viewModelFactory;
         }
 
         // GET: Forum/Thread
@@ -43,17 +46,13 @@ namespace Forum.Web.Areas.Forum.Controllers
                 .ProjectTo<AnswerViewModel>()
                 .ToArray();
 
-            var count = this.Data.Answers.All()
+            var answersCount = this.Data.Answers.All()
                 .Count(a => a.ThreadId == id && a.IsVisible == true);
 
-            var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
+            var pagerViewModel = this.PagerViewModelFactory.CreatePagerViewModel(WebConstants.ThreadController,
+                page, answersCount, WebConstants.PageSize);
 
-            var model = new ThreadAnswersViewModel()
-            {
-                Answers = answers,
-                Thread = thread,
-                PageCounter = new PagerViewModel("Thread", page, count, 3)
-            };
+            var model = this.viewModelFactory.CreateForumThreadViewModel(thread, answers, pagerViewModel);
 
             return this.View(model);
         }

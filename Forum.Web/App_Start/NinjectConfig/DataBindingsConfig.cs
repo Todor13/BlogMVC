@@ -4,13 +4,15 @@ using Forum.Data;
 using Forum.Auth;
 using Microsoft.AspNet.Identity;
 using Forum.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Forum.Web.Factories;
 using Ninject.Extensions.Factory;
 using Forum.Web.Models.Common.Contracts;
 using Forum.Web.Models.Common;
+using Forum.Web.Factories.Contracts;
+using Forum.Web.Areas.Forum.Models.Contracts;
+using Forum.Web.Areas.Forum.Models;
 
 namespace Forum.Web.App_Start
 {
@@ -37,8 +39,10 @@ namespace Forum.Web.App_Start
 
             this.Bind<IPagerViewModel>().To<PagerViewModel>();
             this.Bind<IAjaxPagerViewModel>().To<AjaxPagerViewModel>();
+            this.Bind<IForumThreadViewModel>().To<ForumThreadViewModel>();
 
-            this.Bind<IPagerViewModelFactory>().ToFactory();
+            this.Bind<IPagerViewModelFactory>().ToFactory().InRequestScope();
+            this.Bind<IViewModelFactory>().ToFactory().InRequestScope();
         }
     }
 }
