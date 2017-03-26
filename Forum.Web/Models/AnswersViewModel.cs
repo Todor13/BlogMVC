@@ -6,13 +6,13 @@ using System.Linq.Expressions;
 
 namespace Forum.Web.Models
 {
-    public class AnswerViewModel
+    public class AnswersViewModel
     {
-        public static Expression<Func<Answer, AnswerViewModel>> FromAnswer
+        public static Expression<Func<Answer, AnswersViewModel>> FromAnswer
         {
             get
             {
-                return answer => new AnswerViewModel
+                return answer => new AnswersViewModel
                 {
                     Id = answer.Id,
                     Content = answer.Content,
@@ -21,16 +21,16 @@ namespace Forum.Web.Models
                     ThreadId = answer.ThreadId,
                     EditedOn = answer.EditedOn,
                     EditedById = answer.EditedById,
-                    Comments = answer.Comments.AsQueryable().Select(CommentViewModel.FromComment)
+                    Comments = answer.Comments.AsQueryable().Select(CommentsViewModel.FromComment)
                 };
             }
         }
 
-        public AnswerViewModel()
+        public AnswersViewModel()
         {
         }
 
-        public AnswerViewModel(Answer answer)
+        public AnswersViewModel(Answer answer)
         {
             Id = answer.Id;
             Content = answer.Content;
@@ -39,7 +39,7 @@ namespace Forum.Web.Models
             ThreadId = answer.ThreadId;
             EditedOn = answer.EditedOn;
             EditedById = answer.EditedById;
-            Comments = answer.Comments.Where(a => a.IsVisible == true).Select(x => new CommentViewModel(x));
+            Comments = answer.Comments.Where(a => a.IsVisible == true).Select(x => new CommentsViewModel(x));
         }
 
         public int Id { get; set; }
@@ -56,6 +56,6 @@ namespace Forum.Web.Models
 
         public string EditedById { get; set; }
 
-        public IEnumerable<CommentViewModel> Comments { get; set; }
+        public IEnumerable<CommentsViewModel> Comments { get; set; }
     }
 }

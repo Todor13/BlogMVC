@@ -4,13 +4,13 @@ using System.Linq.Expressions;
 
 namespace Forum.Web.Models
 {
-    public class CommentViewModel
+    public class CommentsViewModel
     {
-        public static Expression<Func<Comment, CommentViewModel>> FromComment
+        public static Expression<Func<Comment, CommentsViewModel>> FromComment
         {
             get
             {
-                return comment => new CommentViewModel
+                return comment => new CommentsViewModel
                 {
                     Id = comment.Id,
                     Content = comment.Content,
@@ -23,11 +23,11 @@ namespace Forum.Web.Models
             }
         }
 
-        public CommentViewModel()
+        public CommentsViewModel()
         {
         }
 
-        public CommentViewModel(Comment comment)
+        public CommentsViewModel(Comment comment)
         {
             Id = comment.Id;
             Content = comment.Content;

@@ -55,6 +55,19 @@ namespace Forum.Models
             }
         }
 
+        public override string UserName
+        {
+            get
+            {
+                return base.UserName;
+            }
+
+            set
+            {
+                base.UserName = value;
+            }
+        }
+
         public virtual ICollection<Thread> Threads
         {
             get { return this.threads; }

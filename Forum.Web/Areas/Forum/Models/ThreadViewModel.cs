@@ -12,9 +12,12 @@ namespace Forum.Web.Areas.Forum.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Published { get; set; }
+        public string UserId { get; set; }
         public string UserName { get; set; }
         public string SectionName { get; set; }
         public int AnswersCount { get; set; }
+        public DateTime? EditedOn { get; set; }
+        public string EditedById { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

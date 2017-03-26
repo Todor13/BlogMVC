@@ -1,21 +1,22 @@
 ﻿using Forum.Models;
+using Forum.Web.Areas.Forum.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers
 {
-    public class ThreadComparer : IComparer, IComparer<Thread>
+    public class ThreadViewModelComparer : IComparer, IComparer<ThreadViewModel>
     {
         public int Compare(object x, object y)
         {
-            var lhs = x as Thread;
-            var rhs = y as Thread;
+            var lhs = x as ThreadViewModel;
+            var rhs = y as ThreadViewModel;
             if (lhs == null || rhs == null) throw new InvalidOperationException();
             return Compare(lhs, rhs);
         }
 
-        public int Compare(Thread x, Thread y)
+        public int Compare(ThreadViewModel x, ThreadViewModel y)
         {
             if (x.Id.CompareTo(y.Id) != 0)
             {
@@ -25,9 +26,9 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers
             {
                 return x.Published.CompareTo(y.Published);
             }
-            else if (x.IsVisible.CompareTo(y.IsVisible) != 0)
+            else if (x.AnswersCount.CompareTo(y.AnswersCount) != 0)
             {
-                return x.IsVisible.CompareTo(y.IsVisible);
+                return x.AnswersCount.CompareTo(y.AnswersCount);
             }
             else if (x.Title.CompareTo(y.Title) != 0)
             {
@@ -36,6 +37,14 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests.Helpers
             else if (x.Content.CompareTo(y.Content) != 0)
             {
                 return x.Content.CompareTo(y.Content);
+            }
+            else if (x.SectionName.CompareTo(y.SectionName) != 0)
+            {
+                return x.SectionName.CompareTo(y.SectionName);
+            }
+            else if (x.UserId.CompareTo(y.UserId) != 0)
+            {
+                return x.UserId.CompareTo(y.UserId);
             }
             else
             {

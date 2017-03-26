@@ -250,6 +250,8 @@
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
     <Compile Include="Areas\Administration\Models\UserAdministrationViewModel.cs" />
+    <Compile Include="Areas\Forum\Models\AnswerViewModel.cs" />
+    <Compile Include="Areas\Forum\Models\CommentViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\BaseController.cs" />
     <Compile Include="Areas\Users\Controllers\HomeController.cs" />
     <Compile Include="Areas\Users\Controllers\SearchController.cs" />
@@ -280,8 +282,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AnswerViewModel.cs" />
-    <Compile Include="Models\CommentViewModel.cs" />
+    <Compile Include="Models\AnswersViewModel.cs" />
+    <Compile Include="Models\CommentsViewModel.cs" />
     <Compile Include="Models\Common\Contracts\IAjaxPagerViewModel.cs" />
     <Compile Include="Models\Common\Contracts\IPagerViewModel.cs" />
     <Compile Include="Models\Common\PagerViewModel.cs" />
@@ -289,7 +291,7 @@
     <Compile Include="Areas\Forum\Models\ThreadAnswersViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ThreadViewModel.cs" />
+    <Compile Include="Models\ThreadsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

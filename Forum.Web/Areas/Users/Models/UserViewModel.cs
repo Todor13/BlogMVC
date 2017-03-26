@@ -19,9 +19,9 @@ namespace Forum.Web.Areas.Users.Models
                     Email = user.Email,
                     UserName = user.UserName,
                     PhoneNumber = user.PhoneNumber,
-                    Threads = user.Threads.AsQueryable().Select(ThreadViewModel.FromThread),
-                    Answers = user.Answers.AsQueryable().Select(AnswerViewModel.FromAnswer),
-                    Comments = user.Comments.AsQueryable().Select(CommentViewModel.FromComment)
+                    Threads = user.Threads.AsQueryable().Select(ThreadsViewModel.FromThread),
+                    Answers = user.Answers.AsQueryable().Select(AnswersViewModel.FromAnswer),
+                    Comments = user.Comments.AsQueryable().Select(CommentsViewModel.FromComment)
                 };
             }
         }
@@ -36,10 +36,10 @@ namespace Forum.Web.Areas.Users.Models
 
         public IEnumerable<string> Roles { get; set; }
 
-        public IEnumerable<ThreadViewModel> Threads { get; set; }
+        public IEnumerable<ThreadsViewModel> Threads { get; set; }
 
-        public IEnumerable<AnswerViewModel> Answers { get; set; }
+        public IEnumerable<AnswersViewModel> Answers { get; set; }
 
-        public IEnumerable<CommentViewModel> Comments { get; set; }
+        public IEnumerable<CommentsViewModel> Comments { get; set; }
     }
 }

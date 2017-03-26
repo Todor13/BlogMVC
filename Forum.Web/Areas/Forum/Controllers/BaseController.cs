@@ -48,21 +48,21 @@ namespace Forum.Web.Areas.Forum.Controllers
             }
         }
 
-        protected IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count, string controllerName = null)
-        {
-            var model = new IndexPageViewModel();
-            //{
-            //    Threads = threads,
-            //    PageCounter = new PagerViewModel()
-            //    {
-            //        CurrentPage = page,
-            //        PageSize = PageSize,
-            //        ItemsCount = count,
-            //        ControllerName = controllerName
-            //    }
-            //};
+        //protected IndexPageViewModel CreateIndexPage(IEnumerable<Thread> threads, int page, int count, string controllerName = null)
+        //{
+        //    var model = new IndexPageViewModel();
+        //    //{
+        //    //    Threads = threads,
+        //    //    PageCounter = new PagerViewModel()
+        //    //    {
+        //    //        CurrentPage = page,
+        //    //        PageSize = PageSize,
+        //    //        ItemsCount = count,
+        //    //        ControllerName = controllerName
+        //    //    }
+        //    //};
 
-            return model;
-        }
+        //    return model;
+        //}
     }
 }

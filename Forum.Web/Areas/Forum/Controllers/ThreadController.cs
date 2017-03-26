@@ -5,6 +5,8 @@ using Forum.Data;
 using Forum.Web.Models.Forum;
 using Forum.Web.Models.Common;
 using Forum.Web.Factories;
+using AutoMapper.QueryableExtensions;
+using Forum.Web.Areas.Forum.Models;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
@@ -23,9 +25,12 @@ namespace Forum.Web.Areas.Forum.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var thread = this.Data.Threads.GetById(id);
+            var thread = this.Data.Threads.All()
+                .Where(t => t.Id == id && t.IsVisible == true)
+                .ProjectTo<ThreadViewModel>()
+                .SingleOrDefault();
 
-            if (thread == null || thread.IsVisible == false)
+            if (thread == null)
             {
                 return HttpNotFound();
             }
@@ -35,6 +40,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 .OrderBy(a => a.Published)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize)
+                .ProjectTo<AnswerViewModel>()
                 .ToArray();
 
             var count = this.Data.Answers.All()
@@ -42,20 +48,14 @@ namespace Forum.Web.Areas.Forum.Controllers
 
             var pagesCount = (count / PageSize) + (count % PageSize == 0 ? 0 : 1);
 
-            //var model = new ThreadAnswersViewModel()
-            //{
-            //    Answers = answers,
-            //    Thread = thread,
-            //    PageCounter = new PagerViewModel()
-            //    {
-            //        CurrentPage = page,
-            //        ItemsCount = count,
-            //        PageSize = PageSize,
-            //        ControllerName = "Thread"
-            //    }
-            //};
+            var model = new ThreadAnswersViewModel()
+            {
+                Answers = answers,
+                Thread = thread,
+                PageCounter = new PagerViewModel("Thread", page, count, 3)
+            };
 
-            return this.View(/*model*/);
+            return this.View(model);
         }
     }
 }
