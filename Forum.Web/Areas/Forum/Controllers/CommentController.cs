@@ -26,13 +26,13 @@ namespace Forum.Web.Areas.Forum.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return PartialView("_Comment");
+            return PartialView(WebConstants.CommentPartialView);
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Comment comment, int? id, int threadId, string title, int page = 1)
+        public ActionResult Index([Bind(Include = "Content")]Comment comment, int? id, int threadId, string title, int page = 1)
         {
             if (ModelState.IsValid)
             {

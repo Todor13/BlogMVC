@@ -7,6 +7,7 @@ using AutoMapper.QueryableExtensions;
 using Forum.Web.Areas.Forum.Models;
 using Forum.Web.Common;
 using Forum.Web.Factories.Contracts;
+using System;
 
 namespace Forum.Web.Areas.Forum.Controllers
 {
@@ -17,6 +18,11 @@ namespace Forum.Web.Areas.Forum.Controllers
         public ThreadController(IUowData data, IPagerViewModelFactory pagerModelFactory, IViewModelFactory viewModelFactory) 
             : base(data, pagerModelFactory)
         {
+            if (viewModelFactory == null)
+            {
+                throw new ArgumentNullException(WebConstants.IViewModelFactoryNullMessage, "viewModelFactory");
+            }
+
             this.viewModelFactory = viewModelFactory;
         }
 

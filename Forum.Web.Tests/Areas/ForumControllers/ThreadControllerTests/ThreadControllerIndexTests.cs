@@ -7,7 +7,6 @@ using Forum.Web.Areas.Forum.Models.Contracts;
 using Forum.Web.Common;
 using Forum.Web.Factories;
 using Forum.Web.Factories.Contracts;
-using Forum.Web.Models.Common;
 using Forum.Web.Models.Common.Contracts;
 using Forum.Web.Tests.Areas.ForumControllers.Helpers;
 using Moq;

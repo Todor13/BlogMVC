@@ -27,13 +27,13 @@ namespace Forum.Web.Areas.Forum.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return PartialView("_Answer");
+            return PartialView(WebConstants.AnswerPartialView);
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Answer answer, int? id, string title)
+        public ActionResult Index([Bind(Include = "Content")]Answer answer, int? id, string title)
         {
             if (ModelState.IsValid)
             {
