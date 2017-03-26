@@ -12,14 +12,16 @@ namespace Forum.Web.Areas.Forum.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Published { get; set; }
-        public ApplicationUser User { get; set; }
-        public Section Section { get; set; }
+        public string UserName { get; set; }
+        public string SectionName { get; set; }
         public int AnswersCount { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Thread, ThreadViewModel>()
                 .ForMember(t => t.AnswersCount, opt => opt.MapFrom(t => t.Answers.Count(a => a.IsVisible == true)))
+                .ForMember(t => t.UserName, opt => opt.MapFrom(t => t.User.UserName))
+                .ForMember(t => t.SectionName, opt => opt.MapFrom(t => t.Section.Name))
                 .ReverseMap();  
         }
     }

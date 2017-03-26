@@ -26,17 +26,6 @@ namespace Forum.Web.Areas.Users.Models
             }
         }
 
-        //public UserViewModel(ApplicationUser user)
-        //{
-        //    Id = user.Id;
-        //    Email = user.Email;
-        //    UserName = user.UserName;
-        //    PhoneNumber = user.PhoneNumber;
-        //    Threads = user.Threads.Select(x => new ThreadViewModel(x));
-        //    Answers = user.Answers.Select(x => new AnswerViewModel(x));
-        //    Comments = user.Comments.Select(x => new CommentViewModel(x));
-        //}
-
         public string Id { get; set; }
 
         public string Email { get; set; }

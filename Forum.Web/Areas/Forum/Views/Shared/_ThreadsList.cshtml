@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Forum.Models.Thread>
+﻿@model IEnumerable<Forum.Web.Areas.Forum.Models.ThreadViewModel>
 
 <div class="panel panel-default">
     <div class="panel-heading">Threads</div>
@@ -9,11 +9,11 @@
                 <div class="media-body">
                     <h4 class="media-heading">@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</h4>
                     <ul class="list-inline list-unstyled">
-                        <li><span><i class="glyphicon glyphicon-user"></i> @thread.User.UserName</span></li>
+                        <li><span><i class="glyphicon glyphicon-user"></i> @thread.UserName</span></li>
                         <li>|</li>
                         <li><span><i class="glyphicon glyphicon-calendar"></i> @string.Format("{0:dd MMMM yyyy H:mm}", thread.Published)</span></li>
                         <li>|</li>
-                        <li><span><i class="glyphicon glyphicon-envelope"></i> Answers: @thread.Answers.Count</span></li>
+                        <li><span><i class="glyphicon glyphicon-envelope"></i> Answers: @thread.AnswersCount</span></li>
                     </ul>
                 </div>
             </div>

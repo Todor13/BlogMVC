@@ -1,4 +1,4 @@
-﻿@model Forum.Web.Models.Forum.IndexPageViewModel
+﻿@model Tuple<IEnumerable<Forum.Web.Areas.Forum.Models.ThreadViewModel>, Forum.Web.Models.Common.Contracts.IPagerViewModel>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,6 +7,13 @@
 <h3>Search Results</h3>
 <div class="container">
     @Html.Partial("_ForumNavBar")
-    @Html.Partial("_ThreadsList", Model.Threads)
-    @Html.Partial("_Pager", Model.PageCounter)
+    @if (Model.Item1.Any())
+    {
+        @Html.Partial("_ThreadsList", Model.Item1)
+        @Html.Partial("_Pager", Model.Item2)
+    }
+    else
+    {
+        <p>No results for "@ViewContext.HttpContext.Request.QueryString["query"]"</p>
+    }
 </div>

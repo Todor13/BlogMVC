@@ -1,4 +1,4 @@
-﻿@model Forum.Web.Models.Forum.IndexPageViewModel
+﻿@model Tuple<IEnumerable<Forum.Web.Areas.Forum.Models.ThreadViewModel>, Forum.Web.Models.Common.Contracts.IPagerViewModel>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,8 +7,8 @@
 <h2>Welcome to our Forum!</h2>
 <div class="container">
     @Html.Partial("_ForumNavBar")
-    @Html.Partial("_ThreadsList", Model.Threads)
-    @Html.Partial("_Pager", Model.PageCounter)
+    @Html.Partial("_ThreadsList", Model.Item1)
+    @Html.Partial("_Pager", Model.Item2)
 </div>
 
 
