@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Forum.Data;
 using Forum.Models;
-using Forum.Web.App_Start;
 using Forum.Web.Areas.Forum.Controllers;
 using Forum.Web.Areas.Forum.Models;
 using Forum.Web.Common;
@@ -13,7 +12,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Web.Mvc;
 
 namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
@@ -189,6 +187,7 @@ namespace Forum.Web.Tests.Areas.ForumControllers.HomeControllerTests
             var pagerFactory = new Mock<IPagerViewModelFactory>();
 
             data.Setup(d => d.Threads.All()).Returns(ThreadsCollection().AsQueryable());
+
             Mapper.Initialize(cfg => cfg.CreateMap<Thread, ThreadViewModel>());
 
             HomeController controller = new HomeController(data.Object, pagerFactory.Object);

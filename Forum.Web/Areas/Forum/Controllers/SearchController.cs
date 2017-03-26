@@ -22,10 +22,10 @@ namespace Forum.Web.Areas.Forum.Controllers
         public ActionResult Index(string query, int page = 1)
         {
             var threadsCount = this.Data.Threads.All()
-                .Count(x => x.Title.ToLower().Contains(query.ToLower()) || x.Content.ToLower().Contains(query.ToLower()) && x.IsVisible == true);
+                .Count(x => x.IsVisible == true && x.Title.ToLower().Contains(query.ToLower()) || x.Content.ToLower().Contains(query.ToLower()) && x.IsVisible == true);
 
             var threads = this.Data.Threads.All()
-                .Where(x => x.Title.ToLower().Contains(query.ToLower()) || x.Content.ToLower().Contains(query.ToLower()) && x.IsVisible == true)
+                .Where(x => x.IsVisible == true && x.Title.ToLower().Contains(query.ToLower()) || x.Content.ToLower().Contains(query.ToLower()) && x.IsVisible == true)
                 .OrderBy(t => t.Published)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize)
