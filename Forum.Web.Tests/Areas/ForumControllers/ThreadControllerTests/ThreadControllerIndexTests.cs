@@ -1,247 +1,359 @@
-﻿//using Forum.Data;
-//using Forum.Models;
-//using Forum.Web.Areas.Forum.Controllers;
-//using Forum.Web.Factories;
-//using Forum.Web.Models.Forum;
-//using Forum.Web.Tests.Areas.ForumControllers.Helpers;
-//using Moq;
-//using NUnit.Framework;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Web.Mvc;
+﻿using AutoMapper;
+using Forum.Data;
+using Forum.Models;
+using Forum.Web.Areas.Forum.Controllers;
+using Forum.Web.Areas.Forum.Models;
+using Forum.Web.Areas.Forum.Models.Contracts;
+using Forum.Web.Common;
+using Forum.Web.Factories;
+using Forum.Web.Factories.Contracts;
+using Forum.Web.Models.Common;
+using Forum.Web.Models.Common.Contracts;
+using Forum.Web.Tests.Areas.ForumControllers.Helpers;
+using Moq;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
-//namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
-//{
-//    [TestFixture]
-//    public class ThreadControllerIndexTests
-//    {
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnBadRequestWhenIdIsNull()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+namespace Forum.Web.Tests.Areas.ForumControllers.ThreadControllerTests
+{
+    [TestFixture]
+    public class ThreadControllerIndexTests
+    {
+        [Test]
+        public void Forum_ThreadController_Index_ShouldReturnBadRequestWhenIdIsNull()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
 
-//            ThreadController controller = new ThreadController(data.Object, pagerFactory.Object);
+            ThreadController controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//            // Act
-//            HttpStatusCodeResult result = controller.Index(null) as HttpStatusCodeResult;
+            // Act
+            HttpStatusCodeResult result = controller.Index(null) as HttpStatusCodeResult;
 
-//            // Assert
-//            Assert.AreEqual(400, result.StatusCode);
-//        }
+            // Assert
+            Assert.AreEqual(400, result.StatusCode);
+        }
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnHttpNotFoundIfThreadNull()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+        [Test]
+        public void Forum_ThreadController_Index_ShouldReturnHttpNotFoundIfThreadNull()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(null as Thread);
+            data.Setup(d => d.Threads.All()).Returns(new List<Thread>().AsQueryable());
+            Mapper.Initialize(cfg => cfg.CreateMap<Thread, ThreadViewModel>());
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//            // Act
-//            HttpNotFoundResult result = controller.Index(1) as HttpNotFoundResult;
+            // Act
+            HttpNotFoundResult result = controller.Index(1) as HttpNotFoundResult;
 
-//            // Assert
-//            Assert.AreEqual(404, result.StatusCode);
-//        }
+            // Assert
+            Assert.AreEqual(404, result.StatusCode);
+        }
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnHttpNotFoundIfIsVisiblePropertyIsFalse()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+        [TestCase(1)]
+        [TestCase(234345)]
+        public void Forum_ThreadController_Index_ShouldCallPagerViewModelFactoryWithCorrectData(int page)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(new Thread() { Id = 1, IsVisible = false });
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Thread, ThreadViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-//            // Act
-//            HttpNotFoundResult result = controller.Index(1) as HttpNotFoundResult;
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//            // Assert
-//            Assert.AreEqual(404, result.StatusCode);
-//        }
+            // Act
+            var result = controller.Index(1, page) as ViewResult;
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnCorrectThread()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            // Assert
+            pagerFactory.Verify(p => p.CreatePagerViewModel("Thread", page, 6, WebConstants.PageSize));
+        }
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
-//            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+        [TestCase(0, 3)]
+        [TestCase(1, 2)]
+        [TestCase(2, 4)]
+        public void Forum_ThreadController_Index_ShouldCallViewModelFactoryWithCorrectData(int atPosition, int expectedId)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-//            // Act
-//            var result = controller.Index(1) as ViewResult;
-//            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Thread, ThreadViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-//            // Assert
-//            Assert.AreEqual(1, resultModel.Thread.Id);
-//        }
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnCorrectThread2()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            // Act
+            var result = controller.Index(1) as ViewResult;
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
-//            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+            // Assert
+            viewModelFactory.Verify(p => p.CreateForumThreadViewModel(It.Is<ThreadViewModel>(t => t.Id == 1 && t.Published == new DateTime(2017, 01, 01)),
+                It.Is<IEnumerable<AnswerViewModel>>(l => l.ElementAt(atPosition).Id == expectedId), null));
+        }
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
-//            var expected = new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 01) };
+        [Test]
+        public void Forum_ThreadController_Index_ShouldReturnCorrectPageViewModelPropertyControllerName()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var pagerViewModel = new Mock<IPagerViewModel>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
+            var forumThreadViewModel = new Mock<IForumThreadViewModel>();
 
-//            // Act
-//            var result = controller.Index(1) as ViewResult;
-//            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-//            // Assert
-//            Assert.That(expected, Has.Property("Id").EqualTo(resultModel.Thread.Id)
-//                & Has.Property("IsVisible").EqualTo(resultModel.Thread.IsVisible)
-//                & Has.Property("Published").EqualTo(resultModel.Thread.Published));
-//        }
+            pagerViewModel.Setup(p => p.ControllerName).Returns("Thread");
+            pagerFactory.Setup(p => p.CreatePagerViewModel(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(f => f.PagerViewModel).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(t => t.Thread).Returns(new ThreadViewModel() { Id = 1 });
+            viewModelFactory.Setup(v => v.CreateForumThreadViewModel(It.IsAny<ThreadViewModel>(),
+                It.IsAny<IEnumerable<AnswerViewModel>>(), It.IsAny<IPagerViewModel>())).Returns(forumThreadViewModel.Object);
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnAnswersEqulToPageSizeAndOrederedByPublishedPropery()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Thread, ThreadViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
-//            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            // Act
+            var result = controller.Index(1) as ViewResult;
+            var resultModel = result.Model as IForumThreadViewModel;
 
-//            var expected = new List<Answer>()
-//            {
-//                new Answer() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01), ThreadId = 1, Content=string.Empty },
-//                new Answer() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02), ThreadId = 1, Content=string.Empty, Comments = new List<Comment>() { new Comment() { Id = 1, IsVisible = true } } },
-//                new Answer() { Id = 4, IsVisible = true, Published = new DateTime(2017, 01, 03), ThreadId = 1, Content=string.Empty },
-//            };
+            // Assert
+            Assert.AreEqual("Thread", resultModel.PagerViewModel.ControllerName);
+        }
 
-//            // Act
-//            var result = controller.Index(1, 1) as ViewResult;
-//            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+        [TestCase(1)]
+        [TestCase(1231)]
+        public void Forum_ThreadController_Index_ShouldReturnCorrectPageViewModelPropertyCurrentPage(int currentPage)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var pagerViewModel = new Mock<IPagerViewModel>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
+            var forumThreadViewModel = new Mock<IForumThreadViewModel>();
 
-//            // Assert
-//            CollectionAssert.AreEqual(expected, resultModel.Answers, new AnswerComparer());
-//        }
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnAnswersEqulToPageSizeAndOrederedByPublishedProperyAtPage2()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            pagerViewModel.Setup(p => p.CurrentPage).Returns(currentPage);
+            pagerFactory.Setup(p => p.CreatePagerViewModel(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(f => f.PagerViewModel).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(t => t.Thread).Returns(new ThreadViewModel() { Id = 1 });
+            viewModelFactory.Setup(v => v.CreateForumThreadViewModel(It.IsAny<ThreadViewModel>(),
+                It.IsAny<IEnumerable<AnswerViewModel>>(), It.IsAny<IPagerViewModel>())).Returns(forumThreadViewModel.Object);
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
-//            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Thread, ThreadViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//            var expected = new List<Answer>()
-//            {
-//                new Answer() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 04), ThreadId = 1, Content=string.Empty, Comments = new List<Comment>() { new Comment() { Id = 2, IsVisible = false } } },
-//                new Answer() { Id = 5, IsVisible = true, Published = new DateTime(2017, 01, 05), ThreadId = 1, Content=string.Empty },
-//                new Answer() { Id = 6, IsVisible = true, Published = new DateTime(2017, 01, 06), ThreadId = 1, Content=string.Empty }
-//            };
+            // Act
+            var result = controller.Index(1) as ViewResult;
+            var resultModel = result.Model as IForumThreadViewModel;
 
-//            // Act
-//            var result = controller.Index(1, 2) as ViewResult;
-//            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+            // Assert
+            Assert.AreEqual(currentPage, resultModel.PagerViewModel.CurrentPage);
+        }
 
-//            // Assert
-//            CollectionAssert.AreEqual(expected, resultModel.Answers, new AnswerComparer());
-//        }
+        [TestCase(121)]
+        [TestCase(4331)]
+        public void Forum_ThreadController_Index_ShouldReturnCorrectPageViewModelPropertyItemsCount(int itemsCount)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var pagerViewModel = new Mock<IPagerViewModel>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
+            var forumThreadViewModel = new Mock<IForumThreadViewModel>();
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnCorrectCurrentPage()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
-//            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+            pagerViewModel.Setup(p => p.ItemsCount).Returns(itemsCount);
+            pagerFactory.Setup(p => p.CreatePagerViewModel(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(f => f.PagerViewModel).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(t => t.Thread).Returns(new ThreadViewModel() { Id = 1 });
+            viewModelFactory.Setup(v => v.CreateForumThreadViewModel(It.IsAny<ThreadViewModel>(),
+                It.IsAny<IEnumerable<AnswerViewModel>>(), It.IsAny<IPagerViewModel>())).Returns(forumThreadViewModel.Object);
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Thread, ThreadViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-//            // Act
-//            var result = controller.Index(1, 2) as ViewResult;
-//            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//            // Assert
-//            Assert.AreEqual(2, resultModel.PageCounter.CurrentPage);
-//        }
+            // Act
+            var result = controller.Index(1) as ViewResult;
+            var resultModel = result.Model as IForumThreadViewModel;
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnCorrectPagesCount()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            // Assert
+            Assert.AreEqual(itemsCount, resultModel.PagerViewModel.ItemsCount);
+        }
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
-//            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+        [TestCase(12)]
+        [TestCase(43)]
+        public void Forum_ThreadController_Index_ShouldReturnCorrectPageViewModelPropertyPageSize(int pageSize)
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var pagerViewModel = new Mock<IPagerViewModel>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
+            var forumThreadViewModel = new Mock<IForumThreadViewModel>();
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-//            // Act
-//            var result = controller.Index(1, 2) as ViewResult;
-//            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+            pagerViewModel.Setup(p => p.PageSize).Returns(pageSize);
+            pagerFactory.Setup(p => p.CreatePagerViewModel(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(f => f.PagerViewModel).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(t => t.Thread).Returns(new ThreadViewModel() { Id = 1 });
+            viewModelFactory.Setup(v => v.CreateForumThreadViewModel(It.IsAny<ThreadViewModel>(),
+                It.IsAny<IEnumerable<AnswerViewModel>>(), It.IsAny<IPagerViewModel>())).Returns(forumThreadViewModel.Object);
 
-//            // Assert
-//            Assert.AreEqual(2, resultModel.PageCounter.PagesCount);
-//        }
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Thread, ThreadViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
 
-//        [Test]
-//        public void ThreadController_Index_ShouldReturnCorrectControllerName()
-//        {
-//            // Arrange
-//            var data = new Mock<IUowData>();
-//            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
 
-//            data.Setup(d => d.Threads.GetById(It.IsAny<int>())).Returns(TestThread());
-//            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+            // Act
+            var result = controller.Index(1) as ViewResult;
+            var resultModel = result.Model as IForumThreadViewModel;
 
-//            var controller = new ThreadController(data.Object, pagerFactory.Object);
+            // Assert
+            Assert.AreEqual(pageSize, resultModel.PagerViewModel.PageSize);
+        }
 
-//            // Act
-//            var result = controller.Index(1, 2) as ViewResult;
-//            ThreadAnswersViewModel resultModel = result.Model as ThreadAnswersViewModel;
+        [Test]
+        public void Forum_ThreadController_Index_ShouldReturnForumThreadViewModelWithCorrectThread()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var pagerViewModel = new Mock<IPagerViewModel>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
+            var forumThreadViewModel = new Mock<IForumThreadViewModel>();
 
-//            // Assert
-//            Assert.AreEqual("Thread", resultModel.PageCounter.ControllerName);
-//        }
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
 
-//        private ICollection<Answer> AnswersCollection()
-//        {
-//            return new List<Answer>()
-//            {
-//                new Answer() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 04), ThreadId = 1, Content=string.Empty, Comments = new List<Comment>() { new Comment() { Id = 2, IsVisible = false } } },
-//                new Answer() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02), ThreadId = 1, Content=string.Empty, Comments = new List<Comment>() { new Comment() { Id = 1, IsVisible = true } } },
-//                new Answer() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01), ThreadId = 1, Content=string.Empty },
-//                new Answer() { Id = 4, IsVisible = true, Published = new DateTime(2017, 01, 03), ThreadId = 1, Content=string.Empty },
-//                new Answer() { Id = 5, IsVisible = true, Published = new DateTime(2017, 01, 05), ThreadId = 1, Content=string.Empty },
-//                new Answer() { Id = 6, IsVisible = true, Published = new DateTime(2017, 01, 06), ThreadId = 1, Content=string.Empty },
-//                new Answer() { Id = 7, IsVisible = false, Published = new DateTime(2017, 01, 08), ThreadId = 1, Content=string.Empty }
-//            };
-//        }
+            pagerFactory.Setup(p => p.CreatePagerViewModel(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(f => f.PagerViewModel).Returns(pagerViewModel.Object);
+            forumThreadViewModel.Setup(t => t.Thread).Returns(new ThreadViewModel() { Id = 1 });
+            viewModelFactory.Setup(v => v.CreateForumThreadViewModel(It.IsAny<ThreadViewModel>(),
+                It.IsAny<IEnumerable<AnswerViewModel>>(), It.IsAny<IPagerViewModel>())).Returns(forumThreadViewModel.Object);
 
-//        private Thread TestThread()
-//        {
-//            return new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01 ,01) };
-//        }
-//    }
-//}
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Thread, ThreadViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Comment, CommentViewModel>();
+            });
+
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
+
+            // Act
+            var result = controller.Index(1) as ViewResult;
+            var resultModel = result.Model as IForumThreadViewModel;
+
+            // Assert
+            Assert.AreEqual(1, resultModel.Thread.Id);
+        }
+
+        //[Test]
+        public void ThreadController_Index_ShouldReturnAnswersEqulToPageSizeAndOrederedByPublishedProperyAtPage2()
+        {
+            // Arrange
+            var data = new Mock<IUowData>();
+            var pagerFactory = new Mock<IPagerViewModelFactory>();
+            var viewModelFactory = new Mock<IViewModelFactory>();
+
+            data.Setup(d => d.Threads.All()).Returns(TestThread().AsQueryable());
+            data.Setup(d => d.Answers.All()).Returns(AnswersCollection().AsQueryable);
+
+            var controller = new ThreadController(data.Object, pagerFactory.Object, viewModelFactory.Object);
+
+            var expected = new List<Answer>()
+            {
+                new Answer() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 04), ThreadId = 1, Content=string.Empty, Comments = new List<Comment>() { new Comment() { Id = 2, IsVisible = false } } },
+                new Answer() { Id = 5, IsVisible = true, Published = new DateTime(2017, 01, 05), ThreadId = 1, Content=string.Empty },
+                new Answer() { Id = 6, IsVisible = true, Published = new DateTime(2017, 01, 06), ThreadId = 1, Content=string.Empty }
+            };
+
+            // Act
+            var result = controller.Index(1, 2) as ViewResult;
+            ForumThreadViewModel resultModel = result.Model as ForumThreadViewModel;
+
+            // Assert
+            CollectionAssert.AreEqual(expected, resultModel.Answers, new AnswerComparer());
+        }
+
+
+        private ICollection<Answer> AnswersCollection()
+        {
+            return new List<Answer>()
+            {
+                new Answer() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 04), ThreadId = 1, Content=string.Empty, UserId = "id", User = new ApplicationUser() { UserName = "testUserName" }, Thread = new Thread() { Id = 1 }, Comments = new List<Comment>() { new Comment() { Id = 2, IsVisible = false } } },
+                new Answer() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02), ThreadId = 1, Content=string.Empty, UserId = "id", User = new ApplicationUser() { UserName = "testUserName" }, Thread = new Thread() { Id = 1 }, Comments = new List<Comment>() { new Comment() { Id = 1, IsVisible = true } } },
+                new Answer() { Id = 3, IsVisible = true, Published = new DateTime(2017, 01, 01), ThreadId = 1, Content=string.Empty, UserId = "id", User = new ApplicationUser() { UserName = "testUserName" }, Thread = new Thread() { Id = 1 }, Comments = new List<Comment>() },
+                new Answer() { Id = 4, IsVisible = true, Published = new DateTime(2017, 01, 03), ThreadId = 1, Content=string.Empty, UserId = "id", User = new ApplicationUser() { UserName = "testUserName" }, Thread = new Thread() { Id = 1 }, Comments = new List<Comment>() },
+                new Answer() { Id = 5, IsVisible = true, Published = new DateTime(2017, 01, 05), ThreadId = 1, Content=string.Empty, UserId = "id", User = new ApplicationUser() { UserName = "testUserName" }, Thread = new Thread() { Id = 1 }, Comments = new List<Comment>() },
+                new Answer() { Id = 6, IsVisible = true, Published = new DateTime(2017, 01, 06), ThreadId = 1, Content=string.Empty, UserId = "id", User = new ApplicationUser() { UserName = "testUserName" }, Thread = new Thread() { Id = 1 }, Comments = new List<Comment>() },
+                new Answer() { Id = 7, IsVisible = false, Published = new DateTime(2017, 01, 08), ThreadId = 1, Content=string.Empty, UserId = "id", User = new ApplicationUser() { UserName = "testUserName" }, Thread = new Thread() { Id = 1 }, Comments = new List<Comment>() }
+            };
+        }
+
+        private IEnumerable<Thread> TestThread()
+        {
+            return new List<Thread>()
+            {
+                new Thread() { Id = 1, IsVisible = true, Published = new DateTime(2017, 01, 01), Title = "SomeTitle", Content = "SomeContent", UserId = "id", User = new ApplicationUser() { UserName = "testUserName"}, Section = new Section() { Name = "testSectionName" }, Answers = new List<Answer>(), EditedById = string.Empty },
+                new Thread() { Id = 2, IsVisible = true, Published = new DateTime(2017, 01, 02), Title = "SomeTitle", Content = "SomeContent", UserId = "id", User = new ApplicationUser() { UserName = "testUserName"}, Section = new Section() { Name = "testSectionName" }, Answers = new List<Answer>(), EditedById = string.Empty }
+            };
+        }
+    }
+}
