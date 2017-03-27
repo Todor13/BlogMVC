@@ -35,7 +35,7 @@ namespace Forum.Web.Areas.Forum
             context.MapRoute(
                 "Forum_Thread",
                 "Forum/Thread/{id}/{title}",
-                defaults: new { controller = "Thread", action = "Index", id = UrlParameter.Optional, title = UrlParameter.Optional }
+                defaults: new { controller = "Thread", action = "Index", title = UrlParameter.Optional }
             );
 
             context.MapRoute(

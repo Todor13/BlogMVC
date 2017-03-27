@@ -15,6 +15,8 @@ using Forum.Web.Areas.Forum.Models.Contracts;
 using Forum.Web.Areas.Forum.Models;
 using Forum.Services.Contracts;
 using Forum.Services;
+using Forum.Web.Models.Contracts;
+using Forum.Web.Models;
 
 namespace Forum.Web.App_Start
 {
@@ -44,6 +46,7 @@ namespace Forum.Web.App_Start
             this.Bind<IPagerViewModel>().To<PagerViewModel>();
             this.Bind<IAjaxPagerViewModel>().To<AjaxPagerViewModel>();
             this.Bind<IForumThreadViewModel>().To<ForumThreadViewModel>();
+            this.Bind<IHomePageViewModel>().To<HomePageViewModel>();
 
             this.Bind<IPagerViewModelFactory>().ToFactory().InRequestScope();
             this.Bind<IViewModelFactory>().ToFactory().InRequestScope();

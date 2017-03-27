@@ -292,6 +292,8 @@
     <Compile Include="Areas\Forum\Models\IndexPageViewModel.cs" />
     <Compile Include="Areas\Forum\Models\ForumThreadViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
+    <Compile Include="Models\Contracts\IHomePageViewModel.cs" />
+    <Compile Include="Models\IndexPageThreadViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ThreadsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

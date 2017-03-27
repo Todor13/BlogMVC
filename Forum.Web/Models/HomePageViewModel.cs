@@ -1,14 +1,22 @@
-﻿using Forum.Models;
+﻿using Forum.Web.Models.Contracts;
 using System.Collections.Generic;
 
 namespace Forum.Web.Models
 {
-    public class HomePageViewModel
+    public class HomePageViewModel : IHomePageViewModel
     {
-        public ICollection<Thread> Newest{ get; set; }
+        public HomePageViewModel(ICollection<IndexPageThreadViewModel> newest, ICollection<IndexPageThreadViewModel> mostDiscussed,
+            ICollection<IndexPageThreadViewModel> important)
+        {
+            this.Newest = newest;
+            this.MostDiscussed = mostDiscussed;
+            this.Important = important;
+        }
 
-        public ICollection<Thread> MostDiscussed { get; set; }
+        public ICollection<IndexPageThreadViewModel> Newest{ get; set; }
 
-        public ICollection<Thread> Important { get; set; }
+        public ICollection<IndexPageThreadViewModel> MostDiscussed { get; set; }
+
+        public ICollection<IndexPageThreadViewModel> Important { get; set; }
     }
 }

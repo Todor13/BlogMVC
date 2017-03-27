@@ -1,4 +1,4 @@
-﻿@model Forum.Web.Models.HomePageViewModel
+﻿@model Forum.Web.Models.Contracts.IHomePageViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -15,21 +15,21 @@
         <h2>Newest Threads</h2>
         @foreach (var thread in Model.Newest)
         {
-            <div>@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum"}, null)</div>
+            <div>@Html.ActionLink(thread.Title, Forum.Web.Common.WebConstants.IndexAction, Forum.Web.Common.WebConstants.ThreadController, new { id = thread.Id, title = thread.Title, Area = "Forum"}, null)</div>
         }
     </div>
     <div class="col-md-4">
         <h2>Most Discussed</h2>
         @foreach (var thread in Model.MostDiscussed)
         {
-            <div>@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</div>
+            <div>@Html.ActionLink(thread.Title, Forum.Web.Common.WebConstants.IndexAction, Forum.Web.Common.WebConstants.ThreadController, new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</div>
         }
     </div>
     <div class="col-md-4">
         <h2>Important</h2>
         @foreach (var thread in Model.Important)
         {
-            <div>@Html.ActionLink(thread.Title, "Index", "Thread", new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</div>
+            <div>@Html.ActionLink(thread.Title, Forum.Web.Common.WebConstants.IndexAction, Forum.Web.Common.WebConstants.ThreadController, new { id = thread.Id, title = thread.Title, Area = "Forum" }, null)</div>
         }
     </div>
 </div>
