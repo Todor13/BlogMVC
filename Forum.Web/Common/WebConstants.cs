@@ -10,6 +10,7 @@
 
         //Forum Area Constants
         public const string HomeController = "Home";
+        public const string IndexAction = "Index";
         public const string SearchController = "Search";
         public const string ThreadController = "Thread";
         public const string AnswerPartialView = "_Answer";
@@ -35,5 +36,6 @@
         public const string IUowDataNullMessage= "An instance of IUowData is required to use this repository!";
         public const string IPagerViewModelFactoryNullMessage = "An instance of IPagerViewModelFactory is required to use this repository!";
         public const string IViewModelFactoryNullMessage = "An instance of IViewModelFactory is required to use this repository!";
+        public const string IMappingServiceNullMessage = "An instance of IMappingService is required to use this repository!";
     }
 }

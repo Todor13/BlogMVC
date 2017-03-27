@@ -1,4 +1,4 @@
-﻿@model Forum.Models.Thread
+﻿@model Forum.Web.Areas.Forum.Models.CreateThreadViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,21 +10,31 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <div class="validation">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Title)
             @Html.TextBoxFor(m => m.Title)
+            @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Content)
             @Html.EditorFor(m => m.Content, new { rows = "4", cols = "55" })
+            @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             @Html.Label("Select Section")
-            @Html.DropDownList("SectionId", "Choose")
+            @Html.DropDownList("SectionId", string.Empty)
+            @Html.ValidationMessage("SectionId", new { @class = "text-danger" })
         </div>
         <div>
             <input type="submit" class="btn btn-default" value="Create"/>
         </div>
     </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
 

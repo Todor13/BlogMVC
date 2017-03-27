@@ -13,6 +13,8 @@ using Forum.Web.Models.Common;
 using Forum.Web.Factories.Contracts;
 using Forum.Web.Areas.Forum.Models.Contracts;
 using Forum.Web.Areas.Forum.Models;
+using Forum.Services.Contracts;
+using Forum.Services;
 
 namespace Forum.Web.App_Start
 {
@@ -36,6 +38,8 @@ namespace Forum.Web.App_Start
             });
 
             this.Bind<ApplicationUserManager>().ToSelf();
+
+            this.Bind<IMappingService>().To<MappingService>();
 
             this.Bind<IPagerViewModel>().To<PagerViewModel>();
             this.Bind<IAjaxPagerViewModel>().To<AjaxPagerViewModel>();

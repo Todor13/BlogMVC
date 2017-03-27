@@ -50,7 +50,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 this.data.SaveChanges();
                 var answersCount = this.data.Answers.All().Count(a => a.ThreadId == id  && a.IsVisible == true);
                 var page = (answersCount / WebConstants.PageSize) + (answersCount % WebConstants.PageSize == 0 ? 0 : 1);
-                return RedirectToAction("Index", "Thread", new { id = id, title = title, page = page });
+                return RedirectToAction(WebConstants.IndexAction, WebConstants.ThreadController, new { id = id, title = title, page = page });
             }
 
             return this.View(answer);

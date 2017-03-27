@@ -1,5 +1,6 @@
 ﻿using Forum.Data;
 using Forum.Models;
+using Forum.Services.Contracts;
 using Forum.Web.Areas.Forum.Controllers;
 using Forum.Web.Tests.Areas.ForumControllers.Helpers;
 using Moq;
@@ -14,13 +15,15 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CreateControllerTests
     public class CreateControllerIndexTests
     {
         [Test]
-        public void CreateController_Index_ShouldReturnAnInstanceOfSelectList()
+        public void Forum_CreateController_Index_ShouldReturnAnInstanceOfSelectList()
         {
             //Arrange
             var data = new Mock<IUowData>();
+            var mappingService = new Mock<IMappingService>();
+
             data.Setup(d => d.Sections.All()).Returns(GetSections().AsQueryable());
 
-            CreateController controller = new CreateController(data.Object);
+            CreateController controller = new CreateController(data.Object, mappingService.Object);
 
             //Act
             var result = controller.Index() as ViewResult;
@@ -30,13 +33,15 @@ namespace Forum.Web.Tests.Areas.ForumControllers.CreateControllerTests
         }
 
         [Test]
-        public void CreateController_Index_ShouldReturnCorrectSectionsInSelectList()
+        public void Forum_CreateController_Index_ShouldReturnCorrectSectionsInSelectList()
         {
             //Arrange
             var data = new Mock<IUowData>();
+            var mappingService = new Mock<IMappingService>();
+
             data.Setup(d => d.Sections.All()).Returns(GetSections().AsQueryable());
 
-            CreateController controller = new CreateController(data.Object);
+            CreateController controller = new CreateController(data.Object, mappingService.Object);
 
             //Act
             var result = controller.Index() as ViewResult;

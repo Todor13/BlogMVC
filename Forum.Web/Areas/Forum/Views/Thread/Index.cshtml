@@ -29,6 +29,7 @@
         </ul>
 @if (Request.IsAuthenticated)
 {
+    @Html.ValidationSummary("", new { @class = "text-danger" })
         @Ajax.ActionLink("Answer", "Index", "Answer", new { id = ViewContext.RouteData.Values["id"], title = ViewContext.RouteData.Values["title"], page = Request.QueryString["page"], Area = "Forum" },
      new AjaxOptions
      {

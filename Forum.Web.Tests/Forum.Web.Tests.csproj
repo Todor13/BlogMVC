@@ -122,6 +122,8 @@
     <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerGetUserThreadsTests.cs" />
     <Compile Include="Areas\UsersControllers\ProfileControllerTests\ProfileControllerIndexTests.cs" />
     <Compile Include="Areas\UsersControllers\SearchControllerTests\SearchControllerIndexTests.cs" />
+    <Compile Include="ModelsTests\AjaxPagerViewModelTests.cs" />
+    <Compile Include="ModelsTests\PagerViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -139,6 +141,10 @@
     <ProjectReference Include="..\Forum.Models\Forum.Models.csproj">
       <Project>{E21EE498-E700-4CB2-873A-2010CD20F902}</Project>
       <Name>Forum.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Forum.Services\Forum.Services.csproj">
+      <Project>{9738BA96-C0A1-41B8-8E7D-292E9B99BF58}</Project>
+      <Name>Forum.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Forum.Web\Forum.Web.csproj">
       <Project>{02166F8A-C0DA-4B18-A4A6-60AC959AE134}</Project>

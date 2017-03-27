@@ -47,7 +47,7 @@ namespace Forum.Web.Areas.Forum.Controllers
                 comment.AnswerId = (int)id;
                 this.data.Comments.Add(comment);
                 this.data.SaveChanges();
-                return RedirectToAction("Index", "Thread", new { id = threadId, title = title, page = page });
+                return RedirectToAction(WebConstants.IndexAction, WebConstants.ThreadController, new { id = threadId, title = title, page = page });
             }
             
             return this.View();

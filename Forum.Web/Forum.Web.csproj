@@ -253,6 +253,7 @@
     <Compile Include="Areas\Forum\Models\AnswerViewModel.cs" />
     <Compile Include="Areas\Forum\Models\CommentViewModel.cs" />
     <Compile Include="Areas\Forum\Models\Contracts\IForumThreadViewModel.cs" />
+    <Compile Include="Areas\Forum\Models\CreateThreadViewModel.cs" />
     <Compile Include="Areas\Users\Controllers\BaseController.cs" />
     <Compile Include="Areas\Users\Controllers\HomeController.cs" />
     <Compile Include="Areas\Users\Controllers\SearchController.cs" />

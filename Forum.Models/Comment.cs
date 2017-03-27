@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Forum.Models
@@ -8,6 +9,8 @@ namespace Forum.Models
         public int Id { get; set; }
 
         [AllowHtml]
+        [Required]
+        [StringLength(4000, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string Content { get; set; }
         public DateTime Published { get; set; }
         public int AnswerId { get; set; }
