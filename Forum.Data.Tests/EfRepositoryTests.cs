@@ -1,9 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Moq;
-using Forum.Data;
 using Forum.Models;
-using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using Forum.Data.Tests.Helpers;
@@ -38,22 +36,6 @@ namespace Forum.Data.Tests
             // Assert
             Assert.AreEqual(threadsDbSet.Count(), result.Count);
         }
-
-        [Test]
-        public void EfRepository_Threads_Should()
-        {
-            // Arrange
-            var mockSet = new Mock<DbSet<Thread>>();
-
-            var mockContext = new Mock<IForumDbContext>();
-            mockContext.Setup(m => m.Threads).Returns(mockSet.Object);
-
-            var repository = new EfRepository<Thread>(mockContext.Object);
-            repository.Add(new Thread());
-
-            mockSet.Verify(m => m.Add(It.IsAny<Thread>()), Times.Once());
-        }
-
 
         private IEnumerable<Thread> GetThreads(int count)
         {
