@@ -384,6 +384,7 @@
     <Content Include="Views\Shared\_Pager.cshtml" />
     <Content Include="Areas\Forum\Views\Shared\_Answer.cshtml" />
     <Content Include="Areas\Forum\Views\Shared\_Comment.cshtml" />
+    <Content Include="Views\Home\_IndexThreads.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Forum.Auth\Forum.Auth.csproj">

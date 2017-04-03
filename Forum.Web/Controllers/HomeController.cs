@@ -31,14 +31,19 @@ namespace Forum.Web.Controllers
             this.viewModelFactory = viewModelFactory;
         }
 
-        [OutputCache(Duration = 60, VaryByParam = "none")]
         public ActionResult Index()
         {
+            return View();
+        }
+
+        [OutputCache(Duration = 60, VaryByParam = "none")]
+        public PartialViewResult IndexThreads()
+        {
             var newest = this.data.Threads.All()
-                .OrderByDescending(t => t.Published)
-                .Take(WebConstants.ThreadListCount)
-                .ProjectTo<IndexPageThreadViewModel>()
-                .ToArray();
+               .OrderByDescending(t => t.Published)
+               .Take(WebConstants.ThreadListCount)
+               .ProjectTo<IndexPageThreadViewModel>()
+               .ToArray();
 
             var mostDiscussed = this.data.Threads.All()
                 .OrderByDescending(t => t.Answers.Count)
@@ -56,7 +61,7 @@ namespace Forum.Web.Controllers
 
             var model = this.viewModelFactory.CreateHomePageViewModel(newest, mostDiscussed, important);
 
-            return View(model);
+            return PartialView("_IndexThreads", model);
         }
 
         public ActionResult About()
